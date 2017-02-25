@@ -10,9 +10,9 @@ $("#machinecontainer").hide();
 $('#loader').fadeIn('slow');
 var dfrom=document.getElementById("dateFrom").value;
 var dTo=document.getElementById("dateTo").value;
-var url1= "getstatus.php?"+"st='"+dfrom+ "'&et='" + dTo+"'&mac='"+selectedMachine+"'";
+var url1 = "https://trendzsoft.ingetstatus.php?" + "st='" + dfrom + "'&et='" + dTo + "'&mac='" + selectedMachine + "'";
 
-var url2= "getMachineCount.php?"+"st='"+dfrom+ "'&et='" + dTo+"'&ip='"+selectedMachine+"'";
+var url2 = "https://trendzsoft.ingetMachineCount.php?" + "st='" + dfrom + "'&et='" + dTo + "'&ip='" + selectedMachine + "'";
 var gridfields=[
             { name: "start_time", type: "text",title :"Start Time" },
             { name: "end_time", type: "text",title :"End Time"},
@@ -20,7 +20,7 @@ var gridfields=[
 			{ name: "idletime", type: "text",title : "Idle Time"},
              ];
 if(reportType==="dsc"){
-var url1= "getDayShiftData.php?"+"st='"+dfrom+ "'&et='" + dTo+"'&ip='"+selectedMachine+"'";
+    var url1 = "https://trendzsoft.ingetDayShiftData.php?" + "st='" + dfrom + "'&et='" + dTo + "'&ip='" + selectedMachine + "'";
 gridfields=[
             { name: "shift", type: "text",title :"Day/Shift" },
             { name: "cnt", type: "text",title :"Count"},
