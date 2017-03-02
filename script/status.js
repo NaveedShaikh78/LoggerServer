@@ -1,6 +1,31 @@
 var selectedMachine = 26;
 var reportType = ""
 var ioports = [26, 19, 13, 6, 22, 27, 17];
+ 
+ function login() {
+
+                       
+                        var formvalues = $("#frmLogin").serialize();
+                        $.post('/api/login.php', formvalues, function (data) {
+
+
+                        }, "html");
+	$("#appview").fadeIn(); 
+	$("#login").dialog("close"); 
+ }
+ 
+ $( function() {
+    $( "#login" ).dialog({ 
+				closeOnEscape: false,
+               modal: true,
+			    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
+               /*buttons: {
+                  OK: function() {$(this).dialog("close");}
+			   }*/
+	});
+  });
+
+  
 function getDefaultDate() {
 
     var now = new Date();
@@ -56,8 +81,9 @@ $(function () {
     var today = now.getFullYear() + "-" + (month) + "-" + (day) + "T20:00";
     $("#dateTo").val(today);
     setInterval(function () {
-        var url = "http://www.trendzsoft.in/machinestatus.php?";
+        var url = "//www.trendzsoft.in/machinestatus.php?";
         $.getJSON(url, function (sdata) {
+			
             for (var i = 0; i < ioports.length; i++) {
                 if (sdata[ioports[i]]) {
                     var mactime = new Date(sdata[ioports[i]].statetime);

@@ -8,10 +8,21 @@
 	<link type="text/css" rel="stylesheet" href="jquery/css/jsgrid-theme.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/status.css" />
 	<link type="text/css" rel="stylesheet" href="css/machinestate.css" />
+	<link type="text/css" rel="stylesheet" href="jquery/css/jquery-ui.css" />
+	
 </head>
 <body onload="$('#loader').fadeOut('slow')">
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
+<form id = "frmLogin" method="post">
+<div id="login" title="Login" >
+	<input class="form-control" id="username" type="text" placeholder = "Username" style = "margin-top: 30px;">
+	<input class="form-control" id="password" type="password" placeholder = "Password" style = "margin-top: 25px;">
+	<button type="submit" onclick="login()" class="btn btn-default btn-sm btn-block" style = "margin-top:30px; ">Login</button>
+	
+ </div>
+</form>
+ <div id="appview" style="display:none;">
+<nav class="navbar navbar-default" >
+  <div class="container-fluid" >
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -100,9 +111,10 @@
 
 	<script src="jquery/js/jquery.min.js"></script>
 	<script src="jquery/js/jsgrid.min.js"> </script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="script/search.js"></script>
-	<script src="script/status.js"></script>  
-    
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="jquery/js/jquery-ui.js"></script>	
+    <script src="script/search.js"></script>
+	<script src="script/status.js"></script>
+	</div>
 	</body>
 </html>
