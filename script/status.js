@@ -5,7 +5,8 @@ var ioports = [26, 19, 13, 6, 22, 27, 17];
  function login() {
 
                        
-                        var formvalues = $("#frmLogin").serialize();
+					    var formvalues={'username':$("#username").val() ,'password':$("#password").val()};
+                       
                         $.post('/api/login.php', formvalues, function (data) {
 
 
@@ -18,10 +19,22 @@ var ioports = [26, 19, 13, 6, 22, 27, 17];
     $( "#login" ).dialog({ 
 				closeOnEscape: false,
                modal: true,
-			    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
-               /*buttons: {
-                  OK: function() {$(this).dialog("close");}
-			   }*/
+			    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); },
+               buttons: {
+                'Login': function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "api/login.php",
+                        data: "{'password':'shaikh' }",
+                        contentType: "application/text",
+                        success: function (msg) {
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            debugger;
+                        }
+						
+                    });
+			   }}
 	});
   });
 

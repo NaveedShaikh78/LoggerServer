@@ -1,12 +1,13 @@
 <?php
 	
-	$user=$_POST['user'];
+	$user=$_POST['username'];
+	echo $user;
 	$password=$_POST['password'];
 	$_SESSION['loggedin']=false;
 	require 'includes/connectdb.php';
 	$conn = connect();
   	$sql = "SELECT *  FROM login where userID = {$user} and password={$password}";
-   
+	echo $sql;
   	$retval = mysql_query( $sql, $conn );
   	if(! $retval )
  	 {
