@@ -1,43 +1,48 @@
+
 var selectedMachine = 26;
 var reportType = ""
 var ioports = [26, 19, 13, 6, 22, 27, 17];
  
- function login() {
+ function login(event) {
 
-                       
+						event.preventDefault();
 					    var formvalues={'username':$("#username").val() ,'password':$("#password").val()};
                        
-                        $.post('/api/login.php', formvalues, function (data) {
-
-
-                        }, "html");
-	$("#appview").fadeIn(); 
-	$("#login").dialog("close"); 
+                        $.post('/api/login.php', formvalues).done(function (data) {
+							if(data == "success"){
+								$("#appview").fadeIn(); 
+								$("#login").dialog("close");
+										
+							}
+							else{
+								$("#failmsg").show();
+								$("#failmsg").html("Invalid Username and Password");
+							}
+							
+                        }
+					)
+    .fail(function(xhr, status, error) {
+		$("#failmsg").show();
+        $("#failmsg").val("Check your internet connection...");
+    });
+						 	
  }
  
  $( function() {
     $( "#login" ).dialog({ 
 				closeOnEscape: false,
                modal: true,
-			    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); },
-               buttons: {
-                'Login': function () {
-                    $.ajax({
-                        type: "POST",
-                        url: "api/login.php",
-                        data: "{'password':'shaikh' }",
-                        contentType: "application/text",
-                        success: function (msg) {
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            debugger;
-                        }
-						
-                    });
-			   }}
+			    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
 	});
   });
 
+  $( function() {
+    $( "#operator" ).dialog({ 
+				closeOnEscape: false,
+               /*modal: true,
+			    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }*/
+	});
+  });
   
 function getDefaultDate() {
 

@@ -60,3 +60,31 @@ $.getJSON(url1, function( sdata ) {
   });
 $('#bs-example-navbar-collapse-1').removeClass('in');
 }
+
+optgridfields=[
+            { name: "operator_name", type: "text",title :"Operator Name" ,width:500 },
+            ];
+
+$("#optgrid").jsGrid({
+        width: "100%",
+        inserting: false,
+        editing: false,
+        sorting: true,
+        paging: false,
+        pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
+        data: [{operator_name : 'shekhar patil'},
+		{operator_name : 'shekhar patil'},
+		{operator_name : 'shekhar patil'},
+		{operator_name : 'shekhar patil'},
+		{operator_name : 'shekhar patil'},
+		{operator_name : 'shekhar patil'},
+		{operator_name : 'shekhar patil'},
+		{operator_name : 'shekhar patil'},
+		{operator_name : 'shekhar patil'},{operator_name : 'shekhar patil'},{operator_name : 'shekhar patil'},{operator_name : 'shekhar patil'},{operator_name : 'shekhar patil'},{operator_name : 'shekhar patil'},
+		{operator_name : 'rahul mali'}
+		],
+        fields: optgridfields
+    });
+
+
+

@@ -1,12 +1,19 @@
 .machinefont {
 width:100%;
 }
+#optgrid .jsgrid-header-cell{
+padding:10px;
+}
+#optgrid .jsgrid-cell{
+padding:5px;;
+}
 @media screen and (max-width: 1000px) {
 .jsgrid-cell,.machinefont {
     font-size: 10px;
 }
 .jsgrid-header-cell{
-font-size:12px;
+font-size:10px;
+padding:15px;
 }
 .jobcount,.machinetimer{
 font-size:11px;text-align:right
