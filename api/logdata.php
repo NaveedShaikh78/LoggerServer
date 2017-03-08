@@ -1,5 +1,5 @@
 <?php
-  require 'connectdb.php';
+  require 'includes/connectdb.php';
   $conn = connect();
   $st=$_GET["st"];
   $et=$_GET["et"];
@@ -12,7 +12,14 @@ $retval = mysql_query($sql , $conn);
    {
   die("Fail 1 ".mysql_error);
    } 
+$sql = "select * from machinelog where ioport=$ip and start_time=$st";
+$retval = mysql_query( $sql, $conn );
 
+$num_rows = mysql_num_rows($retval);
+
+$cycleTime= strtotime($et) - strtotime($st);
+if($num_rows==0 && $cycleTime>20)
+{
 $sql = "UPDATE machinelog SET idletime=@totalidlesec where ioport=$ip and srno=@lastRecord;";
 $retval = mysql_query($sql , $conn);
   if(!$retval)
@@ -26,7 +33,7 @@ $retval = mysql_query($sql , $conn);
    {
   die("Fail 3 ".mysql_error);
   } 
-	
+}
 echo "success";
 mysql_close($conn);
 ?>

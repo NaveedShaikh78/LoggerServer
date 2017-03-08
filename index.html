@@ -8,10 +8,58 @@
 	<link type="text/css" rel="stylesheet" href="jquery/css/jsgrid-theme.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/status.css" />
 	<link type="text/css" rel="stylesheet" href="css/machinestate.css" />
+	<link type="text/css" rel="stylesheet" href="css/slidemenu.css" />
 	<link type="text/css" rel="stylesheet" href="jquery/css/jquery-ui.css" />
 	
 </head>
 <body onload="$('#loader').fadeOut('slow')">
+
+<div class="layer">
+<nav class="navbar navbar-default slide-tab" role="navigation">
+  <div class="container-fluid scroll invisibar">
+      <ul class="nav navbar-nav breakscroll">
+        <li class="active"><a href="#">Foo</a></li>
+        <li><a href="#">Bar</a></li>
+        <li><a href="#">Thunder</a></li>
+        <li><a href="#">Flash</a></li>
+        <li><a href="#">Hotdog</a></li>
+        <li><a href="#">Bar</a></li>
+        <li><a href="#">Thunder</a></li>
+        <li><a href="#">Flash</a></li>
+        <li><a href="#">Hotdog</a></li>
+        <li><a href="#">Bar</a></li>
+        <li><a href="#">Thunder</a></li>
+        <li><a href="#">Flash</a></li>
+        <li><a href="#">Hotdog</a></li>
+        <li><a href="#">Bar</a></li>
+        <li><a href="#">Thunder</a></li>
+        <li><a href="#">Flash</a></li>
+        <li><a href="#">Hotdog</a></li>
+    </ul> 
+  </div>
+  <ul class="control">
+      <li><span class="glyphicon glyphicon-search"></span></li>
+      <li><span class="glyphicon glyphicon-align-justify muted"></span></li>
+  </ul>
+</nav>
+  <div class="hotspot">
+    <div class="half slide" data="left">
+      <button class="click"></button>
+    </div>
+    <div class="half slide" data="right">
+      <button class="click"></button>
+    </div>
+  </div>
+  <div class="dash scroll invisibar">
+    <div class="panes breakscroll">
+    
+    </div>
+  </div>
+</div>
+
+
+
+
 
 <div id="login1" title="Login" >
 <form id = "frmLogin" >
@@ -140,6 +188,9 @@
 	<script src="jquery/js/jquery-ui.js"></script>	
     <script src="script/search.js"></script>
 	<script src="script/status.js"></script>
+	<script src="script/jquery.touchSwipe.min.js"></script>
+	<script src="script/slidemenu.js"></script>
+	
 	</div>
 	</body>
 </html>
