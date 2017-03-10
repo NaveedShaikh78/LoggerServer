@@ -2,6 +2,28 @@
 var selectedMachine = 26;
 var reportType = ""
 var ioports = [26, 19, 13, 6, 22, 27, 17];
+
+/* Code of Slide Menu*/
+  $(window).load(function(){
+        $("[data-toggle]").click(function() {
+          var toggle_el = $(this).data("toggle");
+          $(toggle_el).toggleClass("open-sidebar");
+        });
+         $(".swipe-area").swipe({
+              swipeStatus:function(event, phase, direction, distance, duration, fingers)
+                  {
+                      if (phase=="move" && direction =="right") {
+                           $(".slide-container").addClass("open-sidebar");
+                           return false;
+                      }
+                      if (phase=="move" && direction =="left") {
+                           $(".slide-container").removeClass("open-sidebar");
+                           return false;
+                      }
+                  }
+          }); 
+      });
+/*End The Code of Slide Menu*/
  
  function login(event) {
 
@@ -36,14 +58,14 @@ var ioports = [26, 19, 13, 6, 22, 27, 17];
 	});
   });
 
-  $( function() {
+/*  $( function() {
     $( "#operator" ).dialog({ 
 				closeOnEscape: false,
                /*modal: true,
-			    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }*/
+			    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
 	});
   });
-  
+  */
 function getDefaultDate() {
 
     var now = new Date();

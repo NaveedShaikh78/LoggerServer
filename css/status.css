@@ -1,10 +1,19 @@
 .machinefont {
 width:100%;
 }
+.row{
+margin:10px 0 0 0;	
+}
 #optgrid .jsgrid-header-cell{
 padding:10px;
 }
 #optgrid .jsgrid-cell{
+padding:5px;;
+}
+#jobgrid .jsgrid-header-cell{
+padding:10px;
+}
+#jobgrid .jsgrid-cell{
 padding:5px;;
 }
 @media screen and (max-width: 1000px) {

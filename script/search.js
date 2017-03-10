@@ -1,3 +1,35 @@
+
+
+
+jobgridfields=[
+            { name: "job_name", type: "text",title :"Job Name" ,width:500 },
+            ];
+
+$("#jobgrid").jsGrid({
+        width: "100%",
+        inserting: false,
+        editing: false,
+        sorting: true,
+        paging: false,
+        pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
+        data: [
+		{job_name : 'job1'},
+		{job_name : 'job2'},
+		{job_name : 'job3'},
+		{job_name : 'job4'},
+		{job_name : 'job5'},
+		{job_name : 'job6'},
+		{job_name : 'job7'},
+		{job_name : 'job8'},
+		{job_name : 'job9'},
+		
+		],
+        fields: jobgridfields
+    });
+
+
+
+
 function liveMachineStatus(){
 $("#machinecontainer").show();
 $("#jsGrid").hide();
@@ -60,11 +92,22 @@ $.getJSON(url1, function( sdata ) {
   });
 $('#bs-example-navbar-collapse-1').removeClass('in');
 }
-
+optgridData=[];
 optgridfields=[
-            { name: "operator_name", type: "text",title :"Operator Name" ,width:500 },
+            { name: "operator_name", type: "text",title :"Operator Name" ,width:1500 },
             ];
+loadOptGrid();
+			
+addOperator=function (){
+	optgridData.push({operator_name:$("#txtOperatorName").val()});
+	loadOptGrid();
+}
 
+function deleteOperator(){
+	
+	optgridfields.IndexOf();
+}
+function loadOptGrid(){
 $("#optgrid").jsGrid({
         width: "100%",
         inserting: false,
@@ -72,19 +115,9 @@ $("#optgrid").jsGrid({
         sorting: true,
         paging: false,
         pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
-        data: [{operator_name : 'shekhar patil'},
-		{operator_name : 'shekhar patil'},
-		{operator_name : 'shekhar patil'},
-		{operator_name : 'shekhar patil'},
-		{operator_name : 'shekhar patil'},
-		{operator_name : 'shekhar patil'},
-		{operator_name : 'shekhar patil'},
-		{operator_name : 'shekhar patil'},
-		{operator_name : 'shekhar patil'},{operator_name : 'shekhar patil'},{operator_name : 'shekhar patil'},{operator_name : 'shekhar patil'},{operator_name : 'shekhar patil'},{operator_name : 'shekhar patil'},
-		{operator_name : 'rahul mali'}
-		],
+        data: optgridData,
         fields: optgridfields
     });
-
+}
 
 
