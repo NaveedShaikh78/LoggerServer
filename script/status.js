@@ -3,7 +3,7 @@ var selectedMachine = 26;
 var reportType = ""
 var ioports = [26, 19, 13, 6, 22, 27, 17];
 
-/* Code of Slide Menu*/
+/* Code of Slide Menu
   $(window).load(function(){
         $("[data-toggle]").click(function() {
           var toggle_el = $(this).data("toggle");

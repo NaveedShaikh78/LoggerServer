@@ -92,32 +92,3 @@ $.getJSON(url1, function( sdata ) {
   });
 $('#bs-example-navbar-collapse-1').removeClass('in');
 }
-optgridData=[];
-optgridfields=[
-            { name: "operator_name", type: "text",title :"Operator Name" ,width:1500 },
-            ];
-loadOptGrid();
-			
-addOperator=function (){
-	optgridData.push({operator_name:$("#txtOperatorName").val()});
-	loadOptGrid();
-}
-
-function deleteOperator(){
-	
-	optgridfields.IndexOf();
-}
-function loadOptGrid(){
-$("#optgrid").jsGrid({
-        width: "100%",
-        inserting: false,
-        editing: false,
-        sorting: true,
-        paging: false,
-        pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
-        data: optgridData,
-        fields: optgridfields
-    });
-}
-
-

@@ -31,70 +31,28 @@
   <div class="tabs-content">
     <div class="tabs-menu clearfix" style="  background: #DF314D;">
       <ul>
-        <li><a class="active-tab-menu" href="#" data-tab="tab1">AppView</a></li>
-        <li><a href="#" data-tab="tab2">Operator</a></li>
-        <li><a href="#" data-tab="tab3">Product</a></li>
-        <li><a href="#" data-tab="tab4">Search</a></li>
-        <li><a href="#" data-tab="tab5">Setting</a></li>
+        <li id="menuappview"><a class="active-tab-menu" href="#" data-tab="tab1">AppView</a></li>
+        <li id="menureport"><a href="#" data-tab="tab4">Report</a></li>
+        <li id="menusetting" style="width:110px;" ><a href="#" data-tab="tab5">Setting</a>
+				
+		</li>
       </ul>
     </div> <!-- tabs-menu -->
+	<div id="submenu1" class="tabs-menu" style=" width:100px;margin-left:198px; margin-top:-20px; display:none;">
+				<ul >
+					<li id="menuoperator" style="background: #DF314D; width:110px;"><a href="#" data-tab="tab2" style="color:#fff;">OPERATOR</a></li>
+				
+				
+					<li id="menujob" style="background: #DF314D; width:110px;"><a href="#" data-tab="tab3"  style="color:#fff;">Product</a></li>
+				</ul>
+	</div>
 	<div id="menu body" style="width:100%;height:100%;">
 		<!--First tab Menu-->
-		<div id="appview menu" class="tab1 tabs first-tab" style="padding:1%;margin-top:1%;">
+		<div id="appviewbase" class="tab1 tabs first-tab" style="padding:1%;margin-top:6%;">
 			<div id="appview" >
-				<nav class="navbar navbar-default" >
-					<div class="container-fluid" >
-						<!-- Brand and toggle get grouped for better mobile display -->
-						<div class="navbar-header">
-						  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						  </button>
-						  <a class="navbar-brand" href="#">Machine Logger</a>
-						</div>
-
-						<!-- Collect the nav links, forms, and other content for toggling -->
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						  <ul class="nav navbar-nav">
-							  <li class="dropdown">
-							  <a href="#" class="dropdown-toggle" id="reportcmb" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Detailed <span class="caret"></span></a>
-							  <ul class="dropdown-menu" >
-								  <li><a href="#" id="rcmb-dt" >Detailed</a></li>
-								  <li><a href="#" id="rcmb-dsc">Daily Shift Count</a></li>
-								  <li><a href="#" id="rcmb-dsc">Monthly Shift Count</a></li>	
-							  </ul>
-							</li>
-							<li class="dropdown">
-							  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">Machine1 <span class="caret"></span></a>
-							  <ul class="dropdown-menu" >
-								  <li><a href="#" id="mcmb-26" >Machine 1</a></li>
-								  <li><a href="#" id="mcmb-19">Machine 2</a></li>
-								  <li><a href="#" id="mcmb-13">Machine 3</a></li>
-								  <li><a href="#" id="mcmb-6">Machine 4</a></li>
-								  <li><a href="#" id="mcmb-22">Machine 5</a></li>
-								  <li><a href="#" id="mcmb-27">Machine 6</a></li>
-								  <li><a href="#" id="mcmb-17">Machine 7</a></li>
-							  </ul>
-							</li>
-						  </ul>
-						  <form class="navbar-form navbar-left">
-							<div class="form-group">
-							 From:  	<input type="datetime-local" class="form-control" id="dateFrom"  />
-							 To:    	<input type="datetime-local" class="form-control"  id="dateTo"  >
-							</div>
-							 
-								<button  class="btn btn-default"  type= "button" onclick="searchdb();">Search</button>
-								<button  class="btn btn-default"  type= "button" onclick="liveMachineStatus();">Live</button>
-						  </form>
-						 
-						</div><!-- /.navbar-collapse -->
-					</div><!-- /.container-fluid -->
-				</nav>
 	
 				<div class="container-fluid" id="machinecontainer"> 	
-				<div class="row">
+				<div class="row" >
 					 <machineview> </machineview>
 				</div>
 				</div>
@@ -191,8 +149,8 @@
 			
 		</div><!--tab1 App View-->
 		<!--Second tab Menu Operator-->
-		<div class="tab2 tabs" >
-			<div id="operator" title="Operator Registration">
+		<div id="operator" class="tab2 tabs"  style="margin-top:6%;">
+			<div title="Operator Registration">
 				<div class="row">
 					<div class="row">
 						<div class="col-xs-12">
@@ -218,24 +176,25 @@
 			</div> 
 		</div> <!-- .tab2 operator -->
 		<!--Third tab Menu Job-->
-		<div id="job menu" class="tab3 tabs">
-			<div id="job" title="Job Registration" style="background:; width:35%; margin-left:30%;">
-				<div class="row" style="width:100%; margin:0%;">
-					<div class="row" style="width:100%;">
-						<div class="col-xs-4" style="width:100%; padding:0%;">
-							<input class="form-control" id="jobname" type="text" placeholder = "Job Name">
+		<div id="job" class="tab3 tabs" style="margin-top:6%;">
+			<div title="Job Registration">
+				<div class="row">
+					<div class="row">
+						<div class="col-xs-12">
+							<input class="form-control" id="txtJobName" type="text" placeholder = "Job Name">
 						</div>
-						<div style="width:100%; margin-top:7%;">
-							<div class="col-xs-4" style="width:50%;padding:0%;">
-								<input class="form-control" id="btnjobadd" type="button" value = "Add" >
-							</div>
-							<div class="col-xs-4" style="width:50%;padding:0%;">
-								<input class="form-control" id="btnjobdelete" type="button" value = "Delete" >
-							</div>
 						</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<input class="form-control" id="btnjobadd" type="button" onclick="addJob();" value = "Add" >
+							</div>
+							<div class="col-xs-6">
+								<input class="form-control" id="btnjobdelete" type="button" onclick="deleteJob()" value = "Delete" >
+							</div>
+						
 					</div>
-					<div class="row" style="width:100%;">
-						<div class="col-xs-4" style="margin-top:0.5%;width:100%; padding:0%;">
+					<div class="row">
+						<div class="col-xs-12">
 							<div id="jobgrid">
 							</div>
 						</div>
@@ -243,9 +202,62 @@
 				</div>	
 			</div>
 		</div> <!-- .tab3 Job-->
-		<div class="tab4 tabs">
-		  Phasellus posuere rutrum elit in dignissim. Quisque aliquet scelerisque elit ut pretium. In quis nisi id nunc dapibus ornare sagittis nec velit. Duis odio ipsum, luctus in elementum sed, condimentum a felis. Praesent vitae ante venenatis, varius elit eget, auctor metus. Vestibulum a quam dolor. Vestibulum ornare, quam sit amet lacinia ultricies, tortor nulla fringilla ante, sed commodo nibh lacus at dui. Nam imperdiet a dolor sit amet efficitur. Fusce consequat erat ut rhoncus laoreet. Sed consectetur volutpat nisi, ac congue nunc fermentum posuere. 
-		</div> <!-- .tab3 -->
+		
+		<!-- Report Tab with Machine Logger Navigation Bar-->
+		<div id="demodiv" class="tab4 tabs" style="margin-top:6%;">
+						<nav class="navbar navbar-default" >
+					<div class="container-fluid" >
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						  </button>
+						  <a class="navbar-brand" href="#">Machine Logger</a>
+						</div>
+
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						  <ul class="nav navbar-nav">
+							  <li class="dropdown">
+							  <a href="#" class="dropdown-toggle" id="reportcmb" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Detailed <span class="caret"></span></a>
+							  <ul class="dropdown-menu" >
+								  <li><a href="#" id="rcmb-dt" >Detailed</a></li>
+								  <li><a href="#" id="rcmb-dsc">Daily Shift Count</a></li>
+								  <li><a href="#" id="rcmb-dsc">Monthly Shift Count</a></li>	
+							  </ul>
+							</li>
+							<li class="dropdown">
+							  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">Machine1 <span class="caret"></span></a>
+							  <ul class="dropdown-menu" >
+								  <li><a href="#" id="mcmb-26" >Machine 1</a></li>
+								  <li><a href="#" id="mcmb-19">Machine 2</a></li>
+								  <li><a href="#" id="mcmb-13">Machine 3</a></li>
+								  <li><a href="#" id="mcmb-6">Machine 4</a></li>
+								  <li><a href="#" id="mcmb-22">Machine 5</a></li>
+								  <li><a href="#" id="mcmb-27">Machine 6</a></li>
+								  <li><a href="#" id="mcmb-17">Machine 7</a></li>
+							  </ul>
+							</li>
+						  </ul>
+						  <form class="navbar-form navbar-left">
+							<div class="form-group">
+							 From:  	<input type="datetime-local" class="form-control" id="dateFrom"  />
+							 To:    	<input type="datetime-local" class="form-control"  id="dateTo"  >
+							</div>
+							 
+								<button  class="btn btn-default"  type= "button" onclick="searchdb();">Search</button>
+								<button  class="btn btn-default"  type= "button" onclick="liveMachineStatus();">Live</button>
+						  </form>
+						 
+						</div><!-- /.navbar-collapse -->
+					</div><!-- /.container-fluid -->
+				</nav>
+	
+		
+		</div> <!-- .tab4 -->
 	</div>
   </div> <!-- .tabs -->
 </div> <!-- .content  End of whole tab menu-->
@@ -292,6 +304,8 @@
 	<script src="script/search.js"></script>
 	<script src="script/status.js"></script>
 	<script src="script/tabmenu.js"></script>
+	<script src="script/operator.js"></script>
+	<script src="script/job.js"></script>
 
 	</body>
 </html>
