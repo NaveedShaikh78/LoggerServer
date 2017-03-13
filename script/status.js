@@ -30,7 +30,7 @@ var ioports = [26, 19, 13, 6, 22, 27, 17];
 						event.preventDefault();
 					    var formvalues={'username':$("#username").val() ,'password':$("#password").val()};
                        
-                        $.post('/api/login.php', formvalues).done(function (data) {
+                        $.post('https://trendzsoft.in/api/login.php', formvalues).done(function (data) {
 							if(data == "success"){
 								$("#appview").fadeIn(); 
 								$("#login").dialog("close");

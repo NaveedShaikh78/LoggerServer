@@ -70,37 +70,23 @@ gridfields=[
  $.getJSON(url2, function( sdata ) {
 $('#macJobCount').text("Total Jobs count:"+sdata[0].count);
  });
-$.ajax({
-   type: 'GET',
-   url:url2,
-  ContentType:'json',
-   headers: {Accept : "application/json;charset=utf-8"},
-   success: function(sdata, textStatus, request){
-	   $('#macJobCount').text("Total Jobs count:"+sdata[0].count);
-        
-   },
-   error: function (request, textStatus, errorThrown) {
-        alert(request.getResponseHeader('some_header'));
-   }
-  });
-// $.getJSON(url1, function( sdata ) {
+
+ $.getJSON(url1, function( sdata ) {
    
-    // $("#jsGrid").jsGrid({
-        // width: "100%",
+    $("#jsGrid").jsGrid({
+         width: "100%",
  
-        // inserting: false,
-        // editing: false,
-        // sorting: true,
-        // paging: false,
-        // pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
-   
-        // data: sdata,
- 
-        // fields: gridfields
-    // });
-  // $('#loader').fadeOut('slow');
+        inserting: false,
+         editing: false,
+         sorting: true,
+         paging: false,
+         pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
+		 data: sdata,
+         fields: gridfields
+     });
+   $('#loader').fadeOut('slow');
   
 
-  // });
+   });
 $('#bs-example-navbar-collapse-1').removeClass('in');
 }
