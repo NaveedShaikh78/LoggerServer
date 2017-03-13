@@ -1,72 +1,6 @@
-
 var selectedMachine = 26;
 var reportType = ""
 var ioports = [26, 19, 13, 6, 22, 27, 17];
-var appdata={};
-appdata.cuid="";
-/* Code of Slide Menu
-  $(window).load(function(){
-        $("[data-toggle]").click(function() {
-          var toggle_el = $(this).data("toggle");
-          $(toggle_el).toggleClass("open-sidebar");
-        });
-         $(".swipe-area").swipe({
-              swipeStatus:function(event, phase, direction, distance, duration, fingers)
-                  {
-                      if (phase=="move" && direction =="right") {
-                           $(".slide-container").addClass("open-sidebar");
-                           return false;
-                      }
-                      if (phase=="move" && direction =="left") {
-                           $(".slide-container").removeClass("open-sidebar");
-                           return false;
-                      }
-                  }
-          }); 
-      });
-/*End The Code of Slide Menu*/
- 
- function login(event) {
-
-						event.preventDefault();
-					    var formvalues={'username':$("#username").val() ,'password':$("#password").val(),'cuid':appdata.cuid};
-                       
-                        $.post('https://trendzsoft.in/api/login.php', formvalues).done(function (data) {
-							if(data != "Failed"){
-								$("#appview").fadeIn(); 
-								$("#login").dialog("close");
-								appdata.cuid=data;
-							}
-							else{
-								$("#failmsg").show();
-								$("#failmsg").html("Invalid Username or Password");
-							}
-							
-                        }
-					)
-    .fail(function(xhr, status, error) {
-		$("#failmsg").show();
-        $("#failmsg").val("Check your internet connection...");
-    });
-						 	
- }
- 
-function showLoginDialog() {
-    $( "#login" ).dialog({ 
-				closeOnEscape: false,
-               modal: true,
-			    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
-	});
-  }
-
-/*  $( function() {
-    $( "#operator" ).dialog({ 
-				closeOnEscape: false,
-               /*modal: true,
-			    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
-	});
-  });
-  */
 function getDefaultDate() {
 
     var now = new Date();
@@ -122,17 +56,21 @@ $(function () {
     var today = now.getFullYear() + "-" + (month) + "-" + (day) + "T20:00";
     $("#dateTo").val(today);
     setInterval(function () {
-        var url = "http://trendzsoft.in/api/machinestatus.php";
-		 var formvalues={'username':$("#username").val() ,'password':$("#password").val(),'cuid':appdata.cuid};
-if(appdata.cuid==""){
-	showLoginDialog();
-}else{
-        $.post(url,formvalues, function (sdata) {
-			
+        var api = "http://pi.trendzsoft.in/api/machinestatus.php?";
+		
+		$.ajax({
+    type: "POST",
+    dataType: 'text',
+    url: api,
+    //username: 'user',
+    //password: 'pass',
+    crossDomain : true,
+    xhrFields: {
+        withCredentials: true
+    }
+})
+    .done(function(sdata) {
             for (var i = 0; i < ioports.length; i++) {
-				if(sdata[0] == "Failed"){
-					showLoginDialog();
-				}
                 if (sdata[ioports[i]]) {
                     var mactime = new Date(sdata[ioports[i]].statetime);
                     var tmsec = Date.now() - mactime;
@@ -148,7 +86,12 @@ if(appdata.cuid==""){
                     }
                 }
             }
-        }, "json");
-}
+        })
+    .fail( function(xhr, textStatus, errorThrown) {
+		console.log(xhr.responseText);
+		console.log(textStatus);
+        });
+		
+
     }, 1000)
 });

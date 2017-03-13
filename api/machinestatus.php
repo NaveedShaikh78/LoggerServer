@@ -1,8 +1,36 @@
 <?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+print("\n");
+$rows=[];
+$cuid=$_POST['cuid'];
 
-include('includes/header.php');
+if(!isset($cuid) || $cuid=="")
+{
+$rows= array("Failed");
+print json_encode ($rows);
+return;
+}
+else
+{
+	session_id($cuid);
+	session_start(); 
+}
+
+if(!isset($_SESSION['loggedin']))
+{
+$rows= array("Failed");
+print json_encode ($rows);
+return;
+}else{
+	if($_SESSION['loggedin']=="Failed"){
+		$rows= array("Failed");
+		print json_encode ($rows);
+		return;
+	}
+}
+$rows=[];
 require 'includes/connectdb.php';
-
 $conn = connect();
 date_default_timezone_set('Asia/Kolkata');
 $currentDate = date("Y-m-d H:i:s");
@@ -32,13 +60,11 @@ $sql="select count(*) as count,machinestatus.ioport,machinestatus.statetime,mach
  	 {
   	 	die('Could not get data: ' . mysql_error());
   	 }
-   $rows=[];
+
 while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
   	{
 		$rows[$row['ioport']] = $row;
   	} 
-	header('Content-Type: application/json');
-	header('Access-Control-Allow-Origin: *');
-	print json_encode($rows);
-  	mysql_close($conn);
+print json_encode($rows);
+mysql_close($conn);
 ?>

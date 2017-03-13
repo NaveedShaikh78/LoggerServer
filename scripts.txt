@@ -1,0 +1,2 @@
+create table login(userID varchar(40) primary key,password varchar(20));
+insert into login values('global','global@#')

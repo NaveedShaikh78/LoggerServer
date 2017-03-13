@@ -1,13 +1,17 @@
 <?php
 $user=$_POST['username'];
+$cuid=$_POST['cuid'];
 $password=$_POST['password'];
 header('Access-Control-Allow-Origin: *');
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true)
+session_start();
+if($cuid!="")
 {
-print "success";
-return;
+session_id($cuid);	
 }
-$_SESSION['loggedin']=false;
+else
+{
+$cuid=session_id();	
+}
 require 'includes/connectdb.php';
 $conn = connect();
 $sql = "SELECT *  FROM login where userID = '$user' and password='$password'";
@@ -18,15 +22,14 @@ if(! $retval )
  }
 while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
 	{
-	$_SESSION['loggedin'] = true;
+	$_SESSION['loggedin'] = $cuid;
 	} 
-if($_SESSION['loggedin'])
+if(	mysql_num_rows($retval)==0)
 {
-print "success";
+$_SESSION['loggedin'] = "Failed";
 }
-else
-{
-print "failed";	
-}
+session_write_close();
+print $_SESSION['loggedin'] ;	
+
 mysql_close($conn);
 ?>
