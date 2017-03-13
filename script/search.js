@@ -70,7 +70,11 @@ gridfields=[
  $.getJSON(url2, function( sdata ) {
 $('#macJobCount').text("Total Jobs count:"+sdata[0].count);
  });
-$.ajax({ type: 'GET', url:url2,  ContentType:'json',
+$.ajax({
+   type: 'GET',
+   url:url2,
+  ContentType:'json',
+   headers: {Accept : "application/json;charset=utf-8"},
    success: function(sdata, textStatus, request){
 	   $('#macJobCount').text("Total Jobs count:"+sdata[0].count);
         

@@ -1,5 +1,4 @@
 <?php
-include('includes/header.php');
 require 'includes/connectdb.php';
 $conn = connect();
 $st=$_GET["st"];
@@ -17,8 +16,9 @@ while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
   	{
 		$rows[] = $row;
   	} 
-
-	print("\n");
-	print json_encode($rows);
-  	mysql_close($conn);
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+print("\n");
+print json_encode($rows);
+mysql_close($conn);
 ?>
