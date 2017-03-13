@@ -121,7 +121,7 @@ $(function () {
     var today = now.getFullYear() + "-" + (month) + "-" + (day) + "T20:00";
     $("#dateTo").val(today);
     setInterval(function () {
-        var url = "//www.trendzsoft.in/machinestatus.php?";
+        var url = "http://trendzsoft.in/api/machinestatus.php?";
         $.getJSON(url, function (sdata) {
 			
             for (var i = 0; i < ioports.length; i++) {

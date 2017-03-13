@@ -1,6 +1,6 @@
 <?php
 
-include('includes/headers.php');
+include('includes/header.php');
 require 'includes/connectdb.php';
 
 $conn = connect();
@@ -37,6 +37,8 @@ while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
   	{
 		$rows[$row['ioport']] = $row;
   	} 
+	header('Content-Type: application/json');
+	header('Access-Control-Allow-Origin: *');
 	print json_encode($rows);
   	mysql_close($conn);
 ?>
