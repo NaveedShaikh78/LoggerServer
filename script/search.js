@@ -28,7 +28,7 @@ $("#jobgrid").jsGrid({
     });
 
 
-
+$("#jsGrid").show();
 
 function liveMachineStatus(){
 $("#machinecontainer").show();
@@ -36,10 +36,8 @@ $("#jsGrid").hide();
 $("#macJobCount").hide();
 }
 function searchdb(){
-$("#jsGrid").show();
-$('#macJobCount').show();
-$("#machinecontainer").hide();
-$('#loader').fadeIn('slow');
+  $('#loader').show();
+
 var dfrom=document.getElementById("dateFrom").value;
 var dTo=document.getElementById("dateTo").value;
 var url1 = "https://trendzsoft.in/api/getstatus.php?" + "st='" + dfrom + "'&et='" + dTo + "'&mac='" + selectedMachine + "'";

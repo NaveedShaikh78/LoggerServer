@@ -2,289 +2,259 @@
 <head>
     <title>Machine Logger</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-	<link type="text/css" rel="stylesheet" href="bootstrap/css/spinner.css" />
-	<link type="text/css" rel="stylesheet" href="jquery/css/jsgrid.min.css" />
-	<link type="text/css" rel="stylesheet" href="jquery/css/jsgrid-theme.min.css" />
-	<link type="text/css" rel="stylesheet" href="css/status.css" />
-	<link type="text/css" rel="stylesheet" href="css/machinestate.css" />
-	<link type="text/css" rel="stylesheet" href="css/slidemenu.css" />
-	<link type="text/css" rel="stylesheet" href="css/tabmenu.css" />
-	<link type="text/css" rel="stylesheet" href="jquery/css/jquery-ui.css" />
-	
+    <link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="bootstrap/css/spinner.css" />
+    <link type="text/css" rel="stylesheet" href="jquery/css/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="jquery/css/jsgrid-theme.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/machinestate.css" />
+    <link type="text/css" rel="stylesheet" href="css/slidemenu.css" />
+    <link type="text/css" rel="stylesheet" href="jquery/css/jquery-ui.css" />
+    <link type="text/css" rel="stylesheet" href="slicktab/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="slicktab/css/slick-tab.css" />
+    <link type="text/css" rel="stylesheet" href="css/status.css" />
+
 </head>
 <body onload="$('#loader').fadeOut('slow')">
-
-<div id="slide-view" class="slide-container">
-        <div id="sidebar">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">About</a></li>
-          </ul>
+    <div class="sub-header ">
+        <div class="swipe-tabs">
+            <div class="swipe-tab">Live</div>
+            <div class="swipe-tab">Reports</div>
+            <div class="swipe-tab">Setting</div>
         </div>
-	
+    </div>
+    <div class="main-container">
+        <div class="swipe-tabs-container ">
 
-<!--Start of whole tab menu-->
-<div class="content" style="padding:0%;margin-left:0.3%; margin-top:-0.5%;">
-  <div class="tabs-content">
-    <div class="tabs-menu clearfix" style="  background: #DF314D;">
-      <ul>
-        <li id="menuappview"><a class="active-tab-menu" href="#" data-tab="tab1">AppView</a></li>
-        <li id="menureport"><a href="#" data-tab="tab4">Report</a></li>
-        <li id="menusetting" style="width:110px;" ><a href="#" data-tab="tab5">Setting</a>
-				
-		</li>
-      </ul>
-    </div> <!-- tabs-menu -->
-	<div id="submenu1" class="tabs-menu" style=" width:100px;margin-left:198px; margin-top:-20px; display:none;">
-				<ul >
-					<li id="menuoperator" style="background: #DF314D; width:110px;"><a href="#" data-tab="tab2" style="color:#fff;">OPERATOR</a></li>
-				
-				
-					<li id="menujob" style="background: #DF314D; width:110px;"><a href="#" data-tab="tab3"  style="color:#fff;">Product</a></li>
-				</ul>
-	</div>
-	<div id="menu body" style="width:100%;height:100%;">
-		<!--First tab Menu-->
-		<div id="appviewbase" class="tab1 tabs first-tab" style="padding:1%;margin-top:6%;">
-			<div id="appview" >
-	
-				<div class="container-fluid" id="machinecontainer"> 	
-				<div class="row" >
-					 <machineview> </machineview>
-				</div>
-				</div>
-				<template id="machinetemplete">
-				  <div class="col-xs-12 col-sm-3">
-						 <div class="panel panel-info">
-							<div class="panel-heading">Machine</div>
-							<div class="panel-body" style="width:100%;">
-								<div id="table1" style="width:100%;">		
-									<table class="machinefont" >
-										<tr style="width:100%;">
-											<td rowspan=2 style="width:40%;">
-												<div class="cssload-container">
-													<div class="loading6">
-													</div>
-												</div>
-											</td>
-											<td style="width:30%!important;">Count</td>
-											<td class="jobcount" style="width:30%;">0</td>
-										</tr>
-										<tr style="width:100%;">
-											<td style="width:30% !important;">Timer</td>
-											<td class="machinetimer" style="width:30%;">10:10:10</td>
-										</tr>
-									</table>
-								</div>
-								<div id="table2" style="width:100%;">		
-									<table class="machinefont" >
-										<tr style="width:100%;">
-											<td style="width:40%;">Operator</td>
-											<td style="width:60%;">
-												<div class="dropdown"">
-													<button class="btn btn-default btn-xs dropdown-toggle" style ="width:100%;" data-toggle="dropdown" role="menu" aria-haspopup="true" aria-expanded="false">
-														Operator Names<span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu icon-arrow-right pull-right" style="width:100%;">
-													  <li><a href="#" id="opt1">shekhar Patil</a></li>
-													  <li><a href="#" id="opt2">rahul bhadane</a></li>
-													  <li><a href="#" id="opt3">nikhil vispute</a></li>
-													</ul>
-												</div>
-											
-											
-											
-											
-											</td>
-										</tr>
-										<tr>
-											<td style="width:40%;">Job</td>
-											<td style="width:60%;">
-												<div class="dropdown">
-													<button class="btn btn-default btn-xs dropdown-toggle" style ="width:100%;" data-toggle="dropdown" role="menu" aria-haspopup="true" aria-expanded="false">
-														Job Names<span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu icon-arrow-right pull-right" style="width:100%;">
-													  <li><a href="#" id="opt1">Job1</a></li>
-													  <li><a href="#" id="opt2">Job2</a></li>
-													  <li><a href="#" id="opt3">Job3</a></li>
-													</ul>
-												</div>
-											
-											
-											
-											
-											</td>
-										</tr>
-									</table>
-								</div>	
-							 </div>
-						 </div>
-				  </div>
-				</template>
-				<div id="macJobCount"></div>
-				<div id="jsGrid" ></div>
-	
-				<div class="container">
-					<div class="row">
-						<div id="loader">
-							<div class="dot"></div>
-							<div class="dot"></div>
-							<div class="dot"></div>
-							<div class="dot"></div>
-							<div class="dot"></div>
-							<div class="dot"></div>
-							<div class="dot"></div>
-							<div class="dot"></div>
-							<div class="lading"></div>
-						</div>
-					</div>
-				</div>
+            <div class="swipe-tab-content">
+                <div id="appview">
 
-			</div><!--End of appview div-->
-	
-			
-		</div><!--tab1 App View-->
-		<!--Second tab Menu Operator-->
-		<div id="operator" class="tab2 tabs"  style="margin-top:6%;">
-			<div title="Operator Registration">
-				<div class="row">
-					<div class="row">
-						<div class="col-xs-12">
-							<input class="form-control" id="txtOperatorName" type="text" placeholder = "Operator Name">
-						</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-6">
-								<input class="form-control" id="btnoperatoradd" type="button" onclick="addOperator();" value = "Add" >
-							</div>
-							<div class="col-xs-6">
-								<input class="form-control" id="btnoperatordelete" type="button" onclick="deleteOperator()" value = "Delete" >
-							</div>
-						
-					</div>
-					<div class="row">
-						<div class="col-xs-12">
-							<div id="optgrid">
-							</div>
-						</div>
-					</div>
-				</div>	
-			</div> 
-		</div> <!-- .tab2 operator -->
-		<!--Third tab Menu Job-->
-		<div id="job" class="tab3 tabs" style="margin-top:6%;">
-			<div title="Job Registration">
-				<div class="row">
-					<div class="row">
-						<div class="col-xs-12">
-							<input class="form-control" id="txtJobName" type="text" placeholder = "Job Name">
-						</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-6">
-								<input class="form-control" id="btnjobadd" type="button" onclick="addJob();" value = "Add" >
-							</div>
-							<div class="col-xs-6">
-								<input class="form-control" id="btnjobdelete" type="button" onclick="deleteJob()" value = "Delete" >
-							</div>
-						
-					</div>
-					<div class="row">
-						<div class="col-xs-12">
-							<div id="jobgrid">
-							</div>
-						</div>
-					</div>
-				</div>	
-			</div>
-		</div> <!-- .tab3 Job-->
-		
-		<!-- Report Tab with Machine Logger Navigation Bar-->
-		<div id="demodiv" class="tab4 tabs" style="margin-top:6%;">
-						<nav class="navbar navbar-default" >
-					<div class="container-fluid" >
-						<!-- Brand and toggle get grouped for better mobile display -->
-						<div class="navbar-header">
-						  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						  </button>
-						  <a class="navbar-brand" href="#">Machine Logger</a>
-						</div>
+                    <div class="container-fluid" id="machinecontainer">
+                        <div class="row">
+                            <machineview> </machineview>
+                        </div>
+                    </div>
+                    <template id="machinetemplete">
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">Machine</div>
+                                <div class="panel-body" style="width:100%;">
+                                    <div id="table1" style="width:100%;">
+                                        <table class="mobilefont">
+                                            <tr style="width:100%;">
+                                                <td rowspan=2 style="width:40%;">
+                                                    <div class="cssload-container">
+                                                        <div class="loading6">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="width:30%!important;">Count</td>
+                                                <td class="mobilefont maxwidth" >0</td>
+                                            </tr>
+                                            <tr style="width:100%;">
+                                                <td style="width:30% !important;">Timer</td>
+                                                <td class="mobilefont " >10:10:10</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div id="table2" style="width:100%;">
+                                        <table class="mobilefont">
+                                            <tr style="width:100%;height:25px">
+                                                <td style="width:20%;">Operator</td>
+                                                <td class="maxwidth">
+                                                    <select class="form-control vertical-padding" id="sel1" style="padding:0">
+                                                        <option>op11</option>
+                                                        <option>op12</option>
+                                                        <option>op13</option>
+                                                        <option>op14</option>
+                                                    </select>
 
-						<!-- Collect the nav links, forms, and other content for toggling -->
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						  <ul class="nav navbar-nav">
-							  <li class="dropdown">
-							  <a href="#" class="dropdown-toggle" id="reportcmb" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Detailed <span class="caret"></span></a>
-							  <ul class="dropdown-menu" >
-								  <li><a href="#" id="rcmb-dt" >Detailed</a></li>
-								  <li><a href="#" id="rcmb-dsc">Daily Shift Count</a></li>
-								  <li><a href="#" id="rcmb-dsc">Monthly Shift Count</a></li>	
-							  </ul>
-							</li>
-							<li class="dropdown">
-							  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">Machine1 <span class="caret"></span></a>
-							  <ul class="dropdown-menu" >
-								  <li><a href="#" id="mcmb-26" >Machine 1</a></li>
-								  <li><a href="#" id="mcmb-19">Machine 2</a></li>
-								  <li><a href="#" id="mcmb-13">Machine 3</a></li>
-								  <li><a href="#" id="mcmb-6">Machine 4</a></li>
-								  <li><a href="#" id="mcmb-22">Machine 5</a></li>
-								  <li><a href="#" id="mcmb-27">Machine 6</a></li>
-								  <li><a href="#" id="mcmb-17">Machine 7</a></li>
-							  </ul>
-							</li>
-						  </ul>
-						  <form class="navbar-form navbar-left">
-							<div class="form-group">
-							 From:  	<input type="datetime-local" class="form-control" id="dateFrom"  />
-							 To:    	<input type="datetime-local" class="form-control"  id="dateTo"  >
-							</div>
-							 
-								<button  class="btn btn-default"  type= "button" onclick="searchdb();">Search</button>
-								<button  class="btn btn-default"  type= "button" onclick="liveMachineStatus();">Live</button>
-						  </form>
-						 
-						</div><!-- /.navbar-collapse -->
-					</div><!-- /.container-fluid -->
-				</nav>
-	
-		
-		</div> <!-- .tab4 -->
-	</div>
-  </div> <!-- .tabs -->
-</div> <!-- .content  End of whole tab menu-->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:40%;">Job</td>
+                                                <td class="maxwidth">
+                                                    <select class="form-control vertical-padding" id="sel1" style="padding:0">
+                                                        <option>idel1</option>
+                                                        <option>idel2</option>
+                                                        <option>idel3</option>
+                                                        <option>idel4</option>
+                                                    </select>
 
-	
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
 
-<div id="login" title="Login" >
-<form id = "frmLogin" >
-	<input class="form-control" id="username" type="text" placeholder = "Username" style = "margin-top: 30px;">
-	<input class="form-control" id="password" type="password" placeholder = "Password" style = "margin-top: 25px;">
-	<input class="form-control" id="submit" type="submit" value = "Login" onclick='login(event)' style = "margin-top: 25px;">
-	
-	<div id="failmsg" class="alert alert-danger" style = "display:none; margin-top: 25px;">
-	</div>
-	
-	</form>
- </div>
-       
-	<script src="jquery/js/jquery.min.js"></script>
-	<script src="jquery/js/jsgrid.min.js"> </script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="jquery/js/jquery-ui.js"></script>	
-	<script src="script/search.js"></script>
-	<script src="script/status.js"></script>
-	<script src="script/tabmenu.js"></script>
-	<script src="script/operator.js"></script>
-	<script src="script/job.js"></script>
 
-	</body>
+
+
+                </div><!--End of appview div-->
+            </div>
+            <div class="swipe-tab-content">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Machine Logger</a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" id="reportcmb" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Detailed <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" id="rcmb-dt">Detailed</a></li>
+                                        <li><a href="#" id="rcmb-dsc">Daily Shift Count</a></li>
+                                        <li><a href="#" id="rcmb-dsc">Monthly Shift Count</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">Machine1 <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" id="mcmb-26">Machine 1</a></li>
+                                        <li><a href="#" id="mcmb-19">Machine 2</a></li>
+                                        <li><a href="#" id="mcmb-13">Machine 3</a></li>
+                                        <li><a href="#" id="mcmb-6">Machine 4</a></li>
+                                        <li><a href="#" id="mcmb-22">Machine 5</a></li>
+                                        <li><a href="#" id="mcmb-27">Machine 6</a></li>
+                                        <li><a href="#" id="mcmb-17">Machine 7</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <form class="navbar-form navbar-left">
+                                <div class="form-group">
+                                    From:  	<input type="datetime-local" class="form-control" id="dateFrom" />
+                                    To:    	<input type="datetime-local" class="form-control" id="dateTo">
+                                </div>
+
+                                <button class="btn btn-default" type="button" onclick="searchdb();">Search</button>
+                                <button class="btn btn-default" type="button" onclick="liveMachineStatus();">Live</button>
+                            </form>
+
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+                <div id="macJobCount"></div>
+                <div id="jsGrid"></div>
+            </div>
+
+            <div class="swipe-tab-content">
+                <div id="accordsettings">
+                    <h3>Jobs</h3>
+                    <div>
+                        <p>
+                            <div title="Job Registration">
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <input class="form-control" id="txtJobName" type="text" placeholder="Job Name">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input class="form-control" id="btnjobadd" type="button" onclick="addJob();" value="Add">
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input class="form-control" id="btnjobdelete" type="button" onclick="deleteJob()" value="Delete">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div id="jobgrid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </p>
+                    </div>
+                    <h3>Operator</h3>
+                    <div>
+                        <p>
+                            <div title="Operator Registration">
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <input class="form-control" id="txtOperatorName" type="text" placeholder="Operator Name">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input class="form-control" id="btnoperatoradd" type="button" onclick="addOperator();" value="Add">
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input class="form-control" id="btnoperatordelete" type="button" onclick="deleteOperator()" value="Delete">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div id="optgrid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </p>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div id="login1" title="Login">
+        <form id="frmLogin">
+            <input class="form-control" id="username" type="text" placeholder="Username" style="margin-top: 30px;">
+            <input class="form-control" id="password" type="password" placeholder="Password" style="margin-top: 25px;">
+            <input class="form-control" id="submit" type="submit" value="Login" onclick='return login(event);' style="margin-top: 25px;">
+
+            <div id="failmsg" class="alert alert-danger" style="display:none; margin-top: 25px;">
+            </div>
+
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div id="loader">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+    <script src="jquery/js/jquery.min.js"></script>
+    <script src="jquery/js/jsgrid.min.js"> </script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="jquery/js/jquery-ui.js"></script>
+    <script src="slicktab/js/slick.js"></script>
+    <script src="slicktab/js/slick-tab.js"></script>
+    <script src="script/search.js"></script>
+    <script src="script/status.js"></script>
+    <script src="script/tabmenu.js"></script>
+    <script src="script/operator.js"></script>
+    <script src="script/job.js"></script>
+
+</body>
 </html>

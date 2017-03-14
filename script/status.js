@@ -25,10 +25,9 @@ appdata.cuid="";
           }); 
       });
 /*End The Code of Slide Menu*/
- 
+ $( "#accordsettings" ).accordion({heightStyle: "content"});
  function login(event) {
 
-						event.preventDefault();
 					    var formvalues={'username':$("#username").val() ,'password':$("#password").val(),'cuid':appdata.cuid};
                        
                         $.post('https://trendzsoft.in/api/login.php', formvalues).done(function (data) {
@@ -48,7 +47,7 @@ appdata.cuid="";
 		$("#failmsg").show();
         $("#failmsg").val("Check your internet connection...");
     });
-						 	
+	return false;					 	
  }
  
 function showLoginDialog() {

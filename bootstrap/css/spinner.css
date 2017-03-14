@@ -1,3 +1,4 @@
+
 #loader {
     bottom: 0;
     height: 175px;
@@ -6,17 +7,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 175px;
-}
-#loader {
-    bottom: 0;
-    height: 175px;
-    left: 0;
-    margin: auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 175px;
+    width: 100px;
 }
 #loader .dot {
     bottom: 0;
@@ -26,7 +17,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 87.5px;
+    width: 30.5px;
 }
 #loader .dot::before {
     border-radius: 100%;
@@ -37,7 +28,7 @@
     right: 0;
     top: 0;
     transform: scale(0);
-    width: 87.5px;
+    width: 50.5px;
 }
 #loader .dot:nth-child(7n+1) {
     transform: rotate(45deg);
@@ -109,12 +100,7 @@
 @keyframes load {
 100% {
     opacity: 0;
-    transform: scale(1);
+    transform: scale(.5);
 }
 }
-@keyframes load {
-100% {
-    opacity: 0;
-    transform: scale(1);
-}
-}
+
