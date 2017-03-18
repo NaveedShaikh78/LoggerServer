@@ -12,7 +12,6 @@
     <link type="text/css" rel="stylesheet" href="slicktab/css/slick.css" />
     <link type="text/css" rel="stylesheet" href="slicktab/css/slick-tab.css" />
     <link type="text/css" rel="stylesheet" href="css/status.css" />
-
 </head>
 <body onload="$('#loader').fadeOut('slow')">
     <div class="sub-header ">
@@ -24,17 +23,15 @@
     </div>
     <div class="main-container">
         <div class="swipe-tabs-container ">
-
             <div class="swipe-tab-content">
                 <div id="appview">
-
                     <div class="container-fluid" id="machinecontainer">
                         <div class="row">
                             <machineview> </machineview>
                         </div>
                     </div>
                     <template id="machinetemplete">
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-6 col-sm-3 smallpad">
                             <div class="panel panel-info">
                                 <div class="panel-heading">Machine</div>
                                 <div class="panel-body" style="width:100%;">
@@ -48,50 +45,40 @@
                                                     </div>
                                                 </td>
                                                 <td style="width:30%!important;">Count</td>
-                                                <td class="mobilefont maxwidth" >0</td>
+                                                <td class="mobilefont maxwidth">0</td>
                                             </tr>
                                             <tr style="width:100%;">
                                                 <td style="width:30% !important;">Timer</td>
-                                                <td class="mobilefont " >10:10:10</td>
+                                                <td class="mobilefont ">10:10:10</td>
                                             </tr>
-                                        </table>
-                                    </div>
-                                    <div id="table2" style="width:100%;">
-                                        <table class="mobilefont">
+
                                             <tr style="width:100%;height:25px">
                                                 <td style="width:20%;">Operator</td>
-                                                <td class="maxwidth">
+                                                <td class="maxwidth" colspan="2">
                                                     <select class="form-control vertical-padding" id="sel1" style="padding:0">
                                                         <option>op11</option>
                                                         <option>op12</option>
                                                         <option>op13</option>
                                                         <option>op14</option>
                                                     </select>
-
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="width:40%;">Job</td>
-                                                <td class="maxwidth">
+                                                <td class="maxwidth" colspan="2">
                                                     <select class="form-control vertical-padding" id="sel1" style="padding:0">
                                                         <option>idel1</option>
                                                         <option>idel2</option>
                                                         <option>idel3</option>
                                                         <option>idel4</option>
                                                     </select>
-
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </template>
-
-
-
-
                 </div><!--End of appview div-->
             </div>
             <div class="swipe-tab-content">
@@ -148,74 +135,16 @@
                 <div id="macJobCount"></div>
                 <div id="jsGrid"></div>
             </div>
-
             <div class="swipe-tab-content">
                 <div id="accordsettings">
                     <h3>Jobs</h3>
-                    <div>
-                        <p>
-                            <div title="Job Registration">
-                                <div class="row">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <input class="form-control" id="txtJobName" type="text" placeholder="Job Name">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <input class="form-control" id="btnjobadd" type="button" onclick="addJob();" value="Add">
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <input class="form-control" id="btnjobdelete" type="button" onclick="deleteJob()" value="Delete">
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div id="jobgrid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </p>
-                    </div>
+                      <div>
+                         <div id="jobgrid"> </div>
+                      </div>
                     <h3>Operator</h3>
-                    <div>
-                        <p>
-                            <div title="Operator Registration">
-                                <div class="row">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <input class="form-control" id="txtOperatorName" type="text" placeholder="Operator Name">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <input class="form-control" id="btnoperatoradd" type="button" onclick="addOperator();" value="Add">
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <input class="form-control" id="btnoperatordelete" type="button" onclick="deleteOperator()" value="Delete">
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div id="optgrid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </p>
-                    </div>
-
-
+                       <div id="optgrid" ></div>
                 </div>
-
             </div>
-
         </div>
     </div>
     <div id="login1" title="Login">
@@ -229,7 +158,6 @@
 
         </form>
     </div>
-
     <div class="container">
         <div class="row">
             <div id="loader">
@@ -255,6 +183,5 @@
     <script src="script/tabmenu.js"></script>
     <script src="script/operator.js"></script>
     <script src="script/job.js"></script>
-
 </body>
 </html>

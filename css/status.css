@@ -1,6 +1,9 @@
 .vertical-padding{
     height:22px;
 }
+.hide{
+  display: none;
+}
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
     background:rgb(188, 232, 241);
     border:rgb(188, 232, 241);
@@ -9,35 +12,35 @@
 .maxwidth{
     width:10000px
 }
-body,.mobilefont {
-font-size:12px;
+body,.mobilefont,.jsgrid-header-cell {
+font-size:14px;
 }
 .row{
-margin:10px 0 0 0;	
+margin:10px 0 0 0;
 }
-#optgrid .jsgrid-header-cell{
-padding:10px;
+ .jsgrid-header-cell{
+padding:5px;
 }
-#optgrid .jsgrid-cell{
-padding:5px;;
+.jsgrid-cell{
+padding:3px;
 }
 #jobgrid .jsgrid-header-cell{
-padding:10px;
+padding:12px;
 }
 #jobgrid .jsgrid-cell{
-padding:5px;;
+padding:5px;
 }
 @media screen and (max-width: 1000px) {
-.mobilefont,.form-control, .main-container {
-    font-size: 10px !important;
+.mobilefont,.form-control, .main-container,.jsgrid-cell,.jsgrid-header-cell {
+    font-size: 12px !important;
 
 }
-
-.jsgrid-header-cell{
-font-size:10px;
-padding:15px;
+.col-xs-6.smallpad{
+    padding:0px 5px 0px 5px;
 }
-
+.jsgrid-cell{
+        font-size: 9px !important;
+}
 
 }
 /*#submenu:hover{
