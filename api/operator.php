@@ -6,24 +6,23 @@ print("\n");
 $conn = connect();
 $id=$_POST['id'];
 $rtype=$_POST['rtype'];
-$jobid=$_POST['jobid'];
-$name=$_POST['jobname'];
-$desc=$_POST['jobdesc'];
+$opid=$_POST['opid'];
+$opname=$_POST['opname'];
 if($rtype=="getData")
 {
-  $sql="select * from job";
+  $sql="select * from operator";
 }
 elseif ($rtype == "insertData")
 {
-    $sql = "insert into job(jobid,jobname,jobdesc) values('$jobid','$name','$desc')";
+    $sql = "insert into operator(opid,opname) values('$opid','$opname')";
 }
 elseif ($rtype == "updateData")
 {
-    $sql = "update job set jobid='$jobid', jobname='$name',jobdesc='$desc' where id ='$id'";
+    $sql = "update operator set opid='$opid', opname='$opname' where id ='$id'";
 }
 elseif ($rtype == "deleteData")
 {
-    $sql = "delete from  job  where id ='$id'";
+    $sql = "delete from  operator  where id ='$id'";
 }
 $retval = mysql_query( $sql, $conn );
 
@@ -37,7 +36,7 @@ while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
   {
   $rows[] = $row;
   }
-  if ($rtype == "insertData")
+if ($rtype == "insertData")
   {
       print json_encode([mysql_insert_id()]);
       return;

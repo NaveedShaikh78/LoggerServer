@@ -36,13 +36,13 @@ $("#jobgrid").jsGrid({
                 ).done(function(response) {
                      response = $.grep(response, function(item) {
                        if(filter.jobid !==""){
-                         return item.jobid.toUpperCase().includes( filter.jobid.toUpperCase());
+                         return item.jobid.toUpperCase().includes(filter.jobid.toUpperCase());
                         }
                         if(filter.jobname !==""){
-                        return item.jobname.toUpperCase().includes( filter.jobname.toUpperCase());
+                        return item.jobname.toUpperCase().includes(filter.jobname.toUpperCase());
                         }
                         if(filter.jobdesc !==""){
-                        return item.jobdesc.toUpperCase().includes( filter.jobdesc.toUpperCase());
+                        return item.jobdesc.toUpperCase().includes(filter.jobdesc.toUpperCase());
                         }
                       return true;
                     });
