@@ -4,6 +4,7 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 print("\n");
 $conn = connect();
+$id=$_POST['id'];
 $rtype=$_POST['rtype'];
 $jobid=$_POST['jobid'];
 $name=$_POST['jobname'];
@@ -18,18 +19,28 @@ elseif ($rtype == "insertData")
 }
 elseif ($rtype == "updateData")
 {
-    $sql = "update table  job set jobid='$jobid', jobname='$name',jobdesc='$desc' where jobid ='$id'";
+    $sql = "update  job set jobid='$jobid', jobname='$name',jobdesc='$desc' where id ='$id'";
+}
+elseif ($rtype == "deleteData")
+{
+    $sql = "delete from  job  where id ='$id'";
 }
 $retval = mysql_query( $sql, $conn );
+
   if(! $retval )
   {
-    print json_encode([ mysql_error()]);
+    print json_encode([$sql]);
     die('');
   }
 $rows=[];
 while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
   {
   $rows[] = $row;
+  }
+  if ($rtype == "insertData")
+  {
+      print json_encode([mysql_insert_id()]);
+      return;
   }
 mysql_close($conn);
 print json_encode($rows);
