@@ -33,7 +33,7 @@ $("#jobgrid").jsGrid({
                 $.post("http://pi.trendzsoft.in/api/job.php",
                     {"rtype":"getData"}
                 ).done(function(response) {
-                  appController.setJobs(response);
+                  ctrl.MachineController.setJobs(response);
                      response = $.grep(response, function(item) {
                        if(filter.jobid !==""){
                          return item.jobid.toUpperCase().includes(filter.jobid.toUpperCase());

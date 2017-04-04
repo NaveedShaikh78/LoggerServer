@@ -28,14 +28,14 @@
                 <div id="appview">
                     <div class="container-fluid" id="machinecontainer">
                         <div class="row" ng-controller='MachineController'>
-                          <div>{{machine.name}} </div>
+                          <div>{{name}} </div>
                             <machineview> </machineview>
                         </div>
                     </div>
                     <template id="machinetemplete" >
                         <div class="col-xs-6 col-sm-3 smallpad">
                             <div class="panel panel-info">
-                                <div class="panel-heading">{{machine.name}} Machine--</div>
+                                <div class="panel-heading">{machine.name}} Machine--</div>
                                 <div class="panel-body" style="width:100%;">
                                     <div id="table1" style="width:100%;">
                                         <table class="mobilefont">
@@ -57,7 +57,7 @@
                                             <tr style="width:100%;height:25px">
                                                 <td style="width:20%;">Operator</td>
                                                 <td class="maxwidth" colspan="2">
-                                                    <select class="form-control vertical-padding" id="selOperator" style="padding:0"  ng-options="op.opname for op in operators" />
+                                                    <select class="form-control vertical-padding" id="selOperator" style="padding:0" ng-options="op.opname for op in operators" />
                                                 </td>
                                             </tr>
                                             <tr>

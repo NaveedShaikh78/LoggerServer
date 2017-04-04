@@ -3,6 +3,7 @@ var selectedMachine = 26;
 var reportType = ""
 var ioports = [26, 19, 13, 6, 22, 27, 17];
 var appdata = {};
+var ctrl = {};
 appdata.cuid = "";
 
 $("#accordsettings").accordion({ heightStyle: "content" });
@@ -63,6 +64,15 @@ $(function () {
             $(clone.childNodes[0].nextSibling).attr("id", "mac-" + ioports[i]);
             macview[0].appendChild(clone);
             $("#mac-" + ioports[i] + " div.panel-heading").text("Machine " + (i + 1));
+			var selOperator =  $("#mac-" + ioports[i] + " #selOperator");
+			selOperator.attr("id","selOperator"+ ioports[i]);
+			selOperator.attr("ng-model","selOp["+ ioports[i]+"]");
+			
+			
+			var selJob =  $("#mac-" + ioports[i] + "#selJob");
+			selJob.attr("id","selJob"+ ioports[i]);
+			selJob.attr("ng-model","selJob["+ ioports[i]+"]");
+			
         }
     }
 

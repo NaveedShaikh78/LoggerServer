@@ -26,7 +26,7 @@ $("#optgrid").jsGrid({
                 $.post("http://pi.trendzsoft.in/api/operator.php",
                     {"rtype":"getData"}
                 ).done(function(response) {
-									appController.setOperators(response);
+					ctrl.MachineController.setOperators(response);
 					response = $.grep(response, function(item) {
                        /*if(filter.opid !==""){
                          return item.opid.toUpperCase().includes( filter.opid.toUpperCase());

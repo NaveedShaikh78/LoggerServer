@@ -1,6 +1,7 @@
 angular.module('loggerApp', [])
 .controller('MachineController', function($scope) {
-appController=$scope;
+ctrl.MachineController=$scope;
+
 $scope.setOperators=function (optgridData){
   $scope.operators=optgridData;
   $scope.$apply();
