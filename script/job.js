@@ -1,25 +1,24 @@
-
-appdata.jobgridData=[];
-appdata.jobgridfields=[
-            { name: "id", type: "text",title :"Job ID" ,width:210,css:"hide"
-
-            },
-            { name: "jobid", type: "text",title :"Job ID" ,width:210,
-              validate: { message: "Job ID can not be emty", validator: function(value) { return value !=""; } }
-            },
-            { name: "jobname", type: "text",title :"Job Name",width:210,
-              validate: { message: "Job Name can not be emty", validator: function(value) { return value !=""; } }
-            },
-            { name: "jobdesc", type: "text",title :"Job Description",width:210
-
-            },
-            { type: "control",width:210 }
-            ];
+ 
 loadJobGrid();
 function loadJobGrid(){
+  var jobgridfields=[
+              { name: "id", type: "text",title :"Job ID" ,width:210,css:"hide"
+
+              },
+              { name: "jobid", type: "text",title :"Job ID" ,width:50,
+                validate: { message: "Job ID can not be emty", validator: function(value) { return value !=""; } }
+              },
+              { name: "jobname", type: "text",title :"Job Name",width:50,
+                validate: { message: "Job Name can not be emty", validator: function(value) { return value !=""; } }
+              },
+              { name: "jobdesc", type: "text",title :"Job Description",width:120
+
+              },
+              { type: "control" }
+              ];
 $("#jobgrid").jsGrid({
-   height: "70%",
-   width: "100%",
+  height: "90%",
+     width: "100%",
    filtering: true,
    editing: true,
    inserting: true,
@@ -34,6 +33,7 @@ $("#jobgrid").jsGrid({
                 $.post("http://pi.trendzsoft.in/api/job.php",
                     {"rtype":"getData"}
                 ).done(function(response) {
+                  appController.setJobs(response);
                      response = $.grep(response, function(item) {
                        if(filter.jobid !==""){
                          return item.jobid.toUpperCase().includes(filter.jobid.toUpperCase());
@@ -84,7 +84,6 @@ $("#jobgrid").jsGrid({
    rowClick: function(args) { return false;},
    deleteConfirm: "Do you really want to delete this record?",
    pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
-   data: appdata.jobgridData,
-   fields:appdata.jobgridfields
+   fields:jobgridfields
   });
 }

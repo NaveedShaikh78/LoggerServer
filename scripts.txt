@@ -1,4 +1,4 @@
 create table login(userID varchar(40) primary key,password varchar(20));
 insert into login values('global','global@#')
 create table job (jobid int  AUTO_INCREMENT, jobname varchar(100),jobdesc varchar(100),PRIMARY KEY(jobid));
-create table job (id int AUTO_INCREMENT,jobid varchar(100) , jobname varchar(100),jobdesc varchar(100),PRIMARY KEY(jobid))
+create table job (id int AUTO_INCREMENT,jobid varchar(100) , jobname varchar(100),jobdesc varchar(100),primary key(id),Unique KEY(jobid))

@@ -1,15 +1,14 @@
-appdata.optgridData=[];
-appdata.optgridfields=[
-			{ name: "id", type: "text",title :"Operator ID" ,width:210,css:"hide"},
-            { name: "opid", type: "number", title: "Operator ID",width:210},
-            { name: "opname", type: "text", title: "Operator Name" ,width:210},
-             { type: "control",width:210 }
-            ];
-loadOptGrid();
 
+loadOptGrid();
 function loadOptGrid(){
+	var optgridfields=[
+				{ name: "id", type: "text",title :"Operator ID" ,css:"hide"},
+	            { name: "opid", type: "number", title: "Operator ID"},
+	            { name: "opname", type: "text", title: "Operator Name" ,width:100},
+	             { type: "control" }
+	            ];
 $("#optgrid").jsGrid({
-   height: "70%",
+   height: "60%",
     width: "100%",
     filtering: false,
     editing: true,
@@ -19,14 +18,15 @@ $("#optgrid").jsGrid({
     autoload: true,
     pageSize: 10,
     pageButtonCount: 5,
-	
-	
+
+
 	controller: {
             loadData: function(filter) {
                 var d = $.Deferred();
                 $.post("http://pi.trendzsoft.in/api/operator.php",
                     {"rtype":"getData"}
                 ).done(function(response) {
+									appController.setOperators(response);
 					response = $.grep(response, function(item) {
                        /*if(filter.opid !==""){
                          return item.opid.toUpperCase().includes( filter.opid.toUpperCase());
@@ -36,7 +36,7 @@ $("#optgrid").jsGrid({
                         }*/
                       return true;
                     });
-	
+
                     d.resolve(response);
                 });
                 return d.promise();
@@ -56,11 +56,11 @@ $("#optgrid").jsGrid({
                 $.post("http://pi.trendzsoft.in/api/operator.php", item
                 ).done(function(response) {
                     item.id=response[0];
-					d.resolve(item);
+					         d.resolve(item);
                 });
                 return d.promise();
               },
-			  
+
               deleteItem: function(item) {
                   var d = $.Deferred();
                   item.rtype="deleteData";
@@ -70,13 +70,12 @@ $("#optgrid").jsGrid({
                   });
                   return d.promise();
                 },
-			  
+
         },
-	
+
 	rowClick: function(args) { return false;},
     deleteConfirm: "Do you really want to delete this record?",
     pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
-    data: appdata.optgridData,
-    fields:appdata.optgridfields
+    fields:optgridfields
     });
 }

@@ -5,28 +5,6 @@ jobgridfields=[
             { name: "job_name", type: "text",title :"Job Name" ,width:500 },
             ];
 
-$("#jobgrid").jsGrid({
-        width: "100%",
-        inserting: false,
-        editing: false,
-        sorting: true,
-        paging: false,
-        pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
-        data: [
-		{job_name : 'job1'},
-		{job_name : 'job2'},
-		{job_name : 'job3'},
-		{job_name : 'job4'},
-		{job_name : 'job5'},
-		{job_name : 'job6'},
-		{job_name : 'job7'},
-		{job_name : 'job8'},
-		{job_name : 'job9'},
-		
-		],
-        fields: jobgridfields
-    });
-
 
 $("#jsGrid").show();
 
@@ -36,7 +14,7 @@ $("#jsGrid").hide();
 $("#macJobCount").hide();
 }
 function searchdb(){
-  $('#loader').show();
+  $('#loader1').show();
 
 var dfrom=document.getElementById("dateFrom").value;
 var dTo=document.getElementById("dateTo").value;
@@ -70,10 +48,10 @@ $('#macJobCount').text("Total Jobs count:"+sdata[0].count);
  });
 
  $.getJSON(url1, function( sdata ) {
-   
+
     $("#jsGrid").jsGrid({
          width: "100%",
- 
+
         inserting: false,
          editing: false,
          sorting: true,
@@ -82,8 +60,8 @@ $('#macJobCount').text("Total Jobs count:"+sdata[0].count);
 		 data: sdata,
          fields: gridfields
      });
-   $('#loader').fadeOut('slow');
-  
+   $('#loader1').fadeOut('slow');
+
 
    });
 $('#bs-example-navbar-collapse-1').removeClass('in');

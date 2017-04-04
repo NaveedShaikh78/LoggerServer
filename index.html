@@ -1,19 +1,20 @@
-<html>
+<html ng-app="loggerApp">
+
 <head>
     <title>Machine Logger</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="bootstrap/css/spinner.css" />
-    <link type="text/css" rel="stylesheet" href="jquery/css/jsgrid.min.css" />
-    <link type="text/css" rel="stylesheet" href="jquery/css/jsgrid-theme.min.css" />
+    <link type="text/css" rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="lib/bootstrap/css/spinner.css" />
+    <link type="text/css" rel="stylesheet" href="lib/jquery/css/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="lib/jquery/css/jsgrid-theme.min.css" />
     <link type="text/css" rel="stylesheet" href="css/machinestate.css" />
     <link type="text/css" rel="stylesheet" href="css/slidemenu.css" />
-    <link type="text/css" rel="stylesheet" href="jquery/css/jquery-ui.css" />
-    <link type="text/css" rel="stylesheet" href="slicktab/css/slick.css" />
-    <link type="text/css" rel="stylesheet" href="slicktab/css/slick-tab.css" />
+    <link type="text/css" rel="stylesheet" href="lib/jquery/css/jquery-ui.css" />
+    <link type="text/css" rel="stylesheet" href="lib/slicktab/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="lib/slicktab/css/slick-tab.css" />
     <link type="text/css" rel="stylesheet" href="css/status.css" />
 </head>
-<body onload="$('#loader').fadeOut('slow')">
+<body onload="$('#loader1').fadeOut('slow')">
     <div class="sub-header ">
         <div class="swipe-tabs">
             <div class="swipe-tab">Live</div>
@@ -26,14 +27,15 @@
             <div class="swipe-tab-content">
                 <div id="appview">
                     <div class="container-fluid" id="machinecontainer">
-                        <div class="row">
+                        <div class="row" ng-controller='MachineController'>
+                          <div>{{machine.name}} </div>
                             <machineview> </machineview>
                         </div>
                     </div>
-                    <template id="machinetemplete">
+                    <template id="machinetemplete" >
                         <div class="col-xs-6 col-sm-3 smallpad">
                             <div class="panel panel-info">
-                                <div class="panel-heading">Machine</div>
+                                <div class="panel-heading">{{machine.name}} Machine--</div>
                                 <div class="panel-body" style="width:100%;">
                                     <div id="table1" style="width:100%;">
                                         <table class="mobilefont">
@@ -55,23 +57,13 @@
                                             <tr style="width:100%;height:25px">
                                                 <td style="width:20%;">Operator</td>
                                                 <td class="maxwidth" colspan="2">
-                                                    <select class="form-control vertical-padding" id="sel1" style="padding:0">
-                                                        <option>op11</option>
-                                                        <option>op12</option>
-                                                        <option>op13</option>
-                                                        <option>op14</option>
-                                                    </select>
+                                                    <select class="form-control vertical-padding" id="selOperator" style="padding:0"  ng-options="op.opname for op in operators" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="width:40%;">Job</td>
                                                 <td class="maxwidth" colspan="2">
-                                                    <select class="form-control vertical-padding" id="sel1" style="padding:0">
-                                                        <option>idel1</option>
-                                                        <option>idel2</option>
-                                                        <option>idel3</option>
-                                                        <option>idel4</option>
-                                                    </select>
+                                                    <select class="form-control vertical-padding" id="selJob"  style="padding:0" ng-options="job.jobname for job in jobs" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -142,7 +134,9 @@
                          <div id="jobgrid"> </div>
                       </div>
                     <h3>Operator</h3>
+                    <div>
                        <div id="optgrid" ></div>
+                     </div>
                 </div>
             </div>
         </div>
@@ -160,7 +154,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div id="loader">
+            <div id="loader2">
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
@@ -172,16 +166,23 @@
             </div>
         </div>
     </div>
-    <script src="jquery/js/jquery.min.js"></script>
-    <script src="jquery/js/jsgrid.min.js"> </script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="jquery/js/jquery-ui.js"></script>
-    <script src="slicktab/js/slick.js"></script>
-    <script src="slicktab/js/slick-tab.js"></script>
+    <div id="loader1">
+    <div  class="jsgrid-load-shader" style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; z-index: 1000;widht:100%"></div>
+    <div class="jsgrid-load-panel" style="position: absolute; top: 50%; left: 50%; z-index: 1000; margin-top: -35px; margin-left: -105px;">Please, wait...</div>
+  </div>
+    <script src="lib/jquery/js/jquery.min.js"></script>
+    <script src="lib/jquery/js/jsgrid.min.js"> </script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/jquery/js/jquery-ui.js"></script>
+    <script src="lib/slicktab/js/slick.js"></script>
+    <script src="lib/slicktab/js/slick-tab.js"></script>
     <script src="script/search.js"></script>
     <script src="script/status.js"></script>
     <script src="script/tabmenu.js"></script>
     <script src="script/operator.js"></script>
     <script src="script/job.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="controller/machineController.js"></script>
+
 </body>
 </html>

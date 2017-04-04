@@ -4,6 +4,9 @@
 .hide{
   display: none;
 }
+.form-control{
+  border-radius:0;
+}
 .jsgrid-cell input{
 width:100%;
 }
@@ -21,28 +24,16 @@ font-size:14px;
 .row{
 margin:10px 0 0 0;
 }
- .jsgrid-header-cell{
-padding:5px;
-}
-.jsgrid-cell{
-padding:3px;
-}
-#jobgrid .jsgrid-header-cell{
-padding:12px;
-}
-#jobgrid .jsgrid-cell{
-padding:5px;
-}
+
+
+
 @media screen and (max-width: 1000px) {
 .mobilefont,.form-control, .main-container,.jsgrid-cell,.jsgrid-header-cell {
-    font-size: 12px !important;
+    font-size: 9px !important;
 
 }
 .col-xs-6.smallpad{
     padding:0px 5px 0px 5px;
-}
-.jsgrid-cell{
-        font-size: 9px !important;
 }
 
 }
