@@ -10,6 +10,11 @@ $scope.setJobs=function (jobsData){
   $scope.jobs=jobsData;
   $scope.$apply();
 };
+$scope.setIdle=function (idleData){
+  $scope.idle=idleData;
+  $scope.$apply();
+};
+
 $scope.jobChange=function (macid,seljob){
 
   var  url = "http://pi.trendzsoft.in/api/updatemachinestatus.php?" + "type='op'&tval='"+ seljob.id +"'&ip='" + macid + "'";

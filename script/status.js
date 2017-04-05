@@ -67,11 +67,15 @@ $(function () {
 			var selOperator =  $("#mac-" + ioports[i] + " #selOperator");
 			selOperator.attr("id","selOperator"+ ioports[i]);
 			selOperator.attr("ng-model","selOp["+ ioports[i]+"]");
+			selOperator.attr("ng-change","jobChange(ioports[i],selJob["+ ioports[i]+"])");
 			
-			
-			var selJob =  $("#mac-" + ioports[i] + "#selJob");
+			var selJob =  $("#mac-" + ioports[i] + " #selJob");
 			selJob.attr("id","selJob"+ ioports[i]);
 			selJob.attr("ng-model","selJob["+ ioports[i]+"]");
+			
+			var selIdle =  $("#mac-" + ioports[i] + " #selIdle");
+			selIdle.attr("id","selIdle"+ ioports[i]);
+			selIdle.attr("ng-model","selIdle["+ ioports[i]+"]");
 			
         }
     }
