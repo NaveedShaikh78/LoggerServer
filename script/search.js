@@ -26,6 +26,7 @@ var gridfields=[
             { name: "end_time", type: "text",title :"End Time"},
 			{ name: "cycletime", type: "text",title :"Cycle Time"},
 			{ name: "idletime", type: "text",title : "Idle Time"},
+			{ name: "Country", type: "select", items: ctrl.MachineController.jobs, valueField: "id", textField: "jobname" },
              ];
 if(reportType==="dsc"){
     var url1 = "http://trendzsoft.in/api/getDayShiftData.php?" + "st='" + dfrom + "'&et='" + dTo + "'&ip='" + selectedMachine + "'";

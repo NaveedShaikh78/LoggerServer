@@ -1,4 +1,3 @@
- 
 loadJobGrid();
 function loadJobGrid(){
   var jobgridfields=[
@@ -14,8 +13,14 @@ function loadJobGrid(){
               { name: "jobdesc", type: "text",title :"Job Description",width:120
 
               },
+			  { name: "activejob", type: "checkbox",title :"Active Job",width:25
+
+              },
+			  
+			  
               { type: "control" }
               ];
+			  
 $("#jobgrid").jsGrid({
   height: "90%",
      width: "100%",
@@ -33,20 +38,22 @@ $("#jobgrid").jsGrid({
                 $.post("http://pi.trendzsoft.in/api/job.php",
                     {"rtype":"getData"}
                 ).done(function(response) {
-                  ctrl.MachineController.setJobs(response);
-                     response = $.grep(response, function(item) {
-                       if(filter.jobid !==""){
-                         return item.jobid.toUpperCase().includes(filter.jobid.toUpperCase());
-                        }
-                        if(filter.jobname !==""){
-                        return item.jobname.toUpperCase().includes(filter.jobname.toUpperCase());
-                        }
-                        if(filter.jobdesc !==""){
-                        return item.jobdesc.toUpperCase().includes(filter.jobdesc.toUpperCase());
-                        }
-                      return true;
-                    });
-
+				 
+				 /*
+				 response = $.grep(response, function(item) {
+				  return true;
+				});
+				*/
+				
+				job = $.grep(response, function(item) {
+					if(item.activejob == null)
+						item.activejob = 0;
+					console.log(item.activejob);
+					if(item.activejob)
+						return true;
+				});
+					ctrl.MachineController.setJobs(job); 
+				 
                     d.resolve(response);
                 });
                 return d.promise();

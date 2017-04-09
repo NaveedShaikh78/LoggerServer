@@ -11,7 +11,7 @@ $scope.setJobs=function (jobsData){
   $scope.$apply();
 };
 $scope.setIdle=function (idleData){
-  $scope.idle=idleData;
+  $scope.idles=idleData;
   $scope.$apply();
 };
 

@@ -27,17 +27,12 @@ $("#idlegrid").jsGrid({
    controller: {
             loadData: function(filter) {
                 var d = $.Deferred();
-                $.post("http://pi.trendzsoft.in/api/idle.php",
+                $.post("http://trendzsoft.in/api/idle.php",
                     {"rtype":"getData"}
                 ).done(function(response) {
                   ctrl.MachineController.setIdle(response);
                      response = $.grep(response, function(item) {
-                       if(filter.idleid !==""){
-                         return item.idleid.toUpperCase().includes(filter.idleid.toUpperCase());
-                        }
-                        if(filter.idledesc !==""){
-                        return item.idledesc.toUpperCase().includes(filter.idledesc.toUpperCase());
-                        }
+                       
                       return true;
                     });
 
