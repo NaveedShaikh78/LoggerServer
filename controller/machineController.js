@@ -1,26 +1,33 @@
 angular.module('loggerApp', [])
 .controller('MachineController', function($scope) {
 ctrl.MachineController=$scope;
-$scope.jobs=[];
-$scope.operators=[];
+$scope.selJob=[];
+$scope.selOp=[];
+for( port of appdata.ioports){
+  $scope.selJob[port]=null;
+  $scope.selOp[port]=null;
+}
 $scope.setOperators=function (optgridData){
   $scope.operators=optgridData;
   $scope.$apply();
 };
-
 $scope.setJobs=function (jobsData){
   $scope.jobs=jobsData;
   $scope.$apply();
 };
-$scope.setSelJob=function (jobid){
-  for(var job in   $scope.jobs){
-    if(job.jobid==jobid){
+$scope.setSelJob=function (jobid,macid){
+  for( job of   $scope.jobs){
+    if(job.id==jobid){
+      $scope.selJob[macid]=job;
+      $scope.$apply();
   }
 }
 };
-$scope.setSelOp=function (jobid){
-  for(var op in   $scope.operators){
-    if(op.opid==opid){
+$scope.setSelOp=function (opid){
+  for( operator of   $scope.operators){
+    if(operator.id==opid){
+      $scope.selOperator[macid]=operator;
+      $scope.$apply();
    }
  }
 };

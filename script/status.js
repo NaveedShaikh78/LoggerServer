@@ -1,9 +1,9 @@
 
 var selectedMachine = 26;
 var reportType = ""
-var ioports = [26, 19, 13, 6, 22, 27, 17];
 var appdata = {};
 var ctrl = {};
+appdata.ioports = [26, 19, 13, 6, 22, 27, 17];
 appdata.cuid = "";
 
 $("#accordsettings").accordion({ heightStyle: "content" });
@@ -42,6 +42,7 @@ function getDefaultDate() {
     return today;
 }
 $(function () {
+  var ioports=appdata.ioports;
     $(".dropdown-menu li a").click(function () {
         var cmbText = $(this).text();
         if ($(this).attr("id").includes("mcmb-")) {
@@ -87,6 +88,7 @@ function miliSecToHms(d) {
     return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s);
 }
 $(function () {
+    var ioports=appdata.ioports;
     var now = new Date();
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -107,6 +109,8 @@ $(function () {
                         showLoginDialog();
                     }
                     if (sdata[ioports[i]]) {
+                        ctrl.MachineController.setSelJob(sdata[ioports[i]].jobid,ioports[i]);
+                        ctrl.MachineController.setSelOp(sdata[ioports[i]].opid,ioports[i]);
                         var mactime = new Date(sdata[ioports[i]].statetime);
                         var tmsec = Date.now() - mactime;
                         var HHmmss = miliSecToHms(tmsec);
