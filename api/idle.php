@@ -6,27 +6,23 @@ print("\n");
 $conn = connect();
 $id=$_POST['id'];
 $rtype=$_POST['rtype'];
-$jobid=$_POST['jobid'];
-$name=$_POST['jobname'];
-$desc=$_POST['jobdesc'];
-$activejob = $_POST['activejob'];
-
+$idlename=$_POST['idlename'];
+$idledesc=$_POST['idledesc'];
 if($rtype=="getData")
 {
-  $sql="select * from job";
+  $sql="select * from idle";
 }
 elseif ($rtype == "insertData")
 {
-	$sql = "insert into job(jobid,jobname,jobdesc,activejob)values('$jobid','$name','$desc',
-			(case when $activejob = 0 then NULL else 1 end))";
+    $sql = "insert into idle(idlename,idledesc) values('$idlename','$idledesc')";
 }
 elseif ($rtype == "updateData")
 {
-    $sql = "update job set jobid='$jobid', jobname='$name',jobdesc='$desc',activejob=$activejob where id ='$id'";
+    $sql = "update idle set idlename='$idlename',idledesc='$idledesc' where id ='$id'";
 }
 elseif ($rtype == "deleteData")
 {
-    $sql = "delete from  job  where id ='$id'";
+    $sql = "delete from idle where id ='$id'";
 }
 $retval = mysql_query( $sql, $conn );
 

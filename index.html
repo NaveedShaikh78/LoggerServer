@@ -57,13 +57,25 @@
                                             <tr style="width:100%;height:25px">
                                                 <td style="width:20%;">Operator</td>
                                                 <td class="maxwidth" colspan="2">
-                                                    <select class="form-control vertical-padding" id="selOperator" style="padding:0" ng-options="op.opname for op in operators" />
-                                                </td>
+                                                    <select class="form-control vertical-padding" id="selOperator" style="padding:0" ng-options="op.opname for op in operators">
+														<option value="">Please Select</option>
+													</select>
+												</td>
                                             </tr>
                                             <tr>
                                                 <td style="width:40%;">Job</td>
                                                 <td class="maxwidth" colspan="2">
-                                                    <select class="form-control vertical-padding" id="selJob"  style="padding:0" ng-options="job.jobname for job in jobs" />
+                                                    <select class="form-control vertical-padding" id="selJob"  style="padding:0" ng-options="job.jobname for job in jobs">
+														<option value="">Please Select</option>
+													</select>
+												</td>
+                                            </tr>
+											<tr>
+                                                <td style="width:40%;">Idle</td>
+                                                <td class="maxwidth" colspan="2">
+                                                    <select class="form-control vertical-padding" id="selIdle"  style="padding:0; margin-top:2px;" ng-options="idle.idledesc for idle in idles" >
+														<option value="">Please Select</option>
+													</select>
                                                 </td>
                                             </tr>
                                         </table>
@@ -136,7 +148,11 @@
                     <h3>Operator</h3>
                     <div>
                        <div id="optgrid" ></div>
-                     </div>
+                    </div>
+					<h3>Idle</h3>
+                    <div>
+                       <div id="idlegrid" ></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -181,6 +197,7 @@
     <script src="script/tabmenu.js"></script>
     <script src="script/operator.js"></script>
     <script src="script/job.js"></script>
+    <script src="script/idle.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="controller/machineController.js"></script>
 

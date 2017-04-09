@@ -1,27 +1,19 @@
-loadJobGrid();
-function loadJobGrid(){
-  var jobgridfields=[
-              { name: "id", type: "text",title :"Job ID" ,width:210,css:"hide"
+ 
+loadIdleGrid();
+function loadIdleGrid(){
+  var idlegridfields=[
+              { name: "id", type: "text",title :"Idle ID" ,width:210,css:"hide"
 
               },
-              { name: "jobid", type: "text",title :"Job ID" ,width:50,
-                validate: { message: "Job ID can not be emty", validator: function(value) { return value !=""; } }
+              { name: "idlename", type: "text",title :"Idle Name",width:50,
+                validate: { message: "Idle Name can not be emty", validator: function(value) { return value !=""; } }
               },
-              { name: "jobname", type: "text",title :"Job Name",width:50,
-                validate: { message: "Job Name can not be emty", validator: function(value) { return value !=""; } }
-              },
-              { name: "jobdesc", type: "text",title :"Job Description",width:120
+              { name: "idledesc", type: "text",title :"Idle Description",width:120
 
               },
-			  { name: "activejob", type: "checkbox",title :"Active Job",width:25
-
-              },
-			  
-			  
               { type: "control" }
               ];
-			  
-$("#jobgrid").jsGrid({
+$("#idlegrid").jsGrid({
   height: "90%",
      width: "100%",
    filtering: true,
@@ -35,25 +27,15 @@ $("#jobgrid").jsGrid({
    controller: {
             loadData: function(filter) {
                 var d = $.Deferred();
-                $.post("http://pi.trendzsoft.in/api/job.php",
+                $.post("http://trendzsoft.in/api/idle.php",
                     {"rtype":"getData"}
                 ).done(function(response) {
-				 
-				 /*
-				 response = $.grep(response, function(item) {
-				  return true;
-				});
-				*/
-				
-				job = $.grep(response, function(item) {
-					if(item.activejob == null)
-						item.activejob = 0;
-					console.log(item.activejob);
-					if(item.activejob)
-						return true;
-				});
-					ctrl.MachineController.setJobs(job); 
-				 
+                  ctrl.MachineController.setIdle(response);
+                     response = $.grep(response, function(item) {
+                       
+                      return true;
+                    });
+
                     d.resolve(response);
                 });
                 return d.promise();
@@ -61,7 +43,7 @@ $("#jobgrid").jsGrid({
             updateItem: function(item) {
                 var d = $.Deferred();
                 item.rtype="updateData";
-                $.post("http://pi.trendzsoft.in/api/job.php", item
+                $.post("http://pi.trendzsoft.in/api/idle.php", item
                 ).done(function(response) {
                     d.resolve(item);
                 });
@@ -70,7 +52,7 @@ $("#jobgrid").jsGrid({
             insertItem: function(item) {
                 var d = $.Deferred();
                 item.rtype="insertData";
-                $.post("http://pi.trendzsoft.in/api/job.php", item
+                $.post("http://pi.trendzsoft.in/api/idle.php", item
                 ).done(function(response) {
                     item.id=response[0];
                     d.resolve(item);
@@ -81,7 +63,7 @@ $("#jobgrid").jsGrid({
               deleteItem: function(item) {
                   var d = $.Deferred();
                   item.rtype="deleteData";
-                  $.post("http://pi.trendzsoft.in/api/job.php", item
+                  $.post("http://pi.trendzsoft.in/api/idle.php", item
                   ).done(function(response) {
                       d.resolve(true);
                   });
@@ -91,6 +73,6 @@ $("#jobgrid").jsGrid({
    rowClick: function(args) { return false;},
    deleteConfirm: "Do you really want to delete this record?",
    pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
-   fields:jobgridfields
+   fields:idlegridfields
   });
 }
