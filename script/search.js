@@ -14,22 +14,7 @@ $("#jsGrid").hide();
 $("#macJobCount").hide();
 }
 var gridfields=[];
-gridfields=[  { name: "start_time", type: "text",title :"Start Time", width:230,editing: false },
-              { name: "end_time", type: "text",title :"End Time",editing: false},
-              { name: "cycletime", type: "text",title :"Cycle Time",editing: false},
-              { name: "idletime", type: "text",title : "Idle Time",editing: false},
-              { name: "jobno", type: "select",title : "Job",items: ctrl.MachineController.jobs, valueField: "id", textField: "jobname",
-                headerTemplate: function() {
-                   return $("<button>").attr("type", "button").text("Delete")
-                           .on("click", function () {
-                               deleteSelectedItems();
-                           });
-                          }
-              },
-              { name: "opid", type: "select",title : "Operator",items: ctrl.MachineController.operators, valueField: "id", textField: "opname"},
 
-                  { type: "control" , deleteButton: false }
-               ];
 loadReportGrid();
 function searchdb(){
   $('#loader1').show();
@@ -48,7 +33,21 @@ gridfields=[
 }
 else{
 
+  gridfields=[  { name: "start_time", type: "text",title :"Start Time", width:230,editing: false },
+                { name: "end_time", type: "text",title :"End Time",editing: false},
+                { name: "cycletime", type: "text",title :"Cycle Time",editing: false},
+                { name: "idletime", type: "text",title : "Idle Time",editing: false},
+                { name: "jobno", type: "select",title : "Job",items: ctrl.MachineController.jobs, valueField: "id", textField: "jobname",
+                  headerTemplate: function() {
+                     return $("<button>").attr("type", "button").text("job")
+                             .on("click", function () {
+                             });
+                            }
+                },
+                { name: "opid", type: "select",title : "Operator",items: ctrl.MachineController.operators, valueField: "id", textField: "opname"},
 
+                    { type: "control" , deleteButton: false }
+                 ];
 }
  $.getJSON(url2, function( sdata ) {
 $('#macJobCount').text("Total Jobs count:"+sdata[0].count);

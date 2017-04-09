@@ -53,7 +53,7 @@ else
 
 }
 
-$sql="select count(*) as count,machinestatus.ioport,machinestatus.statetime,machinestatus.status,machinestatus.opid,machinestatus.jobid from machinestatus inner join machinelog on machinestatus.ioport = machinelog.ioport where machinelog.start_time between ".$condition." and TIMESTAMPDIFF(SECOND,machinelog.start_time,machinelog.end_time)>20  group by  machinestatus.ioport,machinestatus.statetime,machinestatus.status";
+$sql="select count(machinestatus.statetime) as count,machinestatus.ioport,machinestatus.statetime,machinestatus.status,machinestatus.opid,machinestatus.jobid from machinestatus left join machinelog on machinestatus.ioport = machinelog.ioport where machinelog.start_time between ".$condition." and TIMESTAMPDIFF(SECOND,machinelog.start_time,machinelog.end_time)>20  group by  machinestatus.ioport,machinestatus.statetime,machinestatus.status";
 
   	$retval = mysql_query( $sql, $conn );
   	if(! $retval )
