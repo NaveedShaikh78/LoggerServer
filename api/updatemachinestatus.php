@@ -1,8 +1,7 @@
 <?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-require 'connectdb.php';
-print("\n");
+require 'includes/connectdb.php';
 $conn = connect();
 $st=$_GET["st"];
 $ip=$_GET["ip"];
@@ -13,7 +12,7 @@ if($type=="op")
   {
     $sql = "UPDATE machinestatus SET opid=$tval where ioport=$ip;";
   }
-if($type=="")
+else if($type=="job")
   {
     $sql = "UPDATE machinestatus SET jobid=$tval where ioport=$ip;";
   }
@@ -23,10 +22,10 @@ else
    }
 $retval = mysql_query($sql , $conn);
 if(!$retval)
-   {
+  {
   die("Fail 1".mysql_error);
   }
 
-echo "success";
+print json_encode( ["success"]);
 mysql_close($conn);
 ?>
