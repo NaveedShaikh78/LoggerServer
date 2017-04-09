@@ -14,7 +14,7 @@ return;
 else
 {
 	session_id($cuid);
-	session_start(); 
+	session_start();
 }
 
 if(!isset($_SESSION['loggedin']))
@@ -50,10 +50,10 @@ else
 		$startDate1 = date("Y-m-d H:i:s",strtotime(date("Y-m-d")." 08:00:00"));
 	}
  $condition= "'".$endDate ."' and '".$startDate1."'"  ;
-	
+
 }
 
-$sql="select count(*) as count,machinestatus.ioport,machinestatus.statetime,machinestatus.status from machinestatus inner join machinelog on machinestatus.ioport = machinelog.ioport where machinelog.start_time between ".$condition." and TIMESTAMPDIFF(SECOND,machinelog.start_time,machinelog.end_time)>20  group by  machinestatus.ioport,machinestatus.statetime,machinestatus.status";
+$sql="select count(*) as count,machinestatus.ioport,machinestatus.statetime,machinestatus.status,machinestatus.opid,machinestatus.jobid from machinestatus inner join machinelog on machinestatus.ioport = machinelog.ioport where machinelog.start_time between ".$condition." and TIMESTAMPDIFF(SECOND,machinelog.start_time,machinelog.end_time)>20  group by  machinestatus.ioport,machinestatus.statetime,machinestatus.status";
 
   	$retval = mysql_query( $sql, $conn );
   	if(! $retval )
@@ -64,7 +64,7 @@ $sql="select count(*) as count,machinestatus.ioport,machinestatus.statetime,mach
 while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
   	{
 		$rows[$row['ioport']] = $row;
-  	} 
+  	}
 print json_encode($rows);
 mysql_close($conn);
 ?>

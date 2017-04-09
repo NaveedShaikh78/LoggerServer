@@ -1,4 +1,4 @@
- 
+
 loadJobGrid();
 function loadJobGrid(){
   var jobgridfields=[

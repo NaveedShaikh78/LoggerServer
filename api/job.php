@@ -9,17 +9,25 @@ $rtype=$_POST['rtype'];
 $jobid=$_POST['jobid'];
 $name=$_POST['jobname'];
 $desc=$_POST['jobdesc'];
+$activejob = $_POST['activejob'];
+
 if($rtype=="getData")
 {
   $sql="select * from job";
 }
 elseif ($rtype == "insertData")
 {
-    $sql = "insert into job(jobid,jobname,jobdesc) values('$jobid','$name','$desc')";
+	if($activejob == true){
+		$sql = "insert into job(jobid,jobname,jobdesc,activejob) values('$jobid','$name','$desc',1)";
+	}
+	else{
+		$sql = "insert into job(jobid,jobname,jobdesc) values('$jobid','$name','$desc')";
+	}
+		
 }
 elseif ($rtype == "updateData")
 {
-    $sql = "update job set jobid='$jobid', jobname='$name',jobdesc='$desc' where id ='$id'";
+    $sql = "update job set jobid='$jobid', jobname='$name',jobdesc='$desc',activejob=$activejob where id ='$id'";
 }
 elseif ($rtype == "deleteData")
 {

@@ -66,13 +66,15 @@ $(function () {
             $("#mac-" + ioports[i] + " div.panel-heading").text("Machine " + (i + 1));
 			var selOperator =  $("#mac-" + ioports[i] + " #selOperator");
 			selOperator.attr("id","selOperator"+ ioports[i]);
-			selOperator.attr("ng-model","selOp["+ ioports[i]+"]");
-			
-			
-			var selJob =  $("#mac-" + ioports[i] + "#selJob");
+      selOperator.attr("ng-model","selOp["+ ioports[i]+"]");
+			selOperator.attr("ng-change","selOp["+ ioports[i]+"]");
+
+
+			var selJob =  $("#mac-" + ioports[i] + " #selJob");
 			selJob.attr("id","selJob"+ ioports[i]);
-			selJob.attr("ng-model","selJob["+ ioports[i]+"]");
-			
+      selJob.attr("ng-model","selJob["+ ioports[i]+"]");
+			selJob.attr("ng-change","jobChange("+ioports[i]+",selJob["+ ioports[i]+"])");
+
         }
     }
 
