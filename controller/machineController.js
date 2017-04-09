@@ -20,16 +20,20 @@ $scope.setSelJob=function (jobid,macid){
     if(job.id==jobid){
       $scope.selJob[macid]=job;
       $scope.$apply();
+    }
   }
-}
 };
 $scope.setSelOp=function (opid){
   for( operator of   $scope.operators){
     if(operator.id==opid){
       $scope.selOperator[macid]=operator;
       $scope.$apply();
-   }
- }
+    }
+  }
+};
+$scope.setIdle=function (idleData){
+  $scope.idles=idleData;
+  $scope.$apply();
 };
 $scope.jobChange=function (macid,seljob){
   $('#loader1').show();
