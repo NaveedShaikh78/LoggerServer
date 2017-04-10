@@ -1,3 +1,5 @@
+job = 0;
+console.log(job+'and'+job);
 loadJobGrid();
 function loadJobGrid(){
   var jobgridfields=[
@@ -49,11 +51,12 @@ $("#jobgrid").jsGrid({
 					if(item.activejob == null)
 						item.activejob = 0;
 					console.log(item.activejob);
-					if(item.activejob)
+					if(item.activejob){
 						return true;
+					}
 				});
 					ctrl.MachineController.setJobs(job); 
-				 
+					console.log(job);
                     d.resolve(response);
                 });
                 return d.promise();
@@ -63,7 +66,35 @@ $("#jobgrid").jsGrid({
                 item.rtype="updateData";
                 $.post("http://pi.trendzsoft.in/api/job.php", item
                 ).done(function(response) {
-                    d.resolve(item);
+					console.log(job)
+					if(item.activejob)
+					{
+						var flag = false;
+						for(var index in job){
+							if(item.id == job[index].id){
+								flag = true;
+								break;
+							}
+						}
+						if(flag == false){
+							job.push(item);
+							job.sort(function (a, b) {
+							return a.id - b.id;
+						});
+						}
+						console.log(job);
+						
+					}
+					else if(item.activejob == false)
+					{
+						var targetObj=item;
+						job = $.grep(job,function(item){
+							return item.id != targetObj.id;
+						});
+					}
+					console.log(job);
+					ctrl.MachineController.setJobs(job); 
+				   d.resolve(item);
                 });
                 return d.promise();
               },
@@ -73,6 +104,11 @@ $("#jobgrid").jsGrid({
                 $.post("http://pi.trendzsoft.in/api/job.php", item
                 ).done(function(response) {
                     item.id=response[0];
+					if(item.activejob)
+					{
+						job.push(item);
+						ctrl.MachineController.setJobs(job);
+					}
                     d.resolve(item);
                 });
                 return d.promise();
@@ -83,6 +119,17 @@ $("#jobgrid").jsGrid({
                   item.rtype="deleteData";
                   $.post("http://pi.trendzsoft.in/api/job.php", item
                   ).done(function(response) {
+					console.log(job);
+					console.log(item);
+					if(item.activejob)
+					{
+						var targetObj=item;
+						job = $.grep(job,function(item){
+							return item.id != targetObj.id;
+						});
+					}
+					console.log(job);
+					ctrl.MachineController.setJobs(job);
                       d.resolve(true);
                   });
                   return d.promise();
