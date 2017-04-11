@@ -22,7 +22,7 @@ elseif ($rtype == "insertData")
 }
 elseif ($rtype == "updateData")
 {
-    $sql = "update job set jobid='$jobid', jobname='$name',jobdesc='$desc',activejob=$activejob where id ='$id'";
+    $sql = "update job set jobid='$jobid', jobname='$name',jobdesc='$desc',activejob=(case when $activejob = 0 then NULL else 1 end) where id ='$id'";
 }
 elseif ($rtype == "deleteData")
 {

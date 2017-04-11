@@ -82,7 +82,7 @@ $(function () {
         }
     }
 
-});
+}); 
 function miliSecToHms(d) {
     d = Number(d) / 1000;
     var h = Math.floor(d / 3600);

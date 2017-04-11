@@ -15,6 +15,9 @@ $scope.setJobs=function (jobsData){
   $scope.jobs=jobsData;
   $scope.$apply();
 };
+$scope.refresh=function(){
+	$scope.$apply();
+}
 $scope.setSelJob=function (jobid,macid){
   for( job of   $scope.jobs){
     if(job.id==jobid){

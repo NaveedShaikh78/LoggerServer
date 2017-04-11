@@ -68,7 +68,7 @@ function loadReportGrid(sdata){
        sorting: false,
        paging: false,
        pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
-   data: sdata,
+		data: sdata,
        fields: gridfields
    });
  $('#loader1').fadeOut('slow');
