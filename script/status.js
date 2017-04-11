@@ -1,4 +1,3 @@
-
 var selectedMachine = 26;
 var reportType = ""
 var appdata = {};

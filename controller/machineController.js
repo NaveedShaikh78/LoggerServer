@@ -1,5 +1,5 @@
-angular.module('loggerApp', [])
-.controller('MachineController', function($scope) {
+loggerApp=angular.module('loggerApp', []);
+loggerApp.controller('MachineController', function($scope) {
 ctrl.MachineController=$scope;
 $scope.selJob=[];
 $scope.selOp=[];

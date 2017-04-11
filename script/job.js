@@ -16,11 +16,11 @@ function loadJobGrid(){
 			  { name: "activejob", type: "checkbox",title :"Active Job",width:25
 
               },
-			  
-			  
+
+
               { type: "control" }
               ];
-			  
+
 $("#jobgrid").jsGrid({
   height: "90%",
      width: "100%",
@@ -38,23 +38,16 @@ $("#jobgrid").jsGrid({
                 $.post("http://pi.trendzsoft.in/api/job.php",
                     {"rtype":"getData"}
                 ).done(function(response) {
-				 
-				 /*
-				 response = $.grep(response, function(item) {
-				  return true;
-				});
-				*/
-				
-				job = $.grep(response, function(item) {
-					if(item.activejob == null)
-						item.activejob = 0;
-					console.log(item.activejob);
-					if(item.activejob)
-						return true;
-				});
-					ctrl.MachineController.setJobs(job); 
-				 
-                    d.resolve(response);
+                        job = $.grep(response, function(item) {
+					              if(item.activejob == null)
+                        		item.activejob = 0;
+                        console.log(item.activejob);
+					                   if(item.activejob)
+						                       return true;
+				                });
+                        ctrl.MachineController.setJobs(job);
+					              ctrl.ReportController.setJobs(job);
+                        d.resolve(response);
                 });
                 return d.promise();
             },

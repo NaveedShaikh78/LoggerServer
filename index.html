@@ -47,18 +47,18 @@
                                                     </div>
                                                 </td>
                                                 <td style="width:30%!important;">Count</td>
-                                                <td class="mobilefont maxwidth">0</td>
+                                                <td class="mobilefont maxwidth jobcount">0</td>
                                             </tr>
                                             <tr style="width:100%;">
                                                 <td style="width:30% !important;">Timer</td>
-                                                <td class="mobilefont ">10:10:10</td>
+                                                <td class="mobilefont machinetimer">10:10:10</td>
                                             </tr>
 
                                             <tr style="width:100%;height:25px">
                                                 <td style="width:20%;">Operator</td>
                                                 <td class="maxwidth" colspan="2">
                                                     <select class="form-control vertical-padding" id="selOperator" style="padding:0" ng-options="op.opname for op in operators">
-														<option value="">Please Select</option>
+														<option selected hidden value="" >Select</option>
 													</select>
 												</td>
                                             </tr>
@@ -85,7 +85,7 @@
                     </template>
                 </div><!--End of appview div-->
             </div>
-            <div class="swipe-tab-content">
+            <div class="swipe-tab-content" ng-controller='ReportController'>
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -157,10 +157,10 @@
             </div>
         </div>
     </div>
-    <div id="login1" title="Login">
+    <div id="login" title="Login">
         <form id="frmLogin">
-            <input class="form-control" id="username" type="text" placeholder="Username" style="margin-top: 30px;">
-            <input class="form-control" id="password" type="password" placeholder="Password" style="margin-top: 25px;">
+            <input class="form-control" id="username" type="text" placeholder="Username" value="global" style="margin-top: 30px;">
+            <input class="form-control" id="password" type="password" placeholder="Password" value="global@#" style="margin-top: 25px;">
             <input class="form-control" id="submit" type="submit" value="Login" onclick='return login(event);' style="margin-top: 25px;">
 
             <div id="failmsg" class="alert alert-danger" style="display:none; margin-top: 25px;">
@@ -200,6 +200,7 @@
     <script src="script/idle.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="controller/machineController.js"></script>
+    <script src="controller/reportController.js"></script>
 
 </body>
 </html>
