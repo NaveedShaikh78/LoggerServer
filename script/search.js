@@ -1,4 +1,3 @@
-$(function () {
 jobgridfields=[
             { name: "job_name", type: "text",title :"Job Name" ,width:500 },
             ];
@@ -12,24 +11,7 @@ $("#jsGrid").hide();
 $("#macJobCount").hide();
 }
 var gridfields=[];
-gridfields=[  { name: "start_time", type: "text",title :"Start Time", width:230,editing: false },
-              { name: "end_time", type: "text",title :"End Time",editing: false},
-              { name: "cycletime", type: "text",title :"Cycle Time",editing: false},
-              { name: "idletime", type: "text",title : "Idle Time",editing: false},
-              { name: "jobno", type: "select",title : "Job",items: [], valueField: "id", textField: "jobname",
-                headerTemplate: function() {
-                   return $("<select>")
-                          .attr("text", "Job")
-                          .attr("ng-change", "jobChange(job.id)")
-                          .attr("ng-model", "job")
-                          .attr("ng-options", "job.jobname for job in jobs")
-                          .text("Job");
-                          }
-              },
-              { name: "opid", type: "select",title : "Operator",items: [], valueField: "id", textField: "opname"},
 
-                  { type: "control" , deleteButton: false }
-               ];
 loadReportGrid();
 function searchdb(){
   $('#loader1').show();
@@ -47,7 +29,24 @@ gridfields=[
              ];
 }
 else{
+  gridfields=[  { name: "start_time", type: "text",title :"Start Time", width:230,editing: false },
+                { name: "end_time", type: "text",title :"End Time",editing: false},
+                { name: "cycletime", type: "text",title :"Cycle Time",editing: false},
+                { name: "idletime", type: "text",title : "Idle Time",editing: false},
+                { name: "jobno", type: "select",title : "Job",items: ctrl.MachineController.jobs, valueField: "id", textField: "jobname",
+                  headerTemplate: function() {
+                     return $("<select>")
+                            .attr("text", "Job")
+                            .attr("ng-change", "jobChange(job.id)")
+                            .attr("ng-model", "job")
+                            .attr("ng-options", "job.jobname for job in jobs")
+                            .text("Job");
+                            }
+                },
+                { name: "opid", type: "select",title : "Operator",items: ctrl.MachineController.operators, valueField: "id", textField: "opname"},
 
+                    { type: "control" , deleteButton: false }
+                 ];
 
 }
  $.getJSON(url2, function( sdata ) {
@@ -76,4 +75,3 @@ function loadReportGrid(sdata){
 
 
  }
-});
