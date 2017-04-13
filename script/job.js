@@ -3,7 +3,7 @@ console.log(job+'and'+job);
 loadJobGrid();
 function loadJobGrid(){
   var jobgridfields=[
-              { name: "id", type: "text",title :"Job ID" ,width:210,css:"hide"
+              { name: "id", type: "text",title :"ID" ,width:210,css:""
 
               },
               { name: "jobid", type: "text",title :"Job ID" ,width:50,
@@ -48,7 +48,7 @@ $("#jobgrid").jsGrid({
 						                       return true;
 				                });
                         ctrl.MachineController.setJobs(job);
-					              ctrl.ReportController.setJobs(job);
+					    /*ctrl.ReportController.setJobs(job);*/
                         d.resolve(response);
                 });
                 return d.promise();

@@ -29,11 +29,12 @@ gridfields=[
              ];
 }
 else{
-  gridfields=[  { name: "start_time", type: "text",title :"Start Time", width:230,editing: false },
+  gridfields=[  { name: "id", type: "text", title:"Id", width: 50, css: "" },
+				{ name: "start_time", type: "text",title :"Start Time", width:110,editing: false },
                 { name: "end_time", type: "text",title :"End Time",editing: false},
                 { name: "cycletime", type: "text",title :"Cycle Time",editing: false},
                 { name: "idletime", type: "text",title : "Idle Time",editing: false},
-                { name: "jobno", type: "select",title : "Job",items: ctrl.MachineController.jobs, valueField: "id", textField: "jobname",
+                { name: "jobid", type: "select",title : "Job Id",items: ctrl.MachineController.jobs, valueField: "id", textField: "jobname",
                   headerTemplate: function() {
                      return $("<select>")
                             .attr("text", "Job")
@@ -43,17 +44,17 @@ else{
                             .text("Job");
                             }
                 },
-                { name: "opid", type: "select",title : "Operator",items: ctrl.MachineController.operators, valueField: "id", textField: "opname"},
+                { name: "opid", type: "select",title : "Operator Id",items: ctrl.MachineController.operators, valueField: "id", textField: "opname"},
 
                     { type: "control" , deleteButton: false }
                  ];
 
 }
- $.getJSON(url2, function( sdata ) {
+$.getJSON(url2, function( sdata ) {
 $('#macJobCount').text("Total Jobs count:"+sdata[0].count);
  });
 
- $.getJSON(url1, function( sdata ) {
+$.getJSON(url1, function( sdata ) {
 loadReportGrid(sdata);
 $('#bs-example-navbar-collapse-1').removeClass('in');
 });
@@ -66,8 +67,22 @@ function loadReportGrid(sdata){
        editing: true,
        sorting: false,
        paging: false,
+	   controller:	{
+		   updateItem: function(item){
+			   var d = $.Deferred();
+			   item.rtype="updateData";
+			   $.post("http://pi.trendzsoft.in/api/updateReport.php", item
+			   ).done(function(response){
+					d.resolve(true);
+					
+			   });
+			   return d.promise;
+		   }
+				
+	   },
+					
        pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
-		data: sdata,
+	   data: sdata,
        fields: gridfields
    });
  $('#loader1').fadeOut('slow');
