@@ -12,9 +12,8 @@ $("#macJobCount").hide();
 }
 var gridfields=[];
 
-loadReportGrid();
+//loadReportGrid();
 function searchdb(){
-  $('#loader1').show();
 
 var dfrom=document.getElementById("dateFrom").value;
 var dTo=document.getElementById("dateTo").value;
@@ -29,12 +28,12 @@ gridfields=[
              ];
 }
 else{
-  gridfields=[  { name: "id", type: "text", title:"Id", width: 50, css: "" },
+  gridfields=[  { name: "srno", type: "text", title:"Id", width: 50, css: "hide" },
 				{ name: "start_time", type: "text",title :"Start Time", width:110,editing: false },
                 { name: "end_time", type: "text",title :"End Time",editing: false},
                 { name: "cycletime", type: "text",title :"Cycle Time",editing: false},
                 { name: "idletime", type: "text",title : "Idle Time",editing: false},
-                { name: "jobid", type: "select",title : "Job Id",items: ctrl.MachineController.jobs, valueField: "id", textField: "jobname",
+                { name: "jobno", type: "select",title : "Job Id",items: ctrl.MachineController.jobs, valueField: "id", textField: "jobname",
                   headerTemplate: function() {
                      return $("<select>")
                             .attr("text", "Job")
@@ -54,39 +53,43 @@ $.getJSON(url2, function( sdata ) {
 $('#macJobCount').text("Total Jobs count:"+sdata[0].count);
  });
 
-$.getJSON(url1, function( sdata ) {
-loadReportGrid(sdata);
-$('#bs-example-navbar-collapse-1').removeClass('in');
-});
+//$.getJSON(url1, function( sdata ) {
+loadReportGrid(url1);
+//$('#bs-example-navbar-collapse-1').removeClass('in');
+//});
 }
-function loadReportGrid(sdata){
+function loadReportGrid(url1){
   $("#jsGrid").jsGrid({
        width: "100%",
         delete:false,
       inserting: false,
+      autoload: true,
        editing: true,
        sorting: false,
        paging: false,
 	   controller:	{
+       loadData: function() {
+           var d = $.Deferred();
+           $.get(url1
+           ).done(function(response) {
+               d.resolve(response);
+           });
+           return d.promise();
+       },
 		   updateItem: function(item){
 			   var d = $.Deferred();
 			   item.rtype="updateData";
-			   $.post("http://pi.trendzsoft.in/api/updateReport.php", item
+			   $.post("http://trendzsoft.in/api/updateReport.php", item
 			   ).done(function(response){
-					d.resolve(true);
-					
+					d.resolve(item);
 			   });
-			   return d.promise;
+			   return d.promise();
 		   }
-				
+
 	   },
-					
+
        pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
-	   data: sdata,
        fields: gridfields
    });
- $('#loader1').fadeOut('slow');
- $('#jsGrid jsgrid-button jsgrid-delete-button').hide();
-
 
  }
