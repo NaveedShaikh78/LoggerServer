@@ -6,7 +6,7 @@ print("\n");
 $conn = connect();
 $id=$_POST['id'];
 $rtype=$_POST['rtype'];
-$idlename=$_POST['idlename'];
+$idleid=$_POST['idleid'];
 $idledesc=$_POST['idledesc'];
 if($rtype=="getData")
 {
@@ -14,11 +14,11 @@ if($rtype=="getData")
 }
 elseif ($rtype == "insertData")
 {
-    $sql = "insert into idle(idlename,idledesc) values('$idlename','$idledesc')";
+    $sql = "insert into idle(idleid,idledesc) values('$idleid','$idledesc')";
 }
 elseif ($rtype == "updateData")
 {
-    $sql = "update idle set idlename='$idlename',idledesc='$idledesc' where id ='$id'";
+    $sql = "update idle set idleid='$idleid',idledesc='$idledesc' where id ='$id'";
 }
 elseif ($rtype == "deleteData")
 {

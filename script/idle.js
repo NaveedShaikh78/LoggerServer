@@ -2,11 +2,11 @@
 loadIdleGrid();
 function loadIdleGrid(){
   var idlegridfields=[
-              { name: "id", type: "text",title :"Idle ID" ,width:210,css:"hide"
+              { name: "id", type: "text",title :"ID" ,width:210,css:""
 
               },
-              { name: "idlename", type: "text",title :"Idle Name",width:50,
-                validate: { message: "Idle Name can not be emty", validator: function(value) { return value !=""; } }
+              { name: "idleid", type: "text",title :"Idle Id",width:50,
+                validate: { message: "Idle Id can not be emty", validator: function(value) { return value !=""; } }
               },
               { name: "idledesc", type: "text",title :"Idle Description",width:120
 

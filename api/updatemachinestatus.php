@@ -16,6 +16,11 @@ else if($type=="job")
   {
     $sql = "UPDATE machinestatus SET jobid=$tval where ioport=$ip;";
   }
+else if($type=="idle")
+  {
+	$sql = "UPDATE machinestatus SET idleid=$tval where ioport=$ip;";
+  }
+
 else
    {
     $sql = "UPDATE machinestatus SET statetime=$st,status=$ss where ioport=$ip;";
