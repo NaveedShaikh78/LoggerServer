@@ -64,20 +64,23 @@ $(function () {
             $(clone.childNodes[0].nextSibling).attr("id", "mac-" + ioports[i]);
             macview[0].appendChild(clone);
             $("#mac-" + ioports[i] + " div.panel-heading").text("Machine " + (i + 1));
+			
 			var selOperator =  $("#mac-" + ioports[i] + " #selOperator");
 			selOperator.attr("id","selOperator"+ ioports[i]);
-      selOperator.attr("ng-model","selOp["+ ioports[i]+"]");
-			selOperator.attr("ng-change","selOp["+ ioports[i]+"]");
+			selOperator.attr("ng-model","selOp["+ ioports[i]+"]");
+			selOperator.attr("ng-change","opChange("+ioports[i]+",selOp["+ ioports[i]+"])");
+			//selOperator.attr("ng-change","selOp["+ ioports[i]+"]");
 
 
 			var selJob =  $("#mac-" + ioports[i] + " #selJob");
 			selJob.attr("id","selJob"+ ioports[i]);
-      selJob.attr("ng-model","selJob["+ ioports[i]+"]");
+			selJob.attr("ng-model","selJob["+ ioports[i]+"]");
 			selJob.attr("ng-change","jobChange("+ioports[i]+",selJob["+ ioports[i]+"])");
 
-      var selIdle =  $("#mac-" + ioports[i] + " #selIdle");
+			var selIdle =  $("#mac-" + ioports[i] + " #selIdle");
 			selIdle.attr("id","selIdle"+ ioports[i]);
 			selIdle.attr("ng-model","selIdle["+ ioports[i]+"]");
+			selIdle.attr("ng-change","idleChange("+ioports[i]+",selIdle["+ ioports[i]+"])");
 
         }
     }
@@ -114,6 +117,7 @@ $(function () {
                     if (sdata[ioports[i]]) {
                         ctrl.MachineController.setSelJob(sdata[ioports[i]].jobid,ioports[i]);
                         ctrl.MachineController.setSelOp(sdata[ioports[i]].opid,ioports[i]);
+                        ctrl.MachineController.setSelIdle(sdata[ioports[i]].idleid,ioports[i]);
                         var mactime = new Date(sdata[ioports[i]].statetime);
                         var tmsec = Date.now() - mactime;
                         var HHmmss = miliSecToHms(tmsec);
