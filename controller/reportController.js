@@ -1,11 +1,15 @@
-loggerApp.controller('ReportController', function($scope) {
+loggerApp.controller('ReportController', function($scope,$compile) {
 ctrl.ReportController=$scope;
+ctrl.ReportController.compile=$compile;
 
 $scope.setJobs=function (jobsData){
   $scope.jobs=jobsData;
   $scope.$apply();
 };
-
+$scope.setOperators=function (jobsData){
+  $scope.jobs=jobsData;
+  $scope.$apply();
+};
 
 $scope.jobChange=function (jobid){
   $('#loader1').show();

@@ -48,7 +48,7 @@ $("#jobgrid").jsGrid({
 						                       return true;
 				                });
                         ctrl.MachineController.setJobs(job);
-					    /*ctrl.ReportController.setJobs(job);*/
+					              ctrl.ReportController.setJobs(job);
                         d.resolve(response);
                 });
                 return d.promise();
@@ -75,7 +75,7 @@ $("#jobgrid").jsGrid({
 						});
 						}
 						console.log(job);
-						
+
 					}
 					else if(item.activejob == false)
 					{
@@ -85,7 +85,7 @@ $("#jobgrid").jsGrid({
 						});
 					}
 					console.log(job);
-					ctrl.MachineController.setJobs(job); 
+					ctrl.MachineController.setJobs(job);
 				   d.resolve(item);
                 });
                 return d.promise();

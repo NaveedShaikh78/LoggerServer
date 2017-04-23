@@ -66,7 +66,7 @@
                                                 <td style="width:40%;">Job</td>
                                                 <td class="maxwidth" colspan="2">
                                                     <select class="form-control vertical-padding" id="selJob"  style="padding:0" ng-options="job.jobname for job in jobs">
-														<option value="">Please Select</option>
+														<option selected hidden  value=""> Select</option>
 													</select>
 												</td>
                                             </tr>
@@ -74,7 +74,7 @@
                                                 <td style="width:40%;">Idle</td>
                                                 <td class="maxwidth" colspan="2">
                                                     <select class="form-control vertical-padding" id="selIdle"  style="padding:0; margin-top:2px;" ng-options="idle.idledesc for idle in idles" >
-														<option value="">Please Select</option>
+														<option selected hidden value="">Select</option>
 													</select>
                                                 </td>
                                             </tr>
@@ -192,9 +192,8 @@
     <script src="lib/jquery/js/jquery-ui.js"></script>
     <script src="lib/slicktab/js/slick.js"></script>
     <script src="lib/slicktab/js/slick-tab.js"></script>
-    <script src="script/search.js"></script>
     <script src="script/status.js"></script>
-    <script src="script/tabmenu.js"></script>
+    <script src="script/search.js"></script>
     <script src="script/operator.js"></script>
     <script src="script/job.js"></script>
     <script src="script/idle.js"></script>

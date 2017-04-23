@@ -1,8 +1,80 @@
-jobgridfields=[
+var jobgridfields=[
             { name: "job_name", type: "text",title :"Job Name" ,width:500 },
             ];
+            var tempid=0;
+var gridfields=[];
+var searchData=[];
+var acceptDataButton
+gridfields=[  { name: "srno", type: "text", title:"Id", width: 50, css: "hide" },
+      { name: "start_time", type: "text",title :"Start Time", width:110,editing: false },
+              { name: "end_time", type: "text",title :"End Time",editing: false},
+              { name: "cycletime", type: "text",title :"Cycle Time",editing: false},
+              { name: "idletime", type: "text",title : "Idle Time",editing: false},
+              { name: "jobno", type: "select",title : "Job Id",items:[], valueField: "id", textField: "jobname",
+                headerTemplate: function() {
+                  var jobListelm=$("<select style='width:100%;height:100%;border:0'><option selected hidden  value='' > Job</option></select>");
+                //return  document.importNode(document.getElementById("reportJobs"));
+                if(ctrl.MachineController){
+                    $.each(ctrl.MachineController.jobs, function(val, item) {
+                        jQuery('<option/>', {
+                          value: item.id,
+                          html: item.jobname
+                        }).appendTo(jobListelm);
+                    });
+                 }
+                  jobListelm.change(function (citem) {
+                    var postData={};
+                    postData.id=  $(this).find("option:selected").val();
+                    $.each(searchData, function(val, item) {
+                      item.jobno=postData.id;
+                    });
+                    $("#jsGrid").jsGrid("refresh");
+                    $("#updateLogData").show();
+                    //$(this).parent().append("<input id='updateJobs' class='jsgrid-button jsgrid-update-button' type='button' title='Update'>");
 
+                  });
+                 return jobListelm;
+               }
+              },
+              { name: "opid", type: "select",title : "Operator Id",items: [], valueField: "id", textField: "opname",
 
+              headerTemplate: function() {
+              var opListelm=$("<select style='width:100%;height:100%;border:0'><option selected hidden  value='' > Operator</option></select>");
+            //return  document.importNode(document.getElementById("reportJobs"));
+            if(ctrl.MachineController){
+              $.each(ctrl.MachineController.operators, function(val, item) {
+              jQuery('<option/>', {
+                    value: item.id,
+                    html: item.opname
+                    }).appendTo(opListelm);
+                });
+              }
+              opListelm.change(function (citem) {
+                var postData={};
+                postData.id=  $(this).find("option:selected").val();
+                $.each(searchData, function(val, item) {
+                  item.opid=postData.id;
+                });
+                $("#jsGrid").jsGrid("refresh");
+                $("#updateLogData").show();
+                //$(this).parent().append("<input id='updateJobs' class='jsgrid-button jsgrid-update-button' type='button' title='Update'>");
+
+              });
+               return opListelm;
+              }
+
+              },
+
+                  { type: "control" , deleteButton: false,headerTemplate: function(){
+                    var updateLogData= $("<input id='updateLogData' class='jsgrid-button jsgrid-update-button' style='Display: none;' type='button' title='Update'>");
+                    updateLogData.click(function(){
+                      $(this).hide();
+                      $('#loader1').fadeIn('slow');
+                      updateLogDataAll(0);
+                    });
+                    return updateLogData;
+                  } }
+               ];
 $("#jsGrid").show();
 
 function liveMachineStatus(){
@@ -10,15 +82,16 @@ $("#machinecontainer").show();
 $("#jsGrid").hide();
 $("#macJobCount").hide();
 }
-var gridfields=[];
 
-//loadReportGrid();
+loadReportGrid();
+
 function searchdb(){
+  $('#loader1').show();
 
 var dfrom=document.getElementById("dateFrom").value;
 var dTo=document.getElementById("dateTo").value;
 var url1 = "http://trendzsoft.in/api/getstatus.php?" + "st='" + dfrom + "'&et='" + dTo + "'&mac='" + selectedMachine + "'";
-var  url2 = "http://trendzsoft.in/api/getMachineCount.php?" + "st='" + dfrom + "'&et='" + dTo + "'&ip='" + selectedMachine + "'";
+var url2 = "http://trendzsoft.in/api/getMachineCount.php?" + "st='" + dfrom + "'&et='" + dTo + "'&ip='" + selectedMachine + "'";
 
 if(reportType==="dsc"){
     var url1 = "http://trendzsoft.in/api/getDayShiftData.php?" + "st='" + dfrom + "'&et='" + dTo + "'&ip='" + selectedMachine + "'";
@@ -28,68 +101,64 @@ gridfields=[
              ];
 }
 else{
-  gridfields=[  { name: "srno", type: "text", title:"Id", width: 50, css: "hide" },
-				{ name: "start_time", type: "text",title :"Start Time", width:110,editing: false },
-                { name: "end_time", type: "text",title :"End Time",editing: false},
-                { name: "cycletime", type: "text",title :"Cycle Time",editing: false},
-                { name: "idletime", type: "text",title : "Idle Time",editing: false},
-                { name: "jobno", type: "select",title : "Job Id",items: ctrl.MachineController.jobs, valueField: "id", textField: "jobname",
-                  headerTemplate: function() {
-                     return $("<select>")
-                            .attr("text", "Job")
-                            .attr("ng-change", "jobChange(job.id)")
-                            .attr("ng-model", "job")
-                            .attr("ng-options", "job.jobname for job in jobs")
-                            .text("Job");
-                            }
-                },
-                { name: "opid", type: "select",title : "Operator Id",items: ctrl.MachineController.operators, valueField: "id", textField: "opname"},
 
-                    { type: "control" , deleteButton: false }
-                 ];
+  gridfields[5].items= ctrl.MachineController.jobs;
+  gridfields[6].items= ctrl.MachineController.operators;
 
 }
 $.getJSON(url2, function( sdata ) {
 $('#macJobCount').text("Total Jobs count:"+sdata[0].count);
  });
 
-//$.getJSON(url1, function( sdata ) {
-loadReportGrid(url1);
-//$('#bs-example-navbar-collapse-1').removeClass('in');
-//});
+$.getJSON(url1, function( sdata ) {
+
+loadReportGrid(sdata);
+});
 }
-function loadReportGrid(url1){
+function updateLogDataAll(index){
+  if(searchData){
+    var item=searchData[index];
+      if(item){
+          item.rtype="updateData";
+          $.post("http://trendzsoft.in/api/updateReport.php", item)
+          .done(function(response){
+               updateLogDataAll(index+1);
+          });
+      }else{
+        $('#loader1').fadeOut('slow');
+      }
+  }
+}
+function updateLogData(item){
+  var d = $.Deferred();
+  item.rtype="updateData";
+  $.post("http://trendzsoft.in/api/updateReport.php", item
+  ).done(function(response){
+   d.resolve(item);
+  });
+  return d.promise();
+}
+function loadReportGrid(sdata){
+  searchData=sdata;
   $("#jsGrid").jsGrid({
        width: "100%",
         delete:false,
       inserting: false,
-      autoload: true,
        editing: true,
        sorting: false,
        paging: false,
 	   controller:	{
-       loadData: function() {
-           var d = $.Deferred();
-           $.get(url1
-           ).done(function(response) {
-               d.resolve(response);
-           });
-           return d.promise();
-       },
+
 		   updateItem: function(item){
-			   var d = $.Deferred();
-			   item.rtype="updateData";
-			   $.post("http://trendzsoft.in/api/updateReport.php", item
-			   ).done(function(response){
-					d.resolve(item);
-			   });
-			   return d.promise();
+			 return  updateLogData(item);
 		   }
 
 	   },
 
        pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount} ",
+	   data: searchData,
        fields: gridfields
    });
+ $('#loader1').fadeOut('slow');
 
  }

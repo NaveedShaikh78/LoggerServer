@@ -29,8 +29,8 @@ $scope.setSelJob=function (jobid,macid){
 $scope.setSelOp=function (opid){
   for( operator of   $scope.operators){
     if(operator.id==opid){
-      $scope.selOperator[macid]=operator;
-      $scope.$apply();
+      //$scope.selOperator[macid]=operator;
+      //$scope.$apply();
     }
   }
 };
