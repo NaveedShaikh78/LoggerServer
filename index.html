@@ -130,7 +130,7 @@
                                 </div>
 
                                 <button class="btn btn-default" type="button" onclick="searchdb();">Search</button>
-                                <button class="btn btn-default" type="button" onclick="liveMachineStatus();">Live</button>
+                                <button class="btn btn-default" type="button" onclick="reportchart();">Chart</button>
                             </form>
 
                         </div><!-- /.navbar-collapse -->
@@ -138,7 +138,8 @@
                 </nav>
                 <div id="macJobCount"></div>
                 <div id="jsGrid"></div>
-            </div>
+                <div id="reportchart"></div>
+             </div>
             <div class="swipe-tab-content">
                 <div id="accordsettings">
                     <h3>Jobs</h3>
@@ -159,6 +160,7 @@
     </div>
     <div id="login" title="Login">
         <form id="frmLogin">
+
             <input class="form-control" id="username" type="text" placeholder="Username" value="global" style="margin-top: 30px;">
             <input class="form-control" id="password" type="password" placeholder="Password" value="global@#" style="margin-top: 25px;">
             <input class="form-control" id="submit" type="submit" value="Login" onclick='return login(event);' style="margin-top: 25px;">
@@ -168,21 +170,7 @@
 
         </form>
     </div>
-    <div class="container">
-        <div class="row">
-            <div id="loader2">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-        </div>
-    </div>
-    <div id="loader1">
+      <div id="loader1">
     <div  class="jsgrid-load-shader" style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; z-index: 1000;widht:100%; display:none;"></div>
     <div class="jsgrid-load-panel" style="position: absolute; top: 50%; left: 50%; z-index: 1000; margin-top: -35px; margin-left: -105px;">Please, wait...</div>
   </div>
@@ -192,6 +180,9 @@
     <script src="lib/jquery/js/jquery-ui.js"></script>
     <script src="lib/slicktab/js/slick.js"></script>
     <script src="lib/slicktab/js/slick-tab.js"></script>
+    <script src="lib/highchart/js/highcharts.js"></script>
+    <script src="lib/highchart/js/modules/exporting.js"></script>
+    <script src="report/highchart.js"></script>
     <script src="script/status.js"></script>
     <script src="script/search.js"></script>
     <script src="script/operator.js"></script>

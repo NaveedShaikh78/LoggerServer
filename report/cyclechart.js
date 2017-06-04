@@ -1,4 +1,11 @@
-function reportchart(){
+function cyclechart(reportData){
+  var chartobj={}
+  cycletime=[];
+  idletime=[];
+  $.each(sdata, function(val, item) {
+    cycletime.push(item.cycletime);
+  idletime.push(item.idletime);
+});
   Highcharts.chart('reportchart', {
       chart: {
           type: 'column'
@@ -8,16 +15,14 @@ function reportchart(){
       },
       xAxis: {
           categories: [
-              'Seattle HQ',
-              'San Francisco',
-              'Tokyo'
+              'Cycle',
+              'Idle'
           ]
-
       },
       yAxis: [{
           min: 0,
           title: {
-              text: 'Employees'
+              text: 'Time Taken'
           }
       }, {
           title: {
@@ -41,13 +46,13 @@ function reportchart(){
       series: [{
           name: 'Employees',
           color: 'rgba(161,230,168,1)',
-          data: [150, 73, 20],
+          data: cycletime,
           pointPadding: 0.3,
           pointPlacement: -0.2
       }, {
           name: 'Employees Optimized',
           color: 'rgba(235,70,103,1)',
-          data: [255, 53, 73],
+          data: idletime,
           pointPadding: 0.44,
           pointPlacement: -0.2
       }]

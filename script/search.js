@@ -111,8 +111,8 @@ $('#macJobCount').text("Total Jobs count:"+sdata[0].count);
  });
 
 $.getJSON(url1, function( sdata ) {
-
-loadReportGrid(sdata);
+  cyclechart(sdata);
+  loadReportGrid(sdata);
 });
 }
 function updateLogDataAll(index){
