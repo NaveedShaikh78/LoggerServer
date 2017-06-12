@@ -1,5 +1,5 @@
 <?php
-require 'connectdb.php';
+require 'includes/connectdb.php';
 $conn = connect();
 $st=$_GET["st"];
 $et=$_GET["et"];
@@ -14,7 +14,10 @@ $sql="select t.shift,count(*)as cnt from (select start_time as st, case when sta
 while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
   	{
 		$rows[] = $row;
-  	} 
+  	}
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+print("\n"); 
 	print json_encode($rows);
   	mysql_close($conn);
 ?>
