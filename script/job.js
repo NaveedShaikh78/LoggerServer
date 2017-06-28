@@ -3,7 +3,7 @@ console.log(job+'and'+job);
 loadJobGrid();
 function loadJobGrid(){
   var jobgridfields=[
-              { name: "id", type: "text",title :"ID" ,width:210,css:""
+              { name: "id", type: "text",title :"ID" ,width:50,css:"hide"
 
               },
               { name: "jobid", type: "text",title :"Job ID" ,width:50,

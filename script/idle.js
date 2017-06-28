@@ -2,7 +2,7 @@
 loadIdleGrid();
 function loadIdleGrid(){
   var idlegridfields=[
-              { name: "id", type: "text",title :"ID" ,width:210,css:""
+              { name: "id", type: "text",title :"ID" ,width:50,css:"hide"
 
               },
               { name: "idleid", type: "text",title :"Idle Id",width:50,
