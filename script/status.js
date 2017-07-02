@@ -1,4 +1,3 @@
-var selectedMachine = 26;
 var reportType = ""
 var appdata = {};
 var ctrl = {};
@@ -42,17 +41,6 @@ function getDefaultDate() {
 }
 $(function () {
   var ioports=appdata.ioports;
-    $(".dropdown-menu li a").click(function () {
-        var cmbText = $(this).text();
-        if ($(this).attr("id").includes("mcmb-")) {
-            selectedMachine = $(this).attr("id").replace("mcmb-", "");
-            $("#maccmb").html(cmbText + "<span class='caret'></span>");
-        }
-        if ($(this).attr("id").includes("rcmb-")) {
-            reportType = $(this).attr("id").replace("rcmb-", "");
-            $("#reportcmb").html(cmbText + "<span class='caret'></span>");
-        }
-    });
     if ('content' in document.createElement('template')) {
         var machinetemp = document.querySelector('#machinetemplete');
         var macview = document.getElementsByTagName("machineview");

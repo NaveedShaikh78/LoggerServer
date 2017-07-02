@@ -27,7 +27,7 @@
         <div class="swipe-tabs-container ">
             <div class="swipe-tab-content">
                 <div id="appview">
-                    <div  id="machinecontainer">
+                    <div id="machinecontainer">
                         <div class="row" ng-controller='MachineController'>
                             <div>{{name}} </div>
                             <machineview> </machineview>
@@ -74,7 +74,7 @@
                                             <tr>
                                                 <td style="width:40%;">Idle</td>
                                                 <td class="maxwidth" colspan="2">
-                                                    <select class="form-control select-height" id="selIdle"  ng-options="idle.idledesc for idle in idles">
+                                                    <select class="form-control select-height" id="selIdle" ng-options="idle.idledesc for idle in idles">
 														<option selected hidden value="">Select</option>
 													</select>
                                                 </td>
@@ -106,31 +106,36 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" id="reportcmb" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Detailed <span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" id="reportcmb" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            {{selectedReportType.name}} <span class="caret"></span></a>
+
                                         <ul class="dropdown-menu">
-                                            <li><a href="#" id="rcmb-dt">Detailed</a></li>
-                                            <li><a href="#" id="rcmb-dsc">Daily Shift Count</a></li>
-                                            <li><a href="#" id="rcmb-dsc">Monthly Shift Count</a></li>
+                                            <li ng-repeat="reportType in reportTypes"><a ng-click="reportTypeChanged(reportType)">
+                                            {{reportType.name}}</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">Machine1 <span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">
+                                            {{selectedMachine.name}} <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#" id="mcmb-26">Machine 1</a></li>
-                                            <li><a href="#" id="mcmb-19">Machine 2</a></li>
-                                            <li><a href="#" id="mcmb-13">Machine 3</a></li>
-                                            <li><a href="#" id="mcmb-6">Machine 4</a></li>
-                                            <li><a href="#" id="mcmb-22">Machine 5</a></li>
-                                            <li><a href="#" id="mcmb-27">Machine 6</a></li>
-                                            <li><a href="#" id="mcmb-17">Machine 7</a></li>
+                                            <li ng-repeat="machine in machines"><a ng-click="machineChanged(machine)">
+                                        {{machine.name}}</a></li>
+                                        </ul>
+
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">
+                                            {{selectedJob.jobname}} <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li ng-repeat="job in jobs"><a ng-click="selectedJobChanged(job)">
+                                        {{job.jobname}}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                                 <form class="navbar-form navbar-left">
                                     <div class="form-group">
                                         From: <input type="datetime-local" class="form-control" id="dateFrom" /> To:
-                                        <input
-                                            type="datetime-local" class="form-control" id="dateTo">
+                                        <input type="datetime-local" class="form-control" id="dateTo">
                                     </div>
 
                                     <button class="btn btn-default" type="button" onclick="searchdb();">Search</button>

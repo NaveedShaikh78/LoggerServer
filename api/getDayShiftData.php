@@ -1,14 +1,46 @@
 <?php
 require 'includes/connectdb.php';
 $conn = connect();
-$st=$_GET["st"];
-$et=$_GET["et"];
-$ip=$_GET["ip"];
-$sql="select t.shift,count(*)as cnt from (select start_time as st, case when start_time > STR_TO_DATE(CONCAT( DATE(start_time), ' 08:00:00'),'%Y-%m-%d %H:%i:%s') && start_time < STR_TO_DATE(CONCAT( DATE(start_time), ' 20:00:00'),'%Y-%m-%d %H:%i:%s') then CONCAT( DATE(start_time), ' Shift1') when start_time > STR_TO_DATE(CONCAT( DATE(start_time),' 20:00:00'),'%Y-%m-%d %H:%i:%s')then CONCAT( DATE(start_time), ' Shift2') else CONCAT(  DATE_SUB(DATE(start_time),INTERVAL 1 DAY), ' Shift2') end as shift from machinelog where cycletime>20 and ioport=$ip and start_time between $st and $et) t group by t.shift";
+ $st=str_replace("T"," ",$_GET["st"]);
+ $et=str_replace("T"," ",$_GET["et"]);
+ $ip=$_GET["ip"];
+ $machine=$_GET["machine"];
+
+ $byMachine="";
+ $filtMachine="and ioport=$ip";
+if(isset($machine))
+{
+$byMachine = ",t.ioport";
+$filtMachine = "";
+}
+$sql=<<<EOT
+select 
+	 t.cycledate, sum(t.shift1) as Shift1,sum(t.shift2) as Shift2,count(*) DayTotal $byMachine
+from (select 
+			  ioport as ioport,
+      		  case when start_time > STR_TO_DATE(CONCAT( DATE(start_time), ' 00:00:00'),'%Y-%m-%d %H:%i:%s') 
+			 		   && start_time < STR_TO_DATE(CONCAT( DATE(start_time), ' 08:00:00'),'%Y-%m-%d %H:%i:%s')
+						  then  DATE_SUB(DATE(start_time),INTERVAL 1 DAY)
+      			  else DATE(start_time)
+      		  end as cycledate,
+      		  start_time as start_time,
+      		  @shift1:=
+			  case when start_time > STR_TO_DATE(CONCAT( DATE(start_time), ' 08:00:00'),'%Y-%m-%d %H:%i:%s') 
+			 		   && start_time < STR_TO_DATE(CONCAT( DATE(start_time), ' 20:00:00'),'%Y-%m-%d %H:%i:%s')
+						  then 1
+      			  else 0	
+			 end as shift1, 
+			 case when @shift1 = 0
+				  	   then 1
+      			  else 0
+			 end as shift2 
+	  from machinelog where cycletime>20 $filtMachine and start_time between $st and $et
+	 ) t group by  t.cycledate $byMachine
+EOT;
   	$retval = mysql_query( $sql, $conn );
-  	if(! $retval )
+   	if(! $retval )
  	 {
-  	 	die('Could not get data: ' . mysql_error());
+  	 	die('Could not get data:$sql--- ' . mysql_error());
   	 }
  $rows=[];
 while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
