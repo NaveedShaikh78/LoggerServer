@@ -22,8 +22,13 @@ font-size:14px;
 margin:10px 0 0 0;
 }
 
-
-
+.smallpad{
+    padding:0px 5px 0px 5px;
+}
+.select-height{
+height: 30px;
+margin-bottom: 2px;
+}
 @media screen and (max-width: 1000px) {
 .mobilefont,.form-control, .main-container,.jsgrid-cell,.jsgrid-header-cell {
     font-size: 9px !important;
@@ -31,9 +36,6 @@ margin:10px 0 0 0;
 }
 .select-height{
 height: 15px;
-}
-.col-xs-6.smallpad{
-    padding:0px 5px 0px 5px;
 }
 .panel-body{
     padding:7px;

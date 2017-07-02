@@ -55,10 +55,10 @@
                                                 <td class="mobilefont machinetimer">10:10:10</td>
                                             </tr>
 
-                                            <tr style="width:100%;height:25px">
+                                            <tr style="width:100%;">
                                                 <td style="width:20%;">Operator</td>
                                                 <td class="maxwidth" colspan="2">
-                                                    <select class="form-control select-height" id="selOperator" style="padding:0" ng-options="op.opname for op in operators">
+                                                    <select class="form-control select-height" id="selOperator" ng-options="op.opname for op in operators">
 														<option selected hidden value="" >Select</option>
 													</select>
                                                 </td>
@@ -66,7 +66,7 @@
                                             <tr>
                                                 <td style="width:40%;">Job</td>
                                                 <td class="maxwidth" colspan="2">
-                                                    <select class="form-control select-height" id="selJob" style="padding:0" ng-options="job.jobname for job in jobs">
+                                                    <select class="form-control select-height" id="selJob" ng-options="job.jobname for job in jobs">
 														<option selected hidden  value=""> Select</option>
 													</select>
                                                 </td>
@@ -74,7 +74,7 @@
                                             <tr>
                                                 <td style="width:40%;">Idle</td>
                                                 <td class="maxwidth" colspan="2">
-                                                    <select class="form-control select-height" id="selIdle" style="padding:0;margin-top:5px;" ng-options="idle.idledesc for idle in idles">
+                                                    <select class="form-control select-height" id="selIdle"  ng-options="idle.idledesc for idle in idles">
 														<option selected hidden value="">Select</option>
 													</select>
                                                 </td>
@@ -164,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <div id="login" title="Login">
+        <div id="login1" title="Login">
             <form id="frmLogin">
 
                 <input class="form-control" id="username" type="text" placeholder="Username" value="" style="margin-top: 30px;">
