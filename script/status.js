@@ -1,4 +1,3 @@
-var reportType = ""
 var appdata = {};
 var ctrl = {};
 appdata.ioports = [26, 19, 13, 6, 22, 27, 17];

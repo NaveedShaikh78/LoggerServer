@@ -40,14 +40,14 @@ function loadJobGrid() {
         $.post("http://pi.trendzsoft.in/api/job.php",
           { "rtype": "getData" }
         ).done(function (response) {
-          job = $.grep(response, function (item) {
+          jobs = $.grep(response, function (item) {
             if (item.activejob == null)
               item.activejob = 0;
             if (item.activejob)
               return true;
           });
-          ctrl.MachineController.setJobs(job);
-          ctrl.ReportController.setJobs(job);
+          ctrl.MachineController.setJobs(jobs);
+          ctrl.ReportController.setJobs(jobs);
           d.resolve(response);
         });
         return d.promise();
@@ -56,30 +56,7 @@ function loadJobGrid() {
         var d = $.Deferred();
         item.rtype = "updateData";
         $.post("http://pi.trendzsoft.in/api/job.php", item
-        ).done(function (response) {
-          if (item.activejob) {
-            var flag = false;
-            for (var index in job) {
-              if (item.id == job[index].id) {
-                flag = true;
-                break;
-              }
-            }
-            if (flag == false) {
-              job.push(item);
-              job.sort(function (a, b) {
-                return a.id - b.id;
-              });
-            }
-          }
-          else if (item.activejob == false) {
-            var targetObj = item;
-            job = $.grep(job, function (item) {
-              return item.id != targetObj.id;
-            });
-          }
-          console.log(job);
-          ctrl.MachineController.setJobs(job);
+        ).done(function () {
           d.resolve(item);
         });
         return d.promise();

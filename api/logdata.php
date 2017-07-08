@@ -1,4 +1,4 @@
-<?php
+9<?php
   require 'connectdb.php';
   $conn = connect();
  $st=str_replace("T"," ",$_GET["st"]);
@@ -12,7 +12,7 @@ $retval = mysql_query($sql , $conn);
    {
   die("Fail 1 ".mysql_error());
    }
-$sql = "select  @opid:=opid,@jobid:=jobid from machinestatus";
+$sql = "select  @opid:=opid,@jobid:=jobid,@idleid:=idleid from machinestatus where ioport=$ip;";
  $retval = mysql_query( $sql, $conn );
 
 $sql = "select * from machinelog where ioport=$ip and start_time='$st'";
