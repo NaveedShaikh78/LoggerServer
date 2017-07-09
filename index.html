@@ -13,6 +13,7 @@
     <link type="text/css" rel="stylesheet" href="lib/slicktab/css/slick.css" />
     <link type="text/css" rel="stylesheet" href="lib/slicktab/css/slick-tab.css" />
     <link type="text/css" rel="stylesheet" href="css/status.css" />
+
 </head>
 
 <body onload="$('#loader1').fadeOut('slow')">
@@ -144,8 +145,9 @@
                                 </ul>
                                 <form class="navbar-form navbar-left">
                                     <div class="form-group">
-                                        From: <input type="datetime-local" class="form-control" id="dateFrom" ng-model="dFrom" /> 
-                                        To:<input type="datetime-local" class="form-control" id="dateTo" ng-model="dTo">
+                                        From: <input type="datetime-local" class="form-control" id="dateFrom" ng-model="dFrom"
+                                        /> To:
+                                        <input type="datetime-local" class="form-control" id="dateTo" ng-model="dTo">
                                     </div>
 
                                     <button class="btn btn-default" type="button" ng-click="searchdb();">Search</button>
@@ -158,7 +160,8 @@
                         <!-- /.container-fluid -->
                     </nav>
                     <div id="macJobCount"></div>
-                    <div id="jsGrid"></div>
+                    <!--<div id="jsGrid"></div>-->
+                    <div ui-grid="gridOptions" grid-api ui-grid-grouping></div>
                     <div id="reportchart"></div>
                 </div>
                 <div class="swipe-tab-content">
@@ -205,10 +208,6 @@
         <script src="lib/highchart/js/modules/exporting.js"></script>
         <script src="script/status.js"></script>
 
-        <script src="script/search.js"></script>
-        <script src="script/operator.js"></script>
-        <script src="script/job.js"></script>
-        <script src="script/idle.js"></script>
 
         <script src="report/chart/highchart.js"></script>
         <script src="report/cycle.js"></script>
@@ -217,8 +216,24 @@
         <script src="report/operator.js"></script>
 
         <script src="lib/angular/angular.min.js"></script>
+        <script src="lib/angular/angular-touch.min.js"></script>
+        <script src="lib/angular/angular-animate.min.js"></script>
+
+        <script src="lib/angular/grid/ui-grid.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="lib/angular/grid/ui-grid.min.css" />
+
+        <script src="lib/gruntscripts/csv.js"></script>
+        <script src="lib/gruntscripts/pdfmake.js"></script>
+        <script src="lib/gruntscripts/vfs_fonts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-route.js"></script>
         <script src="controller/machineController.js"></script>
         <script src="controller/reportController.js"></script>
+
+        <script src="script/search.js"></script>
+        <script src="script/operator.js"></script>
+        <script src="script/job.js"></script>
+        <script src="script/idle.js"></script>
+
 </body>
 
 </html>

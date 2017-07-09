@@ -1,6 +1,9 @@
 .hide{
   display: none;
 }
+.ui-grid-render-container-body .ui-grid-header-canvas {
+height: 30px !important;
+}
 .form-control{
   border-radius:0;
 }

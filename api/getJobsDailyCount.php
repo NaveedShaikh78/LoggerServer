@@ -4,19 +4,44 @@ $conn = connect();
 $st=str_replace("T"," ",$_GET["st"]);
 $et=str_replace("T"," ",$_GET["et"]);
 $jobno=$_GET["jobno"];
- 
+$jobs=$_GET["jobs"];
+if(isset($jobs))
+{
 $sql=<<<EOT
 select 
-	 t.cycledate, count(*) DayTotal, jobno as jobno
+	 t.cycledate, count(*) DayTotal, t.jobname as JobName
 from (select 
-              jobno as jobno
+              jobno as jobno,
 			  ioport as ioport,
       		  DATE(start_time) as cycledate,
       		  start_time as start_time,
-      		  
-	  from machinelog where cycletime>20 and jobno=$jobno and start_time between $st and $et
-	 ) t group by  t.cycledate, t.jobno
+			  jobname as jobname
+	  from 
+	  machinelog inner join job
+	  on
+	  machinelog.jobno =job.id 
+	  where cycletime>20 and start_time between $st and $et
+	 ) t group by  t.cycledate, t.jobname
 EOT;
+}
+else
+{
+$sql=<<<EOT
+select 
+	 t.cycledate, count(*) DayTotal, t.jobname as JobName
+from (select 
+              jobno as jobno,
+			  ioport as ioport,
+      		  DATE(start_time) as cycledate,
+      		  start_time as start_time
+      from 
+	  machinelog inner join job
+	  on 
+	  machinelog.jobno =job.id 
+	  where cycletime>20 and jobno=$jobno and start_time between $st and $et
+	 ) t group by  t.cycledate, t.jobname
+EOT;
+}
   	$retval = mysql_query( $sql, $conn );
    	if(! $retval )
  	 {
