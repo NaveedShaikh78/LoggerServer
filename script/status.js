@@ -1,4 +1,4 @@
-var appdata = {};
+var appdata = {cycle:{},baseUrl:'http://trendzsoft.in/api/'};
 var ctrl = {};
 appdata.ioports = [26, 19, 13, 6, 22, 27, 17];
 appdata.cuid = "";

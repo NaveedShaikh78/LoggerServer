@@ -87,7 +87,7 @@
                     </div>
                     <!--End of appview div-->
                 </div>
-                <div class="swipe-tab-content" ng-controller='ReportController'>
+                <div class="swipe-tab-content" ng-controller='ReportController' ng-init="init()">
                     <nav class="navbar navbar-default">
                         <div class="container-fluid">
                             <!-- Brand and toggle get grouped for better mobile display -->
@@ -119,7 +119,7 @@
                                             {{selectedDayReportType.name}} <span class="caret"></span></a>
 
                                         <ul class="dropdown-menu">
-                                            <li ng-repeat="reportDayType in reportDayTypes"><a ng-click="reportTypeChanged(reportDayType)">
+                                            <li ng-repeat="reportDayType in reportDayTypes"><a ng-click="reportDayTypeChanged(reportDayType)">
                                             {{reportDayType.name}}</a></li>
                                         </ul>
                                     </li>
@@ -144,12 +144,12 @@
                                 </ul>
                                 <form class="navbar-form navbar-left">
                                     <div class="form-group">
-                                        From: <input type="datetime-local" class="form-control" id="dateFrom" /> To:
-                                        <input type="datetime-local" class="form-control" id="dateTo">
+                                        From: <input type="datetime-local" class="form-control" id="dateFrom" ng-model="dFrom" /> 
+                                        To:<input type="datetime-local" class="form-control" id="dateTo" ng-model="dTo">
                                     </div>
 
-                                    <button class="btn btn-default" type="button" onclick="searchdb();">Search</button>
-                                    <button class="btn btn-default" type="button" onclick="reportchart();">Chart</button>
+                                    <button class="btn btn-default" type="button" ng-click="searchdb();">Search</button>
+                                    <button class="btn btn-default" type="button" ng-click="reportchart();">Chart</button>
                                 </form>
 
                             </div>
@@ -203,12 +203,19 @@
         <script src="lib/slicktab/js/slick-tab.js"></script>
         <script src="lib/highchart/js/highcharts.js"></script>
         <script src="lib/highchart/js/modules/exporting.js"></script>
-        <script src="report/highchart.js"></script>
         <script src="script/status.js"></script>
+
         <script src="script/search.js"></script>
         <script src="script/operator.js"></script>
         <script src="script/job.js"></script>
         <script src="script/idle.js"></script>
+
+        <script src="report/chart/highchart.js"></script>
+        <script src="report/cycle.js"></script>
+        <script src="report/job.js"></script>
+        <script src="report/machine.js"></script>
+        <script src="report/operator.js"></script>
+
         <script src="lib/angular/angular.min.js"></script>
         <script src="controller/machineController.js"></script>
         <script src="controller/reportController.js"></script>
