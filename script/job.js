@@ -37,7 +37,7 @@ function loadJobGrid() {
     controller: {
       loadData: function (filter) {
         var d = $.Deferred();
-        $.post("http://pi.trendzsoft.in/api/job.php",
+        $.post("http://trendzsoft.in/api/job.php",
           { "rtype": "getData" }
         ).done(function (response) {
           jobs = $.grep(response, function (item) {
@@ -55,7 +55,7 @@ function loadJobGrid() {
       updateItem: function (item) {
         var d = $.Deferred();
         item.rtype = "updateData";
-        $.post("http://pi.trendzsoft.in/api/job.php", item
+        $.post("http://trendzsoft.in/api/job.php", item
         ).done(function () {
           d.resolve(item);
         });
@@ -64,7 +64,7 @@ function loadJobGrid() {
       insertItem: function (item) {
         var d = $.Deferred();
         item.rtype = "insertData";
-        $.post("http://pi.trendzsoft.in/api/job.php", item
+        $.post("http://trendzsoft.in/api/job.php", item
         ).done(function (response) {
           item.id = response[0];
           if (item.activejob) {
@@ -79,7 +79,7 @@ function loadJobGrid() {
       deleteItem: function (item) {
         var d = $.Deferred();
         item.rtype = "deleteData";
-        $.post("http://pi.trendzsoft.in/api/job.php", item
+        $.post("http://trendzsoft.in/api/job.php", item
         ).done(function (response) {
           console.log(job);
           console.log(item);

@@ -8,181 +8,174 @@
     <link type="text/css" rel="stylesheet" href="lib/jquery/css/jsgrid.min.css" />
     <link type="text/css" rel="stylesheet" href="lib/jquery/css/jsgrid-theme.min.css" />
     <link type="text/css" rel="stylesheet" href="css/machinestate.css" />
-    <link type="text/css" rel="stylesheet" href="css/slidemenu.css" />
     <link type="text/css" rel="stylesheet" href="lib/jquery/css/jquery-ui.css" />
-    <link type="text/css" rel="stylesheet" href="lib/slicktab/css/slick.css" />
-    <link type="text/css" rel="stylesheet" href="lib/slicktab/css/slick-tab.css" />
     <link type="text/css" rel="stylesheet" href="css/status.css" />
+    <link type="text/css" rel="stylesheet" href="css/tab.css" />
 
 </head>
 
 <body onload="$('#loader1').fadeOut('slow')">
-    <div class="sub-header ">
-        <div class="swipe-tabs">
-            <div class="swipe-tab">Live</div>
-            <div class="swipe-tab">Reports</div>
-            <div class="swipe-tab">Setting</div>
-        </div>
-    </div>
-    <div class="main-container">
-        <div class="swipe-tabs-container ">
-            <div class="swipe-tab-content">
-                <div id="appview">
-                    <div id="machinecontainer">
-                        <div class="row" ng-controller='MachineController'>
-                            <div>{{name}} </div>
-                            <machineview> </machineview>
-                        </div>
-                    </div>
-                    <template id="machinetemplete">
-                        <div class="col-xs-6 col-sm-3 smallpad">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">{machine.name}} Machine--</div>
-                                <div class="panel-body" style="width:100%;">
-                                    <div id="table1" style="width:100%;">
-                                        <table class="mobilefont machine-control">
-                                            <tr style="width:100%;">
-                                                <td rowspan=2 style="width:40%;">
-                                                    <div class="cssload-container">
-                                                        <div class="loading6">
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td style="width:30%!important;">Count</td>
-                                                <td class="mobilefont maxwidth jobcount">0</td>
-                                            </tr>
-                                            <tr style="width:100%;">
-                                                <td style="width:30% !important;">Timer</td>
-                                                <td class="mobilefont machinetimer">10:10:10</td>
-                                            </tr>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#appview">Live</a></li>
+        <li><a data-toggle="tab" href="#reportview">Reports</a></li>
+        <li><a data-toggle="tab" href="#settingview">Settings</a></li>
+    </ul>
 
-                                            <tr style="width:100%;">
-                                                <td style="width:20%;">Operator</td>
-                                                <td class="maxwidth" colspan="2">
-                                                    <select class="form-control select-height" id="selOperator" ng-options="op.opname for op in operators">
+    <div class="tab-content">
+        <div id="appview" class="tab-pane fade in active">
+            <div id="machinecontainer">
+                <div class="row" ng-controller='MachineController'>
+                    <div>{{name}} </div>
+                    <machineview> </machineview>
+                </div>
+            </div>
+            <template id="machinetemplete">
+                <div class="col-xs-6 col-sm-3 smallpad">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">{machine.name}} Machine--</div>
+                        <div class="panel-body" style="width:100%;">
+                            <div id="table1" style="width:100%;">
+                                <table class="mobilefont machine-control">
+                                    <tr style="width:100%;">
+                                        <td rowspan=2 style="width:40%;">
+                                            <div class="cssload-container">
+                                                <div class="loading6">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td style="width:30%!important;">Count</td>
+                                        <td class="mobilefont maxwidth jobcount">0</td>
+                                    </tr>
+                                    <tr style="width:100%;">
+                                        <td style="width:30% !important;">Timer</td>
+                                        <td class="mobilefont machinetimer">10:10:10</td>
+                                    </tr>
+
+                                    <tr style="width:100%;">
+                                        <td style="width:20%;">Operator</td>
+                                        <td class="maxwidth" colspan="2">
+                                            <select class="form-control select-height" id="selOperator" ng-options="op.opname for op in operators">
 														<option selected hidden value="" >Select</option>
 													</select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width:40%;">Job</td>
-                                                <td class="maxwidth" colspan="2">
-                                                    <select class="form-control select-height" id="selJob" ng-options="job.jobname for job in jobs">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:40%;">Job</td>
+                                        <td class="maxwidth" colspan="2">
+                                            <select class="form-control select-height" id="selJob" ng-options="job.jobname for job in jobs">
 														<option selected hidden  value=""> Select</option>
 													</select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width:40%;">Idle</td>
-                                                <td class="maxwidth" colspan="2">
-                                                    <select class="form-control select-height" id="selIdle" ng-options="idle.idledesc for idle in idles">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:40%;">Idle</td>
+                                        <td class="maxwidth" colspan="2">
+                                            <select class="form-control select-height" id="selIdle" ng-options="idle.idledesc for idle in idles">
 														<option selected hidden value="">Select</option>
 													</select>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
-                    </template>
+                        </div>
                     </div>
-                    <!--End of appview div-->
                 </div>
-                <div class="swipe-tab-content" ng-controller='ReportController' ng-init="init()">
-                    <nav class="navbar navbar-default">
-                        <div class="container-fluid">
-                            <!-- Brand and toggle get grouped for better mobile display -->
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                                    aria-expanded="false">
+            </template>
+
+            <!--End of appview div-->
+        </div>
+        <div id="reportview" class="tab-pane fade" ng-controller='ReportController' ng-init="init()">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                            aria-expanded="false">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                                <a class="navbar-brand" href="#">Machine Logger</a>
-                            </div>
+                        <a class="navbar-brand" href="#">Machine Logger</a>
+                    </div>
 
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                <ul class="nav navbar-nav">
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" id="reportcmb" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            {{selectedReportType.name}} <span class="caret"></span></a>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
 
-                                        <ul class="dropdown-menu">
-                                            <li ng-repeat="reportType in reportTypes"><a ng-click="reportTypeChanged(reportType)">
-                                            {{reportType.name}}</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" id="reportcmb" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             {{selectedDayReportType.name}} <span class="caret"></span></a>
 
-                                        <ul class="dropdown-menu">
-                                            <li ng-repeat="reportDayType in reportDayTypes"><a ng-click="reportDayTypeChanged(reportDayType)">
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="reportDayType in reportDayTypes"><a ng-click="reportDayTypeChanged(reportDayType)">
                                             {{reportDayType.name}}</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">
-                                            {{selectedMachine.name}} <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li ng-repeat="machine in machines"><a ng-click="machineChanged(machine)">
-                                        {{machine.name}}</a></li>
-                                        </ul>
-
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">
-                                            {{selectedJob.jobname}} <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li ng-repeat="job in jobs"><a ng-click="selectedJobChanged(job)">
-                                        {{job.jobname}}</a></li>
-                                        </ul>
-                                    </li>
                                 </ul>
-                                <form class="navbar-form navbar-left">
-                                    <div class="form-group">
-                                        From: <input type="datetime-local" class="form-control" id="dateFrom" ng-model="dFrom"
-                                        /> To:
-                                        <input type="datetime-local" class="form-control" id="dateTo" ng-model="dTo">
-                                    </div>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            {{selectedOperator.opname}} <span class="caret"></span></a>
 
-                                    <button class="btn btn-default" type="button" ng-click="searchdb();">Search</button>
-                                    <button class="btn btn-default" type="button" ng-click="reportchart();">Chart</button>
-                                </form>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="operator in operators"><a ng-click="operatorChanged(reportType)">
+                                            {{operator.opname}}</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">
+                                            {{selectedMachine.name}} <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="machine in machines"><a ng-click="machineChanged(machine)">
+                                        {{machine.name}}</a></li>
+                                </ul>
 
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="maccmb" role="button" aria-haspopup="true" aria-expanded="false">
+                                            {{selectedJob.jobname}} <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="job in jobs"><a ng-click="selectedJobChanged(job)">
+                                        {{job.jobname}}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-left">
+                            <div class="form-group">
+                                From: <input type="datetime-local" class="form-control" id="dateFrom" ng-model="dFrom" />                                To:
+                                <input type="datetime-local" class="form-control" id="dateTo" ng-model="dTo">
                             </div>
-                            <!-- /.navbar-collapse -->
-                        </div>
-                        <!-- /.container-fluid -->
-                    </nav>
-                    <div id="macJobCount"></div>
-                    <!--<div id="jsGrid"></div>-->
-                    <div ui-grid="gridOptions" grid-api ui-grid-grouping></div>
-                    <div id="reportchart"></div>
-                </div>
-                <div class="swipe-tab-content">
-                    <div id="accordsettings">
-                        <h3>Jobs</h3>
-                        <div>
-                            <div id="jobgrid"> </div>
-                        </div>
-                        <h3>Operator</h3>
-                        <div>
-                            <div id="optgrid"></div>
-                        </div>
-                        <h3>Idle</h3>
-                        <div>
-                            <div id="idlegrid"></div>
-                        </div>
+
+                            <button class="btn btn-default" type="button" ng-click="searchdb();">Search</button>
+                            <button class="btn btn-default" type="button" ng-click="reportchart();">Chart</button>
+                        </form>
+
                     </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <div id="macJobCount"></div>
+            <!--<div id="jsGrid"></div>-->
+            <div ui-grid="gridOptions" grid-api ui-grid-grouping></div>
+            <div id="reportchart"></div>
+        </div>
+        <div id="settingview" class="tab-pane fade">
+            <div id="accordsettings">
+                <h3>Jobs</h3>
+                <div>
+                    <div id="jobgrid"> </div>
+                </div>
+                <h3>Operator</h3>
+                <div>
+                    <div id="optgrid"></div>
+                </div>
+                <h3>Idle</h3>
+                <div>
+                    <div id="idlegrid"></div>
                 </div>
             </div>
         </div>
-        <div id="login1" title="Login">
+        <div id="logi1n" title="Login">
             <form id="frmLogin">
 
                 <input class="form-control" id="username" type="text" placeholder="Username" value="" style="margin-top: 30px;">
@@ -198,41 +191,40 @@
             <div class="jsgrid-load-shader" style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; z-index: 1000;widht:100%; display:none;"></div>
             <div class="jsgrid-load-panel" style="position: absolute; top: 50%; left: 50%; z-index: 1000; margin-top: -35px; margin-left: -105px;">Please, wait...</div>
         </div>
-        <script src="lib/jquery/js/jquery.min.js"></script>
-        <script src="lib/jquery/js/jsgrid.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="lib/jquery/js/jquery-ui.js"></script>
-        <script src="lib/slicktab/js/slick.js"></script>
-        <script src="lib/slicktab/js/slick-tab.js"></script>
-        <script src="lib/highchart/js/highcharts.js"></script>
-        <script src="lib/highchart/js/modules/exporting.js"></script>
-        <script src="script/status.js"></script>
+    </div>
+    <script src="lib/jquery/js/jquery.min.js"></script>
+    <script src="lib/jquery/js/jsgrid.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/jquery/js/jquery-ui.js"></script>
+    <script src="lib/highchart/js/highcharts.js"></script>
+    <script src="lib/highchart/js/modules/exporting.js"></script>
+    <script src="script/status.js"></script>
 
 
-        <script src="report/chart/highchart.js"></script>
-        <script src="report/cycle.js"></script>
-        <script src="report/job.js"></script>
-        <script src="report/machine.js"></script>
-        <script src="report/operator.js"></script>
+    <script src="report/chart/highchart.js"></script>
+    <script src="report/cycle.js"></script>
+    <script src="report/job.js"></script>
+    <script src="report/machine.js"></script>
+    <script src="report/operator.js"></script>
 
-        <script src="lib/angular/angular.min.js"></script>
-        <script src="lib/angular/angular-touch.min.js"></script>
-        <script src="lib/angular/angular-animate.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular-touch.min.js"></script>
+    <script src="lib/angular/angular-animate.min.js"></script>
 
-        <script src="lib/angular/grid/ui-grid.min.js"></script>
-        <link type="text/css" rel="stylesheet" href="lib/angular/grid/ui-grid.min.css" />
+    <script src="lib/angular/grid/ui-grid.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="lib/angular/grid/ui-grid.min.css" />
 
-        <script src="lib/gruntscripts/csv.js"></script>
-        <script src="lib/gruntscripts/pdfmake.js"></script>
-        <script src="lib/gruntscripts/vfs_fonts.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-route.js"></script>
-        <script src="controller/machineController.js"></script>
-        <script src="controller/reportController.js"></script>
+    <script src="lib/gruntscripts/csv.js"></script>
+    <script src="lib/gruntscripts/pdfmake.js"></script>
+    <script src="lib/gruntscripts/vfs_fonts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-route.js"></script>
+    <script src="controller/machineController.js"></script>
+    <script src="controller/reportController.js"></script>
 
-        <script src="script/search.js"></script>
-        <script src="script/operator.js"></script>
-        <script src="script/job.js"></script>
-        <script src="script/idle.js"></script>
+    <script src="script/search.js"></script>
+    <script src="script/operator.js"></script>
+    <script src="script/job.js"></script>
+    <script src="script/idle.js"></script>
 
 </body>
 

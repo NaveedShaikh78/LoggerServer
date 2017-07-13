@@ -4,6 +4,7 @@ loggerApp.controller('ReportController',
     ctrl.ReportController = $scope;
     ctrl.ReportController.compile = $compile;
     $scope.jobs = [];
+    $scope.operators = [];
     $scope.init = function () {
       var now = new Date();
       var day = now.getDate();
@@ -18,11 +19,11 @@ loggerApp.controller('ReportController',
       var reportData;
       switch ($scope.selectedReportType.id) {
         case "cycle":
-          reportData = appdata.cycle.cycleReport($scope.selectedDayReportType.id, $scope.getFromDate(), $scope.getToDate());
+          reportData = appdata.cycle.cycleReport($scope.selectedDayReportType.id, $scope.getFromDate(), $scope.getToDate(), uiGridGroupingConstants);
           $scope.gridfields = reportData.gridfields;
           break;
         case "job":
-          reportData = appdata.job.jobReport($scope.selectedDayReportType.id, $scope.getFromDate(), $scope.getToDate(),uiGridGroupingConstants);
+          reportData = appdata.job.jobReport($scope.selectedDayReportType.id, $scope.getFromDate(), $scope.getToDate(), uiGridGroupingConstants);
           $scope.gridfields = reportData.gridfields;
           break;
         case "operator":
@@ -38,21 +39,24 @@ loggerApp.controller('ReportController',
             sdata[i].ioport = $scope.getMachineById(sdata[i].ioport).name;
           }
         }
-        $scope.gridOptions.columnDefs= $scope.gridfields;
-        $scope.gridOptions.data= sdata;
+        $scope.gridOptions.columnDefs = $scope.gridfields;
+        $scope.gridOptions.data = sdata;
         $scope.gridApi.grid.refresh();
         $('#loader1').fadeOut('slow');
       });
     };
     $scope.gridOptions = {
       treeRowHeaderAlwaysVisible: false,
+      enableFiltering: true,
       data: [],
       columnDefs: [],
       onRegisterApi: function (gridApi) {
         $scope.gridApi = gridApi;
       }
     };
-
+    $scope.operatorChanged = function (operator) {
+      $scope.selectedOperator = operator;
+    };
     $scope.setJobs = function (jobsData) {
       $scope.jobs = angular.extend(jobsData);
       $scope.jobs.unshift({ jobid: -1, jobname: "All Jobs" });
@@ -62,8 +66,9 @@ loggerApp.controller('ReportController',
     $scope.selectedJobChanged = function (job) {
       $scope.selectedJob = job;
     }
-    $scope.setOperators = function (jobsData) {
-      $scope.jobs = jobsData;
+    $scope.setOperators = function (operators) {
+      $scope.operators = operators;
+      $scope.selectedOperator = operators[0];
       $scope.$apply();
     };
     $scope.machines = [
@@ -103,17 +108,6 @@ loggerApp.controller('ReportController',
       if ($scope.selectedMachine.id === 0 && $scope.selectedDayReportType.id === "dt") {
         $scope.selectedMachine = $scope.machines[1];
       }
-    };
-    $scope.reportTypes = [
-      { id: 'cycle', name: "Cycle" },
-      { id: 'job', name: "Job" },
-      { id: 'operator', name: "Operator" }
-    ];
-    $scope.selectedReportType = $scope.reportTypes[0];
-
-    $scope.reportTypeChanged = function (reportType) {
-      $scope.selectedReportType = reportType;
-
     };
     $scope.jobChange = function (jobid) {
       $('#loader1').show();

@@ -1,28 +1,31 @@
 appdata.cycle = {
-    cycleReport: function (reportDayType, dfrom, dTo) {
+    cycleReport: function (reportDayType, dfrom, dTo, uiGridGroupingConstants) {
         var reportData = { gridfields: [], url: '' }
         var baseUrl = appdata.baseUrl;
         switch (reportDayType) {
             case "dailyShiftCount":
                 reportData.gridfields = [
-                    { name: "cycledate", type: "text", title: "Date" },
-                    { name: "Shift1", type: "text", title: "Shift1" },
-                    { name: "Shift2", type: "text", title: "Shift2" },
-                    { name: "DayTotal", type: "text", title: "Total" },
+                    { name: "cycledate", grouping: { groupPriority: 0 }, sort: { priority: 0, direction: 'asc' }, title: "Date" },
+                    { name: "MachineName", grouping: { groupPriority: 1 }, sort: { priority: 1, direction: 'asc' }, title: "MachineName" },
+                    { name: "opname", grouping: { groupPriority: 2 }, sort: { priority: 2, direction: 'asc' } },
+                    { name: "jobname", grouping: { groupPriority: 3 }, sort: { priority: 3, direction: 'asc' }, title: "Job Name" },
+                    { name: "Shift1", treeAggregationType: uiGridGroupingConstants.aggregation.SUM, title: "Shift1" },
+                    { name: "Shift2", treeAggregationType: uiGridGroupingConstants.aggregation.SUM, title: "Shift2" },
+                    { name: "DayTotal", treeAggregationType: uiGridGroupingConstants.aggregation.SUM, title: "Total" },
                 ];
                 reportData.url = baseUrl + "getDayShiftData.php?st='" + dfrom + "'&et='" + dTo + "'&ip='" + ctrl.ReportController.selectedMachine.id + "'";
                 if (ctrl.ReportController.selectedMachine.id == 0) {
                     reportData.url = baseUrl + "getDayShiftData.php?st='" + dfrom + "'&et='" + dTo + "'&ip='" + ctrl.ReportController.selectedMachine.id + "'&machine='all'";
-                    gridfields.unshift({ name: "ioport", type: "text", title: "Machine" });
+                    gridfields.unshift({ name: "ioport", title: "Machine" });
                 }
                 break;
             case "detailed":
                 reportData.url = baseUrl + "getstatus.php?st='" + dfrom + "'&et='" + dTo + "'&mac='" + ctrl.ReportController.selectedMachine.id + "'";
-                reportData.gridfields = [{ name: "srno", type: "text", title: "Id", width: 50, css: "hide" },
-                { name: "start_time", type: "text", title: "Start Time", width: 110, editing: false },
-                { name: "end_time", type: "text", title: "End Time", editing: false },
-                { name: "cycletime", type: "text", title: "Cycle Time", editing: false },
-                { name: "idletime", type: "text", title: "Idle Time", editing: false },
+                reportData.gridfields = [{ name: "srno", title: "Id", width: 50, css: "hide" },
+                { name: "start_time", title: "Start Time", width: 110, editing: false },
+                { name: "end_time", title: "End Time", editing: false },
+                { name: "cycletime", title: "Cycle Time", editing: false },
+                { name: "idletime", title: "Idle Time", editing: false },
                 {
                     name: "jobno", type: "select", title: "Job Name", items: [], valueField: "id", textField: "jobname",
                     headerTemplate: function () {
@@ -78,8 +81,8 @@ appdata.cycle = {
                     }
 
                 },
-                {   
-                    name:'control', type: "control", deleteButton: false, headerTemplate: function () {
+                {
+                    name: 'control', type: "control", deleteButton: false, headerTemplate: function () {
                         var updateLogData = $("<input id='updateLogData' class='jsgrid-button jsgrid-update-button' style='Display: none;' type='button' title='Update'>");
                         updateLogData.click(function () {
                             $(this).hide();

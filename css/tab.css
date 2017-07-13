@@ -1,9 +1,26 @@
-.tabsdemoDynamicHeight md-content {
-  background-color: transparent !important; }
-  .tabsdemoDynamicHeight md-content md-tabs {
-    background: #f6f6f6;
-    border: 1px solid #e1e1e1; }
-    .tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper {
-      background: white; }
-  .tabsdemoDynamicHeight md-content h1:first-child {
-    margin-top: 0; }
+.nav-tabs>li {
+    width: 33.33%;
+    border: 0px;
+    border-bottom-color: transparent;
+    border-top-color:  transparent;
+}
+.nav-tabs>li>a {
+    background:#7e7e7e!important;
+    color: #fff !important;
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border-radius:0px;
+    margin: 0px 0px 0px 1px;
+}
+.nav-tabs>li.active>a{
+    background:#4fbed7 !important;
+    border: 0px !important;
+    font-weight:bold;
+    margin: 0px 0 px 0px 1px;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+    color: #fff !important;
+    cursor: default;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
