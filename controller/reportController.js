@@ -12,6 +12,21 @@ appdata.reportController = loggerApp.controller('ReportController',
       var year = now.getFullYear();
       $scope.dFrom = new Date(year, month, day, 08, 00);
       $scope.dTo = new Date(year, month, day, 20, 00);
+      var height = 30;
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        height =15
+      }
+      $scope.gridOptions = {
+        treeRowHeaderAlwaysVisible: false,
+        enableFiltering: true,
+        data: [],
+        columnDefs: [
+        ],
+        onRegisterApi: function (gridApi) {
+          $scope.gridApi = gridApi;
+        },
+        rowHeight: height
+      };
     };
     ctrl.ReportController.getJobsvalueLabelPair = function () {
       var jobsvalpair = [];
@@ -50,16 +65,7 @@ appdata.reportController = loggerApp.controller('ReportController',
         console.log(err);
       });
     };
-    $scope.gridOptions = {
-      treeRowHeaderAlwaysVisible: false,
-      enableFiltering: true,
-      data: [],
-      columnDefs: [
-      ],
-      onRegisterApi: function (gridApi) {
-        $scope.gridApi = gridApi;
-      }
-    };
+
     $scope.operatorChanged = function (operator) {
       $scope.selectedOperator = operator;
     };

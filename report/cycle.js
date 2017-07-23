@@ -21,16 +21,11 @@ appdata.cycle = {
                 break;
             case "detailed":
                 reportData.url = baseUrl + "getstatus.php?st='" + dfrom + "'&et='" + dTo + "'&mac='" + machineId + "'";
-                var animalTypes = [
-                    { value: 'Mammal', label: 'Mammal' },
-                    { value: 'Reptile', label: 'Reptile' }
-                ];
-
-                reportData.gridfields = [{ name: "srno", displayName: "Id", width: 50, css: "hide", enableCellEdit: true },
-                { name: "start_time", displayName: "Start Time", width: 110, enableCellEdit: true, },
-                { name: "end_time", displayName: "End Time", enableCellEdit: true },
-                { name: "cycletime", displayName: "Cycle Time", enableCellEdit: true },
-                { name: "idletime", displayName: "Idle Time", enableCellEdit: true },
+                reportData.gridfields = [
+                { name: "start_time", displayName: "Start Time", enableCellEdit: false,enableFiltering: false },
+                { name: "end_time", displayName: "End Time", enableCellEdit: false,enableFiltering: false },
+                { name: "cycletime", displayName: "Cycle Time", enableCellEdit: false,enableFiltering: false },
+                { name: "idletime", displayName: "Idle Time", enableCellEdit: false ,enableFiltering: false},
                 {
                     name: "jobno", type: "select", displayName: "Job Name", cellFilter: 'mapJob',
                     filter: { selectOptions: ctrl.ReportController.getJobsvalueLabelPair(), type: uiGridConstants.filter.SELECT, editDropdownValueLabel: "jobname", condition: uiGridConstants.filter.EXACT },
