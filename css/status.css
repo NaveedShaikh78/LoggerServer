@@ -10,6 +10,15 @@ height: 60px !important;
 .jsgrid-cell input{
 width:100%;
 }
+
+.report-ui-grid{
+    height: 85% !important;
+    /*position:absolute;top:40;left:0;right:0;bottom:0*/
+}
+.bg-gray{
+    background: gray;
+    opacity: 1;
+}
 .navbar{
     margin-bottom: 0px;
 }

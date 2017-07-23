@@ -48,6 +48,7 @@ function loadJobGrid() {
           });
           ctrl.MachineController.setJobs(jobs);
           ctrl.ReportController.setJobs(jobs);
+          
           d.resolve(response);
         });
         return d.promise();

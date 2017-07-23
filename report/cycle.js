@@ -1,63 +1,59 @@
 appdata.cycle = {
-    cycleReport: function (reportDayType, dfrom, dTo, uiGridGroupingConstants) {
+    cycleReport: function (reportDayType, dfrom, dTo, machineId, uiGridGroupingConstants, uiGridConstants) {
         var reportData = { gridfields: [], url: '' }
         var baseUrl = appdata.baseUrl;
         switch (reportDayType) {
             case "dailyShiftCount":
                 reportData.gridfields = [
-                    { name: "cycledate", grouping: { groupPriority: 0 }, sort: { priority: 0, direction: 'asc' }, title: "Date" },
-                    { name: "MachineName", grouping: { groupPriority: 1 }, sort: { priority: 1, direction: 'asc' }, title: "MachineName" },
-                    { name: "opname", grouping: { groupPriority: 2 }, sort: { priority: 2, direction: 'asc' } },
-                    { name: "jobname", grouping: { groupPriority: 3 }, sort: { priority: 3, direction: 'asc' }, title: "Job Name" },
-                    { name: "Shift1", treeAggregationType: uiGridGroupingConstants.aggregation.SUM, title: "Shift1" },
-                    { name: "Shift2", treeAggregationType: uiGridGroupingConstants.aggregation.SUM, title: "Shift2" },
-                    { name: "DayTotal", treeAggregationType: uiGridGroupingConstants.aggregation.SUM, title: "Total" },
+                    { name: "cycledate", grouping: { groupPriority: 0 }, sort: { priority: 0, direction: 'asc' }, displayName: "Date" },
+                    { name: "MachineName", grouping: { groupPriority: 1 }, sort: { priority: 1, direction: 'asc' }, displayName: "MachineName" },
+                    { name: "jobname", grouping: { groupPriority: 2 }, sort: { priority: 2, direction: 'asc' }, displayName: "Job Name" },
+                    { name: "opname", grouping: { groupPriority: 3 }, sort: { priority: 3, direction: 'asc' } },
+                    { name: "Shift1", treeAggregationType: uiGridGroupingConstants.aggregation.SUM, displayName: "Shift1" },
+                    { name: "Shift2", treeAggregationType: uiGridGroupingConstants.aggregation.SUM, displayName: "Shift2" },
+                    { name: "DayTotal", treeAggregationType: uiGridGroupingConstants.aggregation.SUM, displayName: "Total" },
                 ];
-                reportData.url = baseUrl + "getDayShiftData.php?st='" + dfrom + "'&et='" + dTo + "'&ip='" + ctrl.ReportController.selectedMachine.id + "'";
-                if (ctrl.ReportController.selectedMachine.id == 0) {
-                    reportData.url = baseUrl + "getDayShiftData.php?st='" + dfrom + "'&et='" + dTo + "'&ip='" + ctrl.ReportController.selectedMachine.id + "'&machine='all'";
-                    gridfields.unshift({ name: "ioport", title: "Machine" });
+                reportData.url = baseUrl + "getDayShiftData.php?st='" + dfrom + "'&et='" + dTo + "'&ip='" + machineId + "'";
+                if (machineId == 0) {
+                    reportData.url = baseUrl + "getDayShiftData.php?st='" + dfrom + "'&et='" + dTo + "'";
+                    gridfields.unshift({ name: "ioport", displayName: "Machine" });
                 }
                 break;
             case "detailed":
-                reportData.url = baseUrl + "getstatus.php?st='" + dfrom + "'&et='" + dTo + "'&mac='" + ctrl.ReportController.selectedMachine.id + "'";
-                reportData.gridfields = [{ name: "srno", title: "Id", width: 50, css: "hide" },
-                { name: "start_time", title: "Start Time", width: 110, editing: false },
-                { name: "end_time", title: "End Time", editing: false },
-                { name: "cycletime", title: "Cycle Time", editing: false },
-                { name: "idletime", title: "Idle Time", editing: false },
+                reportData.url = baseUrl + "getstatus.php?st='" + dfrom + "'&et='" + dTo + "'&mac='" + machineId + "'";
+                var animalTypes = [
+                    { value: 'Mammal', label: 'Mammal' },
+                    { value: 'Reptile', label: 'Reptile' }
+                ];
+
+                reportData.gridfields = [{ name: "srno", displayName: "Id", width: 50, css: "hide", enableCellEdit: true },
+                { name: "start_time", displayName: "Start Time", width: 110, enableCellEdit: true, },
+                { name: "end_time", displayName: "End Time", enableCellEdit: true },
+                { name: "cycletime", displayName: "Cycle Time", enableCellEdit: true },
+                { name: "idletime", displayName: "Idle Time", enableCellEdit: true },
                 {
-                    name: "jobno", type: "select", title: "Job Name", items: [], valueField: "id", textField: "jobname",
-                    headerTemplate: function () {
-                        var jobListelm = $("<select style='width:100%;height:100%;border:0'><option selected hidden  value='' > Job</option></select>");
-                        //return  document.importNode(document.getElementById("reportJobs"));
-                        if (ctrl.MachineController) {
-                            $.each(ctrl.MachineController.jobs, function (val, item) {
+                    name: "jobno", type: "select", displayName: "Job Name", cellFilter: 'mapJob',
+                    filter: { selectOptions: ctrl.ReportController.getJobsvalueLabelPair(), type: uiGridConstants.filter.SELECT, editDropdownValueLabel: "jobname", condition: uiGridConstants.filter.EXACT },
+                    editableCellTemplate: 'ui-grid/dropdownEditor',
+                    editDropdownOptionsArray: ctrl.ReportController.jobs, editDropdownValueLabel: "jobname",
+                    headerCellTemplate: function () {
+                        var jobListelm = $(`<select id='jobCombo' style='padding-top:6px;width:100%;height:100%;border:0' onchange="appdata.cycle.itemChanged('#jobCombo')" ><option selected hidden  value='' > Job</option></select>`);
+                        if (ctrl.ReportController) {
+                            $.each(ctrl.ReportController.jobs, function (val, item) {
                                 jQuery('<option/>', {
                                     value: item.id,
                                     html: item.jobname
                                 }).appendTo(jobListelm);
                             });
                         }
-                        jobListelm.change(function (citem) {
-                            var postData = {};
-                            postData.id = $(this).find("option:selected").val();
-                            $.each(searchData, function (val, item) {
-                                item.jobno = postData.id;
-                            });
-                            $("#jsGrid").jsGrid("refresh");
-                            $("#updateLogData").show();
-                            //$(this).parent().append("<input id='updateJobs' class='jsgrid-button jsgrid-update-button' type='button' title='Update'>");
-
-                        });
-                        return jobListelm;
+                        return `<div>${jobListelm[0].outerHTML}<input id='updateData' type='button' style='width:100%' value='Update' onclick='appdata.cycle.updateLogDataAll(0)' ></input></div>`;
                     }
                 },
                 {
-                    name: "opid", type: "select", title: "Operator Id", items: [], valueField: "id", textField: "opname",
-                    headerTemplate: function () {
-                        var opListelm = $("<select style='width:100%;height:100%;border:0'><option selected hidden  value='' > Operator</option></select>");
-                        //return  document.importNode(document.getElementById("reportJobs"));
+                    name: "opid", type: "select", displayName: "Operator", cellFilter: 'mapOperator',
+                    editableCellTemplate: 'ui-grid/dropdownEditor',
+                    headerCellTemplate: function () {
+                        var opListelm = $(`<select id='operatorCombo' style='padding-top:6px;width:100%;height:100%;border:0' onchange="appdata.cycle.itemChanged('#operatorCombo')" ><option selected hidden  value='' > Operator</option></select> `);
                         if (ctrl.MachineController) {
                             $.each(ctrl.MachineController.operators, function (val, item) {
                                 jQuery('<option/>', {
@@ -66,50 +62,40 @@ appdata.cycle = {
                                 }).appendTo(opListelm);
                             });
                         }
-                        opListelm.change(function (citem) {
-                            var postData = {};
-                            postData.id = $(this).find("option:selected").val();
-                            $.each(searchData, function (val, item) {
-                                item.opid = postData.id;
-                            });
-                            $("#jsGrid").jsGrid("refresh");
-                            $("#updateLogData").show();
-                            //$(this).parent().append("<input id='updateJobs' class='jsgrid-button jsgrid-update-button' type='button' title='Update'>");
-
-                        });
-                        return opListelm;
-                    }
-
-                },
-                {
-                    name: 'control', type: "control", deleteButton: false, headerTemplate: function () {
-                        var updateLogData = $("<input id='updateLogData' class='jsgrid-button jsgrid-update-button' style='Display: none;' type='button' title='Update'>");
-                        updateLogData.click(function () {
-                            $(this).hide();
-                            $('#loader1').fadeIn('slow');
-                            updateLogDataAll(0);
-                        });
-                        return updateLogData;
+                        return `<div>${opListelm[0].outerHTML}<input id='updateData' type='button' style='width:100%' value='Update' onclick='appdata.cycle.updateLogDataAll(0)' ></input></div>`;
                     }
                 }
                 ];
-                reportData.gridfields[5].items = ctrl.MachineController.jobs;
-                reportData.gridfields[6].items = ctrl.MachineController.operators;
                 break;
-
         }
-        console.log('Cycle Report');
         return reportData;
     },
+    itemChanged: function (comboName) {
+        var postData = {};
+        postData.id = $(comboName).find("option:selected").val();
+        $.each(ctrl.ReportController.reportData, function (val, item) {
+            if (comboName === "#jobCombo") {
+                item.jobno = postData.id;
+            }
+            else {
+                item.opid = postData.id;
+            }
+        });
+        ctrl.ReportController.refreshGrid();
+        $("#updateLogData").show();
+        $("#updateJobs").remove();
+        //$(comboName).parent().append("<input id='updateData' type='button' style='width:100%' value='Update' onclick='appdata.cycle.updateLogDataAll(0)' ></input>");
 
+    },
     updateLogDataAll: function (index) {
-        if (searchData) {
-            var item = searchData[index];
+        $('#loader1').show('slow');
+        if (ctrl.ReportController.reportData) {
+            var item = ctrl.ReportController.reportData[index];
             if (item) {
                 item.rtype = "updateData";
                 $.post("http://trendzsoft.in/api/updateReport.php", item)
                     .done(function (response) {
-                        updateLogDataAll(index + 1);
+                        appdata.cycle.updateLogDataAll(index + 1);
                     });
             } else {
                 $('#loader1').fadeOut('slow');
@@ -124,5 +110,6 @@ appdata.cycle = {
             d.resolve(item);
         });
         return d.promise();
-    }
+    },
+
 }

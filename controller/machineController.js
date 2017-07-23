@@ -1,4 +1,4 @@
-loggerApp=angular.module('loggerApp', ['ngAnimate','ngTouch', 'ui.grid', 'ui.grid.grouping']);
+loggerApp=angular.module('loggerApp', ['ngAnimate','ngTouch','ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid', 'ui.grid.grouping']);
 loggerApp.controller('MachineController', function($scope) {
 ctrl.MachineController=$scope;
 $scope.selJob=[];
