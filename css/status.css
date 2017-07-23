@@ -10,13 +10,7 @@ height: 60px !important;
 .jsgrid-cell input{
 width:100%;
 }
-.ui-grid-cell-contents {
-    padding: 2px !important;
-    overflow: none;
-}
-.ui-grid-cell .ui-grid-vertical-bar {
-    height: 10px!important;
-}
+
 .report-ui-grid{
     height: 90% !important;
     /*position:absolute;top:40;left:0;right:0;bottom:0*/

@@ -22,12 +22,12 @@ appdata.cycle = {
             case "detailed":
                 reportData.url = baseUrl + "getstatus.php?st='" + dfrom + "'&et='" + dTo + "'&mac='" + machineId + "'";
                 reportData.gridfields = [
-                { name: "start_time", displayName: "Start Time", enableCellEdit: false,enableFiltering: false },
-                { name: "end_time", displayName: "End Time", enableCellEdit: false,enableFiltering: false },
-                { name: "cycletime", displayName: "Cycle Time", enableCellEdit: false,enableFiltering: false },
-                { name: "idletime", displayName: "Idle Time", enableCellEdit: false ,enableFiltering: false},
+                { name: "start_time", displayName: "Start Time",width:"25%", enableCellEdit: false,enableFiltering: false },
+                { name: "end_time", displayName: "End Time",width:"25%", enableCellEdit: false,enableFiltering: false },
+                { name: "cycletime", displayName: "Cycle Time",width:"12%", enableCellEdit: false,enableFiltering: false },
+                { name: "idletime", displayName: "Idle Time",width:"12%", enableCellEdit: false ,enableFiltering: false},
                 {
-                    name: "jobno", type: "select", displayName: "Job Name", cellFilter: 'mapJob',
+                    name: "jobno", type: "select",width:"16%", displayName: "Job Name", cellFilter: 'mapJob',
                     filter: { selectOptions: ctrl.ReportController.getJobsvalueLabelPair(), type: uiGridConstants.filter.SELECT, editDropdownValueLabel: "jobname", condition: uiGridConstants.filter.EXACT },
                     editableCellTemplate: 'ui-grid/dropdownEditor',
                     editDropdownOptionsArray: ctrl.ReportController.jobs, editDropdownValueLabel: "jobname",
@@ -45,7 +45,7 @@ appdata.cycle = {
                     }
                 },
                 {
-                    name: "opid", type: "select", displayName: "Operator", cellFilter: 'mapOperator',
+                    name: "opid", type: "select",width:"16%", displayName: "Operator", cellFilter: 'mapOperator',
                     editableCellTemplate: 'ui-grid/dropdownEditor',
                     headerCellTemplate: function () {
                         var opListelm = $(`<select id='operatorCombo' style='padding-top:6px;width:100%;height:100%;border:0' onchange="appdata.cycle.itemChanged('#operatorCombo')" ><option selected hidden  value='' > Operator</option></select> `);
