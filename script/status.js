@@ -14,6 +14,8 @@ if (appdata.saveLogin === "true") {
 }
 $("#accordsettings").accordion({ heightStyle: "content" });
 function login(event) {
+ $('.report-ui-grid').css('width', screen.width);
+
     var formvalues = { 'username': $("#username").val(), 'password': $("#password").val(), 'cuid': appdata.cuid };
     $.post('http://trendzsoft.in/api/login.php', formvalues).done(function (data) {
         if (data != "Failed") {
@@ -21,7 +23,6 @@ function login(event) {
             $("#login").dialog("close");
             appdata.cuid = data;
             $("#loaderOverlay").hide();
-            $("#report-ui-grid").attr('style',null);
             var saveLogin = $("#saveLogin").is(":checked");
             if (saveLogin) {
                 localStorage.setItem('username', formvalues.username);

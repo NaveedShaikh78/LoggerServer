@@ -22,10 +22,10 @@ appdata.cycle = {
             case "detailed":
                 reportData.url = baseUrl + "getstatus.php?st='" + dfrom + "'&et='" + dTo + "'&mac='" + machineId + "'";
                 reportData.gridfields = [
-                { name: "start_time", displayName: "Start Time",width:"25%", enableCellEdit: false,enableFiltering: false },
-                { name: "end_time", displayName: "End Time",width:"25%", enableCellEdit: false,enableFiltering: false },
-                { name: "cycletime", displayName: "Cycle Time",width:"12%", enableCellEdit: false,enableFiltering: false },
-                { name: "idletime", displayName: "Idle Time",width:"12%", enableCellEdit: false ,enableFiltering: false},
+                { name: "start_time", displayName: "Start Time",width:"22%", enableCellEdit: false,enableFiltering: false },
+                { name: "end_time", displayName: "End Time",width:"22%", enableCellEdit: false,enableFiltering: false },
+                { name: "cycletime", displayName: "Cycle Time",width:"10%", enableCellEdit: false,enableFiltering: false },
+                { name: "idletime", displayName: "Idle Time",width:"10%", enableCellEdit: false ,enableFiltering: false},
                 {
                     name: "jobno", type: "select",width:"16%", displayName: "Job Name", cellFilter: 'mapJob',
                     filter: { selectOptions: ctrl.ReportController.getJobsvalueLabelPair(), type: uiGridConstants.filter.SELECT, editDropdownValueLabel: "jobname", condition: uiGridConstants.filter.EXACT },

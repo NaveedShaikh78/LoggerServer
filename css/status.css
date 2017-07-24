@@ -10,11 +10,12 @@ height: 60px !important;
 .jsgrid-cell input{
 width:100%;
 }
-
+.ui-grid-cell-contents{ overflow: visible !important;}
 .report-ui-grid{
     height: 90% !important;
-    /*position:absolute;top:40;left:0;right:0;bottom:0*/
+    width: 1000px;
 }
+
 .bg-gray{
     background: gray;
     opacity: 1;

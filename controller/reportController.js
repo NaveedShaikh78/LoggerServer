@@ -12,21 +12,22 @@ appdata.reportController = loggerApp.controller('ReportController',
       var year = now.getFullYear();
       $scope.dFrom = new Date(year, month, day, 08, 00);
       $scope.dTo = new Date(year, month, day, 20, 00);
-      var height = 30;
+      height = 30;
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        height =15
+        $scope.gridOptions.rowHeight = 15
       }
-      $scope.gridOptions = {
-        treeRowHeaderAlwaysVisible: false,
-        enableFiltering: true,
-        data: [],
-        columnDefs: [
-        ],
-        onRegisterApi: function (gridApi) {
-          $scope.gridApi = gridApi;
-        },
-        rowHeight: height
-      };
+      
+    };
+    $scope.gridOptions = {
+      enableFiltering: true,
+      data: [],
+      onRegisterApi: function (gridApi) {
+        $scope.gridApi = gridApi;
+        gridApi.core.handleWindowResize();
+      },
+      columnDefs: [
+
+      ]
     };
     ctrl.ReportController.getJobsvalueLabelPair = function () {
       var jobsvalpair = [];
@@ -38,6 +39,9 @@ appdata.reportController = loggerApp.controller('ReportController',
     $scope.getFromDate = function () { return $filter('date')($scope.dFrom, "yyyy-MM-ddTHH:mm"); };
     $scope.getToDate = function () { return $filter('date')($scope.dTo, "yyyy-MM-ddTHH:mm"); };
     $scope.searchdb = function () {
+      $('.navbar-collapse').removeClass('in');
+
+
       var reportData;
       // switch ($scope.selectedReportType.id) {
       //   case "cycle":
@@ -59,11 +63,14 @@ appdata.reportController = loggerApp.controller('ReportController',
         $scope.gridOptions.data = sdata;
         $scope.reportData = sdata;
         $('#loader1').fadeOut('slow');
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
         $scope.refreshGrid();
       }).error(function (err) {
         $('#loader1').fadeOut('slow');
         console.log(err);
       });
+    $('.report-ui-grid').css('width', '99%');
+      
     };
 
     $scope.operatorChanged = function (operator) {
@@ -134,8 +141,9 @@ appdata.reportController = loggerApp.controller('ReportController',
       $scope.refresh = true;
       $timeout(function () {
         $scope.gridApi.grid.refresh();
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
         $scope.refresh = false;
-      }, 0);
+      }, 100);
     };
   })
   .filter('mapJob', function () {
