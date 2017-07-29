@@ -14,7 +14,7 @@ appdata.reportController = loggerApp.controller('ReportController',
       $scope.dTo = new Date(year, month, day, 20, 00);
       height = 30;
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        $scope.gridOptions.rowHeight = 15
+        $scope.gridOptions.rowHeight = 25
       }
       
     };
@@ -69,8 +69,8 @@ appdata.reportController = loggerApp.controller('ReportController',
         $('#loader1').fadeOut('slow');
         console.log(err);
       });
-    $('.report-ui-grid').css('width', '99%');
-      
+         // $('.report-ui-grid').css('width', screen.width);
+
     };
 
     $scope.operatorChanged = function (operator) {

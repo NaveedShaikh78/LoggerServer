@@ -14,7 +14,6 @@ if (appdata.saveLogin === "true") {
 }
 $("#accordsettings").accordion({ heightStyle: "content" });
 function login(event) {
- $('.report-ui-grid').css('width', screen.width);
 
     var formvalues = { 'username': $("#username").val(), 'password': $("#password").val(), 'cuid': appdata.cuid };
     $.post('http://trendzsoft.in/api/login.php', formvalues).done(function (data) {

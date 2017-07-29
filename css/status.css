@@ -53,6 +53,10 @@ margin-bottom: 2px;
 .ui-grid-render-container-body .ui-grid-header-canvas {
 height: 40px !important;
 }
+.report-ui-grid{
+    height: 90% !important;
+    width: 500px;
+}
 .form-control {
    padding-top: 0px;
    padding-bottom: 0px;
