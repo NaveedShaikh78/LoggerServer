@@ -5,6 +5,7 @@ $st=str_replace("T"," ",$_GET["st"]);
 $et=str_replace("T"," ",$_GET["et"]);
 $ip=$_GET["ip"];
 $jobid=$_GET["jobid"];
+$opid=$_GET["opid"];
 $opidCondtion="";
 $jobidCondtion="";
 $midCondtion="";

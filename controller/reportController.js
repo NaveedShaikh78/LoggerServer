@@ -14,9 +14,9 @@ appdata.reportController = loggerApp.controller('ReportController',
       $scope.dTo = new Date(year, month, day, 20, 00);
       height = 30;
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        $scope.gridOptions.rowHeight = 25
+        $scope.gridOptions.rowHeight = 20
       }
-      
+
     };
     $scope.gridOptions = {
       enableFiltering: true,
@@ -40,22 +40,9 @@ appdata.reportController = loggerApp.controller('ReportController',
     $scope.getToDate = function () { return $filter('date')($scope.dTo, "yyyy-MM-ddTHH:mm"); };
     $scope.searchdb = function () {
       $('.navbar-collapse').removeClass('in');
-
-
       var reportData;
-      // switch ($scope.selectedReportType.id) {
-      //   case "cycle":
-      reportData = appdata.cycle.cycleReport($scope.selectedDayReportType.id, $scope.getFromDate(), $scope.getToDate(), $scope.selectedMachine.id, uiGridGroupingConstants, uiGridConstants);
-      $scope.gridfields = reportData.gridfields;
-      //   break;
-      // case "job":
-      //   reportData = appdata.job.jobReport($scope.selectedDayReportType.id, $scope.getFromDate(), $scope.getToDate(), uiGridGroupingConstants);
-      //   $scope.gridfields = reportData.gridfields;
-      //   break;
-      // case "operator":
-      //   break;
-
-      // }
+        reportData = appdata.cycle.cycleReport($scope.selectedDayReportType.id, $scope.getFromDate(), $scope.getToDate(), $scope.selectedMachine.id, uiGridGroupingConstants, uiGridConstants);
+        $scope.gridfields = reportData.gridfields;
       $('#loader1').show();
       console.log(reportData.url);
       $.getJSON(reportData.url, function (sdata) {
@@ -69,29 +56,36 @@ appdata.reportController = loggerApp.controller('ReportController',
         $('#loader1').fadeOut('slow');
         console.log(err);
       });
-         // $('.report-ui-grid').css('width', screen.width);
+      // $('.report-ui-grid').css('width', screen.width);
 
     };
 
     $scope.operatorChanged = function (operator) {
       $scope.selectedOperator = operator;
+      if ($scope.selectedOperator.id !== -1 && $scope.selectedDayReportType.id === "detailed") {
+        $scope.selectedDayReportType = $scope.reportDayTypes[1];
+      }
     };
     $scope.setJobs = function (jobsData) {
       $scope.jobs = angular.extend(jobsData);
-      $scope.jobs.unshift({ jobid: -1, jobname: "All Jobs" });
+      $scope.jobs.unshift({ id: -1, jobname: "All Jobs" });
       $scope.selectedJob = $scope.jobs[0];
       $scope.$apply();
     };
     $scope.selectedJobChanged = function (job) {
       $scope.selectedJob = job;
+       if ($scope.selectedJob.id !== -1 && $scope.selectedDayReportType.id === "detailed") {
+        $scope.selectedDayReportType = $scope.reportDayTypes[1];
+      }
     }
     $scope.setOperators = function (operators) {
-      $scope.operators = operators;
-      $scope.selectedOperator = operators[0];
+      $scope.operators = angular.extend(operators);
+      $scope.operators.unshift({ id: -1, opname: "All Operators" });
+      $scope.selectedOperator = $scope.operators[0];
       $scope.$apply();
     };
     $scope.machines = [
-      { id: 00, name: "All Machines" },
+      { id: -1, name: "All Machines" },
       { id: 26, name: "Machine 1" },
       { id: 19, name: "Machine 2" },
       { id: 13, name: "Machine 3" },
@@ -111,7 +105,7 @@ appdata.reportController = loggerApp.controller('ReportController',
 
     $scope.machineChanged = function (machine) {
       $scope.selectedMachine = machine;
-      if ($scope.selectedMachine.id === 0 && $scope.selectedDayReportType.id === "dt") {
+      if ($scope.selectedMachine.id === -1 && $scope.selectedDayReportType.id === "detailed") {
         $scope.selectedDayReportType = $scope.reportDayTypes[1];
       }
     };
@@ -124,8 +118,10 @@ appdata.reportController = loggerApp.controller('ReportController',
 
     $scope.reportDayTypeChanged = function (reportDayType) {
       $scope.selectedDayReportType = reportDayType;
-      if ($scope.selectedMachine.id === 0 && $scope.selectedDayReportType.id === "dt") {
-        $scope.selectedMachine = $scope.machines[1];
+      if ($scope.selectedDayReportType.id === "detailed") {
+        $scope.selectedMachine = $scope.machines[0];
+        $scope.selectedJob = $scope.jobs[0];
+        $scope.selectedOperator = $scope.operators[0];
       }
     };
     $scope.jobChange = function (jobid) {

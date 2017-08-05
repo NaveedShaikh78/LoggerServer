@@ -14,7 +14,7 @@ if(isset($jobid)) $jobidCondtion=	" and machinelog.jobno =$jobid";
 if(isset($ip)) $midCondtion=	" and machinelog.ioport =$ip";
 $sql=<<<EOT
 select 
-	 MONTHNAME(t.cycledate), count(*) MonthTotal, t.machinename as MachineName, t.opname as opname,t.jobname as jobname
+	 CONCAT(MONTH(t.cycledate),'.', MONTHNAME(t.cycledate)) as MonthName, count(*) as  MonthTotal, t.machinename as MachineName, t.opname as opname,t.jobname as jobname
 from (select 
 			  machine.name as machinename,
 			  operator.opname as opname,
