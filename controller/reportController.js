@@ -20,6 +20,7 @@ appdata.reportController = loggerApp.controller('ReportController',
     };
     $scope.gridOptions = {
       enableFiltering: true,
+      enableSorting: false,
       data: [],
       onRegisterApi: function (gridApi) {
         $scope.gridApi = gridApi;

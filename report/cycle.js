@@ -47,8 +47,8 @@ appdata.cycle = {
                 reportData.gridfields = [
                     { name: "start_time", displayName: "Start Time", width: "23%", enableCellEdit: false, enableFiltering: false },
                     { name: "end_time", displayName: "End Time", width: "23%", enableCellEdit: false, enableFiltering: false },
-                    { name: "cycletime", displayName: "Cycle Time", width: "10%", enableCellEdit: false, enableFiltering: false },
-                    { name: "idletime", displayName: "Idle Time", width: "10%", enableCellEdit: false, enableFiltering: false },
+                    { name: "cycletime", displayName: "Cycle", width: "10%", enableCellEdit: false, enableFiltering: false },
+                    { name: "idletime", displayName: "Idle", width: "10%", enableCellEdit: false, enableFiltering: false },
                     {
                         name: "jobno", type: "select", width: "15%", displayName: "Job Name", cellFilter: 'mapJob',
                         filter: { selectOptions: ctrl.ReportController.getJobsvalueLabelPair(), type: uiGridConstants.filter.SELECT, editDropdownValueLabel: "jobname", condition: uiGridConstants.filter.EXACT },
