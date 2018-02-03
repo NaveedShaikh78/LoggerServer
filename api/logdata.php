@@ -1,5 +1,5 @@
 <?php
-  require 'connectdb.php';
+  require 'includes/connectdb.php';
   $conn = connect();
   $st=str_replace("T"," ",$_GET["st"]);
   $et=str_replace("T"," ",$_GET["et"]);

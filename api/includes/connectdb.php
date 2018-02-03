@@ -1,9 +1,9 @@
 <?php
 function connect(){
  $dbhost = 'localhost:3306';
-   $dbuser = 'navee_logger';
+   $dbuser = 'harisaut_global';
    $dbpass = '@z@zu66iN';
-   $dbname = 'naveedajaj2_logger';
+   $dbname = 'harisaut_global';
 
    $conn = mysql_connect($dbhost, $dbuser, $dbpass);
   if(!$conn )

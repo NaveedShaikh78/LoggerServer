@@ -2,7 +2,7 @@
 $user=$_POST['username'];
 $cuid=$_POST['cuid'];
 $password=$_POST['password'];
-header('Access-Control-Allow-Origin: *');
+
 session_start();
 if($cuid!="")
 {
@@ -29,7 +29,10 @@ if(	mysql_num_rows($retval)==0)
 $_SESSION['loggedin'] = "Failed";
 }
 session_write_close();
-print $_SESSION['loggedin'] ;	
-
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET,HEAD,OPTIONS,POST,PUT');
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
+print $_SESSION['loggedin'];
 mysql_close($conn);
 ?>

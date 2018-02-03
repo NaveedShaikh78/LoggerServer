@@ -1,6 +1,6 @@
-var appdata = { cycle: {}, baseUrl: 'http://trendzsoft.in/api/' };
+var appdata = { cycle: {}, baseUrl: 'http://harisautomation.com/global/api/' };
 var ctrl = {};
-appdata.ioports = [26, 19, 13, 6, 22, 27, 17];
+appdata.ioports = [26, 13, 6, 5, 22, 27, 17];
 appdata.cuid = "";
 appdata.username = localStorage.getItem('username');
 appdata.password = localStorage.getItem('password');
@@ -15,8 +15,9 @@ if (appdata.saveLogin === "true") {
 $("#accordsettings").accordion({ heightStyle: "content" });
 function login(event) {
 
-    var formvalues = { 'username': $("#username").val(), 'password': $("#password").val(), 'cuid': appdata.cuid };
-    $.post('http://trendzsoft.in/api/login.php', formvalues).done(function (data) {
+    var formvalues = { 'username': $("#username").val(), 'password': $("#password").val(), +
+    appdata.cuid };
+    $.post(appdata.baseUrl + 'login.php', formvalues).done(function (data) {
         if (data != "Failed") {
             $("#appview").fadeIn();
             $("#login").dialog("close");
@@ -85,6 +86,8 @@ $(function () {
             selJob.attr("ng-model", "selJob[" + ioports[i] + "]");
             selJob.attr("ng-change", "jobChange(" + ioports[i] + ",selJob[" + ioports[i] + "])");
 
+
+
             var selIdle = $("#mac-" + ioports[i] + " #selIdle");
             selIdle.attr("id", "selIdle" + ioports[i]);
             selIdle.attr("ng-model", "selIdle[" + ioports[i] + "]");
@@ -111,7 +114,7 @@ $(function () {
     var today = now.getFullYear() + "-" + (month) + "-" + (day) + "T20:00";
     $("#dateTo").val(today);
     setInterval(function () {
-        var url = "http://trendzsoft.in/api/machinestatus.php";
+        var url = appdata.baseUrl + "machinestatus.php";
         var formvalues = { 'username': $("#username").val(), 'password': $("#password").val(), 'cuid': appdata.cuid };
         if (appdata.cuid == "") {
             showLoginDialog();

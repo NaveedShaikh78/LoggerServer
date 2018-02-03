@@ -85,12 +85,13 @@ appdata.reportController = loggerApp.controller('ReportController',
       $scope.selectedOperator = $scope.operators[0];
       $scope.$apply();
     };
+    26, 13, 6, 5, 22, 27, 17
     $scope.machines = [
       { id: -1, name: "All Machines" },
       { id: 26, name: "Machine 1" },
-      { id: 19, name: "Machine 2" },
-      { id: 13, name: "Machine 3" },
-      { id: 06, name: "Machine 4" },
+      { id: 13, name: "Machine 2" },
+      { id: 06, name: "Machine 3" },
+      { id: 05, name: "Machine 4" },
       { id: 22, name: "Machine 5" },
       { id: 27, name: "Machine 6" },
       { id: 17, name: "Machine 7" }

@@ -30,7 +30,7 @@ function loadIdleGrid() {
         controller: {
             loadData: function (filter) {
                 var d = $.Deferred();
-                $.post("http://trendzsoft.in/api/idle.php",
+                $.post(appdata.baseUrl + "idle.php",
                     { "rtype": "getData" }
                 ).done(function (response) {
                     ctrl.MachineController.setIdle(response);
@@ -46,7 +46,7 @@ function loadIdleGrid() {
             updateItem: function (item) {
                 var d = $.Deferred();
                 item.rtype = "updateData";
-                $.post("http://pi.trendzsoft.in/api/idle.php", item
+                $.post(appdata.baseUrl + "idle.php", item
                 ).done(function (response) {
                     d.resolve(item);
                 });
@@ -55,7 +55,7 @@ function loadIdleGrid() {
             insertItem: function (item) {
                 var d = $.Deferred();
                 item.rtype = "insertData";
-                $.post("http://pi.trendzsoft.in/api/idle.php", item
+                $.post(appdata.baseUrl + "idle.php", item
                 ).done(function (response) {
                     item.id = response[0];
                     d.resolve(item);
@@ -66,7 +66,7 @@ function loadIdleGrid() {
             deleteItem: function (item) {
                 var d = $.Deferred();
                 item.rtype = "deleteData";
-                $.post("http://pi.trendzsoft.in/api/idle.php", item
+                $.post(appdata.baseUrl + "idle.php", item
                 ).done(function (response) {
                     d.resolve(true);
                 });

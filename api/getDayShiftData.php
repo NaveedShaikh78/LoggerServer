@@ -42,7 +42,7 @@ from (select
 	  left join operator
 	  on
 	  operator.id=machinelog.opid
-	    left join job
+	  left join job
 	  on
 	  job.id=machinelog.jobno
 	   where cycletime>20 $filtMachine and start_time between $st and $et $opidCondtion $jobidCondtion $midCondtion

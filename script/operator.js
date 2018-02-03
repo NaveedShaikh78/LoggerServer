@@ -23,7 +23,7 @@ $("#optgrid").jsGrid({
 	controller: {
             loadData: function(filter) {
                 var d = $.Deferred();
-                $.post("http://trendzsoft.in/api/operator.php",
+                $.post(appdata.baseUrl + "operator.php",
                     {"rtype":"getData"}
                 ).done(function(response) {
 					ctrl.MachineController.setOperators(response);
@@ -45,7 +45,7 @@ $("#optgrid").jsGrid({
             updateItem: function(item) {
                 var d = $.Deferred();
                 item.rtype="updateData";
-                $.post("http://trendzsoft.in/api/operator.php", item
+                $.post(appdata.baseUrl + "operator.php", item
                 ).done(function(response) {
                     d.resolve(item);
                 });
@@ -54,7 +54,7 @@ $("#optgrid").jsGrid({
             insertItem: function(item) {
                 var d = $.Deferred();
                 item.rtype="insertData";
-                $.post("http://trendzsoft.in/api/operator.php", item
+                $.post(appdata.baseUrl + "operator.php", item
                 ).done(function(response) {
                     item.id=response[0];
 					         d.resolve(item);
@@ -65,7 +65,7 @@ $("#optgrid").jsGrid({
               deleteItem: function(item) {
                   var d = $.Deferred();
                   item.rtype="deleteData";
-                  $.post("http://trendzsoft.in/api/operator.php", item
+                  $.post(appdata.baseUrl + "operator.php", item
                   ).done(function(response) {
                       d.resolve(true);
                   });
