@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 require 'includes/connectdb.php';
 $conn = connect();
 $st=$_POST["st"];
-$ip=$_POST["ip"];
+$ip=$_GET["ip"];
 $ss=$_POST["ss"];
 $type=$_POST["type"];
 $tval=$_POST["tval"];
