@@ -53,7 +53,7 @@ else
 
 }
 
-$sql="select IFNULL(COUNT(machinelog.end_time),0) as count,machinestatus.ioport,machinestatus.statetime,machinestatus.status,machinestatus.opid,machinestatus.jobid,machinestatus.idleid from machinestatus left join machinelog on machinestatus.ioport = machinelog.ioport and machinelog.start_time between ".$condition." and TIMESTAMPDIFF(SECOND,machinelog.start_time,machinelog.end_time)>20  group by  machinestatus.ioport,machinestatus.statetime,machinestatus.status";
+$sql="select IFNULL(COUNT(machinelog.end_time),0) as count,machinestatus.ioport,machinestatus.statetime,machinestatus.status,machinestatus.opid,machinestatus.jobid,machinestatus.idleid, machinelog.cycletime from machinestatus left join machinelog on machinestatus.ioport = machinelog.ioport and machinelog.start_time between ".$condition." and TIMESTAMPDIFF(SECOND,machinelog.start_time,machinelog.end_time)>20  group by  machinestatus.ioport,machinestatus.statetime,machinestatus.status";
 
   	$retval = mysql_query( $sql, $conn );
   	if(! $retval )
