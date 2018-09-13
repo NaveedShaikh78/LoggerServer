@@ -5,7 +5,7 @@
   $et=str_replace("T"," ",$_GET["et"]);
   $ip=$_GET["ip"];
   $jn=0;
-$sql = "SELECT @lastRecord:= srno,end_time,@totalidlesec:=TIMESTAMPDIFF(SECOND,end_time,str_to_date('$st','%Y-%m-%d %H:%i:%s')) from machinelog where ioport=$ip and srno=(SELECT MAX(srno) FROM machinelog  where ioport=$ip );";
+$sql = "SELECT @lastRecord:= srno,end_time,@totalidlesec:=TIMESTAMPDIFF(SECOND,end_time,str_to_date('$st','%Y-%m-%d %H:%i:%s')) from machinelog where srno=(SELECT MAX(srno) FROM machinelog  where ioport=$ip );";
 
 $retval = mysql_query($sql , $conn);
   if(!$retval)
